@@ -4,7 +4,7 @@
     <title>Введение в компьютерную графику</title>
     <meta charset="utf-8" />
     <meta name="author" content="Тимофей Самсонов" />
-    <meta name="date" content="2020-09-22" />
+    <meta name="date" content="2020-10-05" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" type="text/css" />
   </head>
@@ -15,7 +15,7 @@ class: center, middle, inverse, title-slide
 # Введение в компьютерную графику
 ## Визуализация пространственных данных
 ### Тимофей Самсонов
-### 2020-09-22
+### 2020-10-05
 
 ---
 
@@ -277,6 +277,93 @@ def plot_line(x0, y0, x1, y1):
 2. Если `\(X\)` не пусто, то упорядочить его по возрастанию и выполнить закрашивание между его элементами в порядке:
 
 `$$\lceil x_1 \rceil \to \lfloor x_2 \rfloor,~\lceil x_3 \rceil \to \lfloor x_4 \rfloor,~...~,~\lceil x_{n-1} \rceil \to \lfloor x_n \rfloor$$`
+
+---
+
+## Передискретизация (resampling)
+
+Передискретизация необходима при визуализации растрового изображения на растровом экране. Как правило, разрешение этих растров не совпадает.
+
+![:scale 65%](images/res_screen.png)
+
+---
+
+## Метод ближайшего соседа
+
+Используется значение ближайшего пикселя:
+
+![:scale 70%](images/res_nn.png)
+
+---
+
+## Метод билинейной интерполяции
+
+Восстанавливается поверхность в ячейке из 4 узлов:
+
+![:scale 75%](images/res_bln.png)
+---
+
+## Метод билинейной интерполяции
+
+.right-column[Коэффициенты определяются по 4 точкам:
+`$$\begin{cases}
+a_{00} = f_{00},\\
+a_{10} = f_{10} - f_{00},\\
+a_{01} = f_{01} - f_{00},\\
+a_{01} = f_{00} + f_{11} - f_{10} - f_{01}.
+\end{cases}$$`
+
+`$$f(x, y) = a_{00} + a_{10}x + a_{01}y + a_{11}xy$$` 
+]
+
+.left-column[
+![](images/res_bln_crop.png)
+]
+
+
+---
+
+## Метод бикубической интерполяции
+
+Восстанавливается поверхность в 9 ячейках, окружающих узел:
+
+![:scale 75%](images/res_bcb.png)
+
+---
+
+## Метод бикубической интерполяции
+
+.left-40[
+![:scale 95%](images/res_bcb_crop.png)
+]
+
+.right-60[
+Коэффициенты определяются по 16 точкам:
+
+`$$\begin{cases}
+f(0,0) = a_{00},\\
+f(1,0) = a_{00} + a_{10} + a_{20} + a_{30},\\
+f(0,1) = a_{00} + a_{01} + a_{02} + a_{03},\\
+f(1,1) = \sum_{i=0}^3 \sum_{j=0}^3 a_{ij},\\
+\dots
+\end{cases}$$`
+
+`$$f(x, y) = \sum_{i=0}^3 \sum_{j=0}^3 a_{ij} x^i y^j$$` 
+]
+
+---
+
+## Метод бикубической интерполяции
+
+Для достижения бикубической интерполяции коэффициенты необходимо рассчитать для каждой ячейки исходного растра. Keys (1981) показал, что аналогичного результата можно достичь путем свёртки с использованием следующего фильтра:
+
+`$$W(x) = \begin{cases}
+ (a+2)|x|^3-(a+3)|x|^2+1 &amp; \text{для } |x| \leq 1, \\
+ a|x|^3-5a|x|^2+8a|x|-4a &amp; \text{для } 1 &lt; |x| &lt; 2, \\
+ 0                       &amp; \text{иначе},
+\end{cases},$$`
+
+где `\(a = -0.5\)` или `\(a = -0.75\)`.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
