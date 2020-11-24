@@ -756,8 +756,8 @@ def code(x, y, xmax, ymax):
 Для каждого отрезка $(x_0, y_0), (x_1, y_1)$ выполняется бесконечный цикл, внутри которого ведутся следующие действия:
 
 1. Вычисляются коды `code0` и `code1` для концов отрезка.
-1. Если оба конца находятся внутри порта просмотра (`code0 | code0 == 0`), то отрезок принимается целиком и цикл прерывается.
-1. Если оба конца находятся по одну сторону от порта просмотра (`code0 & code0 != 0`), то отрезок отклоняется целиком и цикл прерывается.
+1. Если оба конца находятся внутри порта просмотра (`code0 | code1 == 0`), то отрезок принимается целиком и цикл прерывается.
+1. Если оба конца находятся по одну сторону от порта просмотра (`code0 & code1 != 0`), то отрезок отклоняется целиком и цикл прерывается.
 1. В противном случае (оба конца находятся по разные стороны от порта просмотра), выполняются следующие действия:
     - Выбирается любая точка, находящаяся за пределами порта просмотра.
     - Выполняется пересечение отрезка с прямой, определяющей ту сторону, в которой находится выбранная точка.
@@ -778,7 +778,7 @@ def code(x, y, xmax, ymax):
 ## Алгоритм Сазерленда-Ходжмана
 
 ```{python, eval = FALSE}
-input_line = np.array([[ix0, iy0], [ix1, iy1], ..., [ix0, iy0])
+output_line = np.array([[ix0, iy0], [ix1, iy1], ..., [ix0, iy0])
 clip_ring = np.array([[cx0, cy0], [cx1, cy1], ..., [cx0, cy0]])
 
 for i in range(length(clip_ring) - 1):
@@ -788,8 +788,8 @@ for i in range(length(clip_ring) - 1):
   n = length(input_line)
     
   for j in range(n-1)
-    cur_point = line[i];
-    next_point = line[i+1]
+    cur_point = line[j];
+    next_point = line[j+1]
     
     if inside(next_point, clip_edge):
       if not inside(cur_point, clip_edge):
@@ -805,3 +805,641 @@ for i in range(length(clip_ring) - 1):
     output_line = np.vstack((output_line, output_line[0]))
 ```
 
+---
+
+## Композиция и смешение цветов
+
+__Композиция (compositing)__ в общем случае есть комбинация графического элемента и его фона.
+
+__Смешение (blending)__ есть определение того как взаимодействуют цвета графического элемента и его фона.
+
+- Под графическим элементом обычно понимается или растровое изображение или растрированное представление векторного объекта.
+- Как правило, сначала выполняется смешивание, затем композиция
+
+> Распространенные примеры: наложение слоев карты с прозрачностью, комбинирование отмывки и послойной окраски с разными режимами смешивания.
+
+---
+
+## Альфа-композиция
+
+Стандартная формула для альфа-композиции дает средневзвешенное значение:
+
+`co = Cs x αs + Cb x αb x (1 - αs)`
+
+- `co`: результирующее значение в пикселе
+- `Cs`: исходный цвет
+- `αs`: альфа исходного цвета
+- `Cb`: фоновый цвет
+- `αb`: альфа фона
+
+Поскольку для фона и графического элементы задаются собственные альфы, результирующая альфа композиции будет равна:
+
+`αo = αs + αb x (1 - αs)`
+
+---
+
+## Альфа-композиция
+
+Для ускорения работы композиции часто хранят предумноженные значения цвета: 
+
+`cs = Cs x αs`
+
+В этом случае формула для стандартной альфа-композиции будет выглядеть как:
+
+`co = cs + cb x (1 - αs)`
+
+Для получения цвета необходимо поделить результат на альфу композиции:
+
+`Co = co / αo`
+
+---
+
+## Альфа-композиция
+
+.left-40[
+Пример:
+
+![](https://www.w3.org/TR/compositing-1/examples/two_box_transparency.svg)
+]
+
+.right-60[
+Композиция:
+```
+Cs = RGB(0,0,1)
+αs = 0.5
+Cb = RGB(1,0,0)
+αb = 1
+
+co = Cs x αs + Cb x αb x (1 - αs)
+co = RGB(0,0,1) x 0.5 + RGB(1,0,0) x 1 x (1 - 0.5)
+co = RGB(0,0,1) x 0.5 + RGB(1,0,0) x 0.5
+co = RGB(0.5,0,0.5)
+
+αo = αs + αb x (1 - αs)
+αo = 0.5 + 1 x (1 - 0.5)
+αo = 1
+
+Co = co / αo
+Co = RGB(0.5, 0, 0.5) / 1
+Co = RGB(0.5, 0, 0.5)
+```
+]
+
+---
+
+## Альфа-композиция
+
+.left-40[
+Пример:
+
+![](https://www.w3.org/TR/compositing-1/examples/two_box_transparency_both.svg)
+]
+
+.right-60[
+Композиция:
+```
+Cs = RGB(0,0,1)
+αs = 0.5
+Cb = RGB(1,0,0)
+αb = 0.5
+
+co = Cs x αs + Cb x αb x (1 - αs)
+co = RGB(0,0,1) x 0.5 + RGB(1,0,0) x 0.5 x (1 - 0.5)
+co = RGB(0,0,1) x 0.5 + RGB(1,0,0) x 0.25
+co = RGB(0.25, 0, 0.5)
+
+αo = αs + αb x (1 - αs)
+αo = 0.5 + 0.5 x (1 - 0.5)
+αo = 0.75
+
+Co = co / αo
+Co = RGB(0.25, 0, 0.5) / 0.75
+Co = RGB(0.33, 0, 0.66)
+```
+]
+
+---
+
+## Модель Портера-Даффа
+
+Композиция по методу __Портера-Даффа__ (1984) основана на модели пикселя, в которой две формы (источник и назначение) могут вносить свой вклад в конечный цвет пикселя. Пиксель разделен на 4 субпиксельные области, и каждая область представляет собой возможную комбинацию источника и назначения
+
+.left-40[
+![](https://www.w3.org/TR/compositing-1/examples/PD_regions.svg)
+]
+
+.right-60[
+- Оба: 	`αs & αb`
+- Только источник: 	`αs & (1 \ αb)`
+- Только назначение: 	`αb & (1 \ αs)`
+- Ни один: 	`(1 \ αs) & (1 \ αb)`
+
+Для рисунка слева:
+```
+Both = 0.5 x 0.5 = 0.25 
+Source Only = 0.5 (1 – 0.5) = 0.25
+Destination Only = 0.5(1 – 0.5) = 0.25
+None = (1 – 0.5)(1 – 0.5) = 0.25
+```
+]
+
+---
+## Модель Портера-Даффа
+
+Применить альфа-смешение:
+
+`Cs = (1 - αb) x Cs + αb x B(Cb, Cs)`
+
+Выполнить композицию:
+
+`Co = αs x Fa x Cs + αb x Fb x Cb`
+
+- `Cs`: цвет источника
+- `Cb`: цвет фона
+- `αs`: альфа источника
+- `αb`: альфа фона
+- `B(Cb, Cs)`: функция смешения
+- `Fa`: оператор композиции
+- `Fb`: оператор композиции
+
+
+---
+
+## Clear
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_clr.svg)
+
+```
+Fa = 0; Fb = 0
+co = 0
+αo = 0
+```
+
+---
+
+## Copy (source)
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_src.svg)
+
+```
+Fa = 1; Fb = 0
+co = αs x Cs
+αo = αs
+```
+
+---
+
+## Destination
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_dst.svg)
+
+```
+Fa = 0; Fb = 1
+co = αb x Cb
+αo = αb
+```
+
+---
+
+## Source over
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_src-over.svg)
+
+```
+Fa = 1; Fb = 1 – αs
+co = αs x Cs + αb x Cb x (1 – αs)
+αo = αs + αb x (1 – αs)
+```
+
+---
+
+## Destination over
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_dst-over.svg)
+
+```
+Fa = 1 – αb; Fb = 1
+co = αs x Cs x (1 – αb) + αb x Cb
+αo = αs x (1 – αb) + αb
+```
+
+---
+
+## Source In
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_src-in.svg)
+
+```
+Fa = αb; Fb = 0
+co = αs x Cs x αb
+αo = αs x αb
+```
+
+---
+
+## Destination In
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_dst-in.svg)
+
+```
+Fa = 0; Fb = αs
+co = αb x Cb x αs 
+αo = αb x αs
+```
+
+---
+
+## Source Out
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_src-out.svg)
+
+```
+Fa = 1 – αb; Fb = 0
+co = αs x Cs x (1 – αb)
+αo = αs x (1 – αb)
+```
+
+---
+
+## Destination Out
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_dst-out.svg)
+
+```
+Fa = 0; Fb = 1 – αs
+co = αb x Cb x (1 – αs)
+αo = αb x (1 – αs)
+```
+
+---
+
+## Source Atop
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_src-atop.svg)
+
+```
+Fa = αb; Fb = 1 – αs
+co = αs x Cs x αb + αb x Cb x (1 – αs)
+αo = αs x αb + αb x (1 – αs)
+```
+
+---
+
+## Destination Atop
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_dst-atop.svg)
+
+```
+Fa = 1 - αb; Fb = αs
+co = αs x Cs x (1 - αb) + αb x Cb x αs
+αo = αs x (1 - αb) + αb x αs
+```
+
+---
+
+## XOR
+
+![:scale 80%](https://www.w3.org/TR/compositing-1/examples/PD_xor.svg)
+
+```
+Fa = 1 - αb; Fb = 1 – αs
+co = αs x Cs x (1 - αb) + αb x Cb x (1 – αs)
+αo = αs x (1 - αb) + αb x (1 – αs)
+```
+
+---
+
+## Lighter
+
+Вычисляется как сумма (Union) исходного и результирующего изображения:
+
+```
+Fa = 1; Fb = 1
+co = αs x Cs + αb x Cb;
+αo = αs + αb
+```
+
+---
+
+## Смешение (Blending)
+
+Смешение есть составляющая композиции, которая работает как функция от цветовых компонент изображения и фона в тех случаях когда они перекрываются.  Композиция выполняется после смешения.
+
+Общая формула для смешения:
+
+`Cm = B(Cb, Cs)`
+
+- `Cm`: результирующий цвет
+- `B`: функция смешения
+- `Cb`: фоновый цвет
+- `Cs`: исходный цвет
+
+__Важно:__ результирующий цвет должен быть обрезан до допустимого диапазона (0-255 для 8-битных изображений). 
+
+---
+
+## Смешение (Blending)
+
+Результат смешения обычно модулируется прозрачностью фона. В этом случае формула для нового цвета будет следующей:
+
+`Cr = (1 - αb) x Cs + αb x Cm`
+
+with:
+
+- `Cm = B(Cb, Cs)`: цвет после смешения
+- `Cs`: исходный цвет
+- `αb`: альфа фона
+
+Алгоритмы смешения есть двух категорий:
+
+- __Разделяемые:__ могут выполняться для каждой цветовой компоненты отдельно.
+- __Неразделяемые:__ могут выполняться для каждой цветовой компоненты отдельно.
+---
+
+## Normal
+
+```
+B(Cb, Cs) = Cs
+```
+
+.pull-left[
+![](01_CG_Fundamentals_insertimage_19.png)
+]
+
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/normal.png)
+]
+
+---
+
+## Multiply
+
+```
+B(Cb, Cs) = Cb x Cs
+```
+
+.pull-left[
+![Plot title. ](01_CG_Fundamentals_insertimage_20.png)
+]
+
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/multiply.png)
+]
+
+---
+
+## Screen
+
+```
+B(Cb, Cs) = 1 - [(1 - Cb) x (1 - Cs)]
+          = Cb + Cs -(Cb x Cs)
+```
+
+.pull-left[
+![Plot title. ](01_CG_Fundamentals_insertimage_21.png)
+]
+
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/screen.png)
+]
+
+---
+
+## Darken
+
+```
+B(Cb, Cs) = min(Cb, Cs)
+```
+
+.pull-left[
+![Plot title. ](01_CG_Fundamentals_insertimage_22.png)
+]
+
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/darken.png)
+]
+
+---
+
+## Lighten
+
+```
+B(Cb, Cs) = max(Cb, Cs)
+```
+
+.pull-left[
+![](01_CG_Fundamentals_insertimage_23.png)
+]
+
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/lighten.png)
+]
+
+---
+
+## Color dodge
+
+```
+if Cb == 0:
+    B(Cb, Cs) = 0
+elif Cs == 1:
+    B(Cb, Cs) = 1
+else:
+    B(Cb, Cs) = min(1, Cb / (1 - Cs))
+```
+.pull-left[
+![:scale 90%](01_CG_Fundamentals_insertimage_24.png)
+]
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/colordodge.png)
+]
+
+---
+
+## Color burn
+
+```
+if Cb == 1:
+    B(Cb, Cs) = 1
+elif Cs == 0:
+    B(Cb, Cs) = 0
+else:
+    B(Cb, Cs) = 1 - min(1, (1 - Cb) / Cs)
+```
+.pull-left[
+![:scale 90%](01_CG_Fundamentals_insertimage_25.png)
+]
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/colorburn.png)
+]
+
+---
+
+## Hard light
+
+```
+if Cs <= 0.5:
+    B(Cb, Cs) = Multiply(Cb, 2 x Cs)
+else:
+    B(Cb, Cs) = Screen(Cb, 2 x Cs -1)  
+```
+.pull-left[
+![:scale 90%](01_CG_Fundamentals_insertimage_26.png)
+]
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/hardlight.png)
+]
+
+---
+
+## Overlay
+
+```
+B(Cb, Cs) = HardLight(Cs, Cb)
+```
+.pull-left[
+![](01_CG_Fundamentals_insertimage_28.png)
+]
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/overlay.png)
+]
+
+---
+
+## Soft light
+
+```
+if Cb <= 0.25:
+    D(Cb) = ((16 * Cb - 12) x Cb + 4) x Cb
+else:
+    D(Cb) = sqrt(Cb) 
+if Cs <= 0.5:
+    B(Cb, Cs) = Cb - (1 - 2 x Cs) x Cb x (1 - Cb)
+else
+    B(Cb, Cs) = Cb + (2 x Cs - 1) x (D(Cb) - Cb)
+```
+.pull-left[
+![:scale 80%](01_CG_Fundamentals_insertimage_27.png)
+]
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/softlight.png)
+]
+
+---
+
+## Difference
+
+```
+B(Cb, Cs) = | Cb - Cs |
+```
+.pull-left[
+![](01_CG_Fundamentals_insertimage_29.png)
+]
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/difference.png)
+]
+
+---
+
+## Exclusion (subtract)
+
+```
+B(Cb, Cs) = Cb + Cs - 2 x Cb x Cs
+```
+.pull-left[
+![](01_CG_Fundamentals_insertimage_30.png)
+]
+.pull-right[
+![:scale 70%](https://www.w3.org/TR/compositing-1/examples/exclusion.png)
+]
+
+---
+
+## Неразделяемые методы смешения
+
+В неразделяемых методах смешения участвуют все компоненты цвета одновременно. При этом обычно используется следующая последовательность обработки цвета:
+
+1. Конвертировать цвета исходного и фонового изображения из пространства RGB в пространство HSL (Hue-Saturation-Luminosity).
+
+2. Вычислить новый цвет в пространстве HSL.
+
+3. Конвертировать в исходное цветовое пространство (RBG)
+
+Функции вычисления яркости и насыщенности:
+```
+Lum(C) = 0.3 x red(C) + 0.59 x green(C) + 0.11 x blue(C)
+
+Sat(C) = max(red(C), green(C), blue(C)) - min(red(C), green(C), blue(C))
+```
+
+---
+
+## Неразделяемые методы смешения
+
+```
+ClipColor(C):
+    L = Lum(C)
+    n = min(Cred, Cgreen, Cblue)
+    x = max(Cred, Cgreen, Cblue)
+    if n < 0:
+        C = L + (((C - L) * L) / (L - n))
+    if x > 1:
+        C = L + (((C - L) * (1 - L)) / (x - L))
+    return C
+    
+SetLum(C, l):
+    d = l - Lum(C)
+    Cred = Cred + d
+    Cgreen = Cgreen + d
+    Cblue = Cblue + d
+    return ClipColor(C)
+    
+SetSat(C, s)
+    if(Cmax > Cmin)
+        Cmid = (((Cmid - Cmin) x s) / (Cmax - Cmin))
+        Cmax = s
+    else
+        Cmid = Cmax = 0
+    Cmin = 0
+    return C;
+```
+
+---
+
+## Hue
+
+```
+B(Cb, Cs) = SetLum(SetSat(Cs, Sat(Cb)), Lum(Cb))
+```
+
+![:scale 50%](https://www.w3.org/TR/compositing-1/examples/hue.png)
+
+---
+
+## Saturation
+
+```
+B(Cb, Cs) = SetLum(SetSat(Cb, Sat(Cs)), Lum(Cb))
+```
+
+![:scale 50%](https://www.w3.org/TR/compositing-1/examples/saturation.png)
+
+---
+
+## Color
+
+```
+B(Cb, Cs) = SetLum(Cs, Lum(Cb))
+```
+
+![:scale 50%](https://www.w3.org/TR/compositing-1/examples/color.png)
+
+---
+
+## Luminosity
+
+```
+B(Cb, Cs) = SetLum(Cb, Lum(Cs))
+```
+
+![:scale 50%](https://www.w3.org/TR/compositing-1/examples/luminosity.png)
