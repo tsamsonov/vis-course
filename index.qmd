@@ -2,12 +2,6 @@
 jupyter: python3
 ---
 
-# Preface {.unnumbered}
+# Введение {.unnumbered}
 
-This is a Quarto book.
-
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
-
-```{python}
-1 + 1
-```
+Добро пожаловать на курс "Визуализация пространственных данных"! В этом курсе мы научимся создавать карты программным путём, используя возможности QGIS.
