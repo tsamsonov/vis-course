@@ -208,6 +208,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>QgsProject.instance().removeAllMapLayers() <span class="co"># удаление всех слоёв</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Если необходимо чтобы скрипт собирал карту с нуля каждый раз при запуске, следует расположить вызов <code>removeAllMapLayers()</code> в самом начале. Это будет гарантировать, что сборка проекта начнется с чистого листа.</p>
+<p>Сборку логично начать с добавления слоёв, которое осуществляется посредством следующей команды:</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>layer <span class="op">=</span> iface.addVectorLayer(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>где <code>path</code> — полный путь к данным, <code>layer</code> — переменная, которая будет хранить ссылку на слой в таблице содержания. Вы можете ее называть любым подходящим именем.</p>
 
 
 
