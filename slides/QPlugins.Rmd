@@ -1,0 +1,68 @@
+---
+title: "Геоинформационное картографирование"
+subtitle: "Визуализация пространственных данных"
+author: "Тимофей Самсонов"
+date: "`r Sys.Date()`"
+output: 
+  xaringan::moon_reader:
+    css: [default, "style.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "macros.js"
+header-includes:
+   - \usepackage{amsmath}
+   - \DeclareMathOperator{\sign}{sign}
+---
+
+## Плагин для QGIS
+
+Плагины располагаются в рабочей папке пользователя:
+
+![Plot title. ](QPlugins_insertimage_1.png)
+
+---
+
+## Плагин для QGIS
+
+Все установленные (в т.ч. ваши) плагины располагаются в папке python:
+
+![Plot title. ](QPlugins_insertimage_2.png)
+
+---
+
+## Структура плагина
+
+```
+PYTHON_PLUGINS_PATH/
+  MyPlugin/
+    __init__.py    --> *точка входа в плагин*
+    mainPlugin.py  --> *рабочий код плагина*
+    metadata.txt   --> *метаданные*
+    resources.qrc  --> *описание ресурсов, используемых интерфейсом*
+    resources.py   --> *то же самое, но в виде кода на Python*
+    form.ui        --> *описание графического интерфейса Qt Designer*
+    form.py        --> *то же самое, но в виде кода на Python*
+```
+
+---
+
+## Оптимальная стартовая точка
+
+Plugin Builder
+
+![Plot title. ](QPlugins_insertimage_3.png)
+
+---
+
+## Plugin Builder
+
+![Plot title. ](QPlugins_insertimage_4.png)
+
+---
+
+## Plugin Builder
+
+![Plot title. ](QPlugins_insertimage_5.png)

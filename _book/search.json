@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "book",
+    "section": "",
+    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n2"
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "1 + 1\n\n2"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "01_Basics.html",
+    "href": "01_Basics.html",
+    "title": "1  Базовые операции рендеринга",
+    "section": "",
+    "text": "Первая операция, которая может быть полезной, это получение ссылки на экземпляр проекта:\n\nQgsProject.instance()\n\nГлавное, для чего он может быть полезен — это управление списком отображаемых слоёв. Можно получить список слоев или удалить все слои из содержимого карты:\n\nQgsProject.instance().mapLayers().values() # список слоёв\nQgsProject.instance().removeAllMapLayers() # удаление всех слоёв\n\nЕсли необходимо чтобы скрипт собирал карту с нуля каждый раз при запуске, следует расположить вызов removeAllMapLayers() в самом начале. Это будет гарантировать, что сборка проекта начнется с чистого листа."
+  },
+  {
+    "objectID": "02_Scales.html",
+    "href": "02_Scales.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "1 + 1\n\n2"
+  }
+]

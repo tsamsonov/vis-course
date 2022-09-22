@@ -1,0 +1,21 @@
+---
+title: "Геоинформационное картографирование"
+subtitle: "Визуализация пространственных данных"
+author: "Тимофей Самсонов"
+date: "`r Sys.Date()`"
+output: 
+  xaringan::moon_reader:
+    css: [default, "style.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "macros.js"
+header-includes:
+   - \usepackage{amsmath}
+   - \DeclareMathOperator{\sign}{sign}
+---
+
+## Диаграммы и вычисление размеров
+

@@ -1,0 +1,23 @@
+project:
+  type: book
+
+book:
+  title: "book"
+  author: "Jane Doe"
+  date: "22.09.2022"
+  chapters:
+    - index.qmd
+    - 01_Basics.qmd
+    - 02_Scales.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

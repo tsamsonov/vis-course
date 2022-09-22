@@ -2,18 +2,18 @@
 @import url('https://fonts.googleapis.com/css?family=Scada:400,400i,700,700i&subset=cyrillic');
 @import url('https://fonts.googleapis.com/css?family=Menlo:400,400i,700,700i&subset=cyrillic');
 
-body { font-family: 'Scada', serif; font-size: 18pt; }
-p { font-size: 18pt; margin-top: 3;}
-ul { font-size: 18pt;}
-ol { font-size: 18pt; }
+body { font-family: 'Scada', serif; font-size: 16pt; }
+p { font-size: 16pt; margin-top: 3;}
+ul { font-size: 16pt;}
+ol { font-size: 16pt; }
 h3 { margin-top: 0;}
-.caption { font-size: 16pt; }
+.caption { font-size: 14pt; }
 .right-column { padding: 0px; }
 .left-column { font-size: 12pt; color: black;}
 .red { color: crimson; }
 .blue { color: steelblue; }
-.large { font-size: 22pt; }
-.small { font-size: 16pt;}
+.large { font-size: 20pt; }
+.small { font-size: 14pt;}
 .remark-inline-code { color: darkgreen; background-color: #d9f2d9; font-size: 16pt; font-family: 'Menlo'; padding: 3px; border-radius: 5px;}
 .remark-code { font-family: 'Menlo'; font-size: 13pt;}
 .left-column>p{
@@ -40,7 +40,7 @@ h1, h2, h3 {
   font-family: 'Cuprum';
   font-weight: bold;
 }
-table { font-size: 16pt; }
+table { font-size: 14pt; }
 img {
   margin-bottom: 0;
   padding-bottom: 0;
