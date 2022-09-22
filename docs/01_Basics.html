@@ -165,7 +165,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#функции-qgis" id="toc-функции-qgis" class="nav-link active" data-scroll-target="#функции-qgis"> <span class="header-section-number">1.1</span> Функции QGIS</a></li>
+  <li><a href="#пример-использования" id="toc-пример-использования" class="nav-link" data-scroll-target="#пример-использования"> <span class="header-section-number">1.2</span> Пример использования</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -186,6 +193,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<section id="функции-qgis" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="функции-qgis"><span class="header-section-number">1.1</span> Функции QGIS</h2>
 <p>Визуализация данных в QGIS возможна не только посредством графического интерфейса, но также путем программной компоновки карт. Преимущество программного отображения в QGIS по сравнению с тем, что вы можете сделать на чистом Python — в том, что становится доступен невероятно мощный функционал и производительность графического движка QGIS.</p>
 <p>Первая операция, которая может быть полезной, это получение ссылки на экземпляр проекта:</p>
 <div class="cell" data-execution_count="1">
@@ -260,8 +269,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  layer.triggerRepaint()</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  iface.layerTreeView().refreshLayerSymbology(layer.<span class="bu">id</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="пример-использования" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="пример-использования"><span class="header-section-number">1.2</span> Пример использования</h2>
+<p>В данном примере рассматривается добавление на карту и раскрашивание полигона суши:</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>QgsProject.instance().removeAllMapLayers()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> <span class="st">'/Volumes/Data/Spatial/Natural Earth/natural_earth_vector.gpkg|layername=</span><span class="sc">{layer}</span><span class="st">'</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>land <span class="op">=</span> db.<span class="bu">format</span>(layer<span class="op">=</span><span class="st">'ne_110m_land'</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>layer <span class="op">=</span> iface.addVectorLayer(land,<span class="st">''</span>,<span class="st">'ogr'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>fill <span class="op">=</span> QColor (<span class="dv">250</span>,<span class="dv">250</span>,<span class="dv">250</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>stroke <span class="op">=</span> QColor(<span class="st">'darkblue'</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>symbol <span class="op">=</span> layer.renderer().symbol()</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>symbol.setColor(fill)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>pen <span class="op">=</span> Qt.PenStyle(Qt.SolidLine)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>symbol.symbolLayer(<span class="dv">0</span>).setStrokeStyle(pen)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>symbol.symbolLayer(<span class="dv">0</span>).setStrokeColor(stroke)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>layer.triggerRepaint()</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>iface.layerTreeView().refreshLayerSymbology(layer.<span class="bu">id</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Результат выглядит следующим образом:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/paste-B337EFE1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Программное добавление полигона суши в QGIS</figcaption><p></p>
+</figure>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -6,6 +6,8 @@ execute:
 
 # Базовые операции рендеринга
 
+## Функции QGIS
+
 Визуализация данных в QGIS возможна не только посредством графического интерфейса, но также путем программной компоновки карт. Преимущество программного отображения в QGIS по сравнению с тем, что вы можете сделать на чистом Python --- в том, что становится доступен невероятно мощный функционал и производительность графического движка QGIS.
 
 Первая операция, которая может быть полезной, это получение ссылки на экземпляр проекта:
@@ -108,3 +110,32 @@ for layer in layers:
   iface.layerTreeView().refreshLayerSymbology(layer.id())
   
 ```
+
+## Пример использования
+
+В данном примере рассматривается добавление на карту и раскрашивание полигона суши:
+
+```{python}
+QgsProject.instance().removeAllMapLayers()
+db = '/Volumes/Data/Spatial/Natural Earth/natural_earth_vector.gpkg|layername={layer}'
+
+land = db.format(layer='ne_110m_land')
+
+layer = iface.addVectorLayer(land,'','ogr')
+
+fill = QColor (250,250,250)
+stroke = QColor('darkblue')
+
+symbol = layer.renderer().symbol()
+symbol.setColor(fill)
+pen = Qt.PenStyle(Qt.SolidLine)
+symbol.symbolLayer(0).setStrokeStyle(pen)
+symbol.symbolLayer(0).setStrokeColor(stroke)
+
+layer.triggerRepaint()
+iface.layerTreeView().refreshLayerSymbology(layer.id())
+```
+
+Результат выглядит следующим образом:
+
+![Программное добавление полигона суши в QGIS](images/paste-B337EFE1.png)
