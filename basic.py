@@ -3,16 +3,16 @@ db = '/Volumes/Data/Spatial/Natural Earth/natural_earth_vector.gpkg|layername={l
 
 land = db.format(layer='ne_110m_land')
 
-lyr_lnd = iface.addVectorLayer(land,'','ogr')
+layer = iface.addVectorLayer(land,'','ogr')
 
-lnd_color = QColor (250,250,250)
-cst_color = QColor ('darkblue')
+fill = QColor (250,250,250)
+stroke = QColor('darkblue')
 
-symb_lnd = lyr_lnd.renderer().symbol()
-symb_lnd.setColor(lnd_color)
-cont_lnd = Qt.PenStyle(Qt.SolidLine)
-symb_lnd.symbolLayer(0).setStrokeStyle(cont_lnd)
-symb_lnd.symbolLayer(0).setStrokeColor(cst_color)
+symbol = layer.renderer().symbol()
+symbol.setColor(fill)
+pen = Qt.PenStyle(Qt.SolidLine)
+symbol.symbolLayer(0).setStrokeStyle(pen)
+symbol.symbolLayer(0).setStrokeColor(stroke)
 
-lyr_lnd.triggerRepaint()
-iface.layerTreeView().refreshLayerSymbology(lyr_lnd.id())
+layer.triggerRepaint()
+iface.layerTreeView().refreshLayerSymbology(layer.id())
