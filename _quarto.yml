@@ -9,6 +9,8 @@ book:
   chapters:
     - index.qmd
     - 01_Basics.qmd
+  appendices:
+    - calibration.qmd
 
 bibliography: references.bib
 
