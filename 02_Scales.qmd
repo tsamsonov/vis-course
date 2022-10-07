@@ -1,11 +1,101 @@
 ---
 jupyter: python3
+execute:
+  eval: false
 ---
 
-# Summary
+# Градуированные символы для визуализации атрибутов
 
-In summary, this book has no content whatsoever.
+В данном упражнении мы будем работать со слоем стран, поэтому его необходимо загрузить:
 
 ```{python}
-1 + 1
+QgsProject.instance().removeAllMapLayers()
+db = '/Volumes/Data/Spatial/Natural Earth/natural_earth_vector.gpkg|layername=ne_10m_admin_0_countries'
+layer = iface.addVectorLayer(db, '','ogr')
 ```
+
+## Доступ к атрибутивным полям
+
+Чтобы узнать перечень атрибутов, можно использовать метод `fields()`:
+```{python}
+fields = [field.name for field in layer.fields()]
+print(fields)
+```
+
+Аналогичным образом можно вытащить все значения атрибута:
+```{python}
+admin = [feature["ADMIN"] for feature in layer.getFeatures()]
+print(admin)
+```
+
+## Формирование интервалов
+
+Данный метод может использоваться дли автоматизации таких способов как картограммы, картодиаграммы, значки. В этом упражнении мы рассмотрим как создать каждый интервал классификации вручную. 
+
+Прежде всего необходимо понимать, какой тип геометрии у слоя:
+```{python}
+geom_type = layer.geometryType()
+```
+
+Далее нужно создать пустой список интервалов классификации:
+```{python}
+ranges = []
+```
+
+Если известно количество классов (`N`), которое необходимо получить, следует заполнить этот список объектами интервалов. Для каждого интервала надо вычислить его цвет, минимальную и максимальную границу, а также подпись (то, что будет отображаться в легенде). Далее на основе этих данных создается объект символа (`QgsSymbol`) и объект интервала (`QgsRendererRange`), который добавляется в список интеовалов. Примерный шаблон кода выглядит следующим образом:
+
+```{python}
+for i in range(N):
+  col = ...
+  low = ...
+  high = ...
+  label = ...
+  
+  sym = QgsSymbol.defaultSymbol(geom_type)
+  sym.setColor(col)
+  interval = QgsRendererRange(low, high, sym, label)
+  
+  ranges.append(interval)
+```
+
+Далее на основе созданных интервалов можно уже соорудить визуализатор градуированных символов:
+
+```{python}
+renderer = QgsGraduatedSymbolRenderer('POP_EST', ranges)
+```
+
+## Назначение ручного метода классификации
+
+Чтобы визуализатор заработал, необходимо выбрать, к какому методу классификации относятся выбранные вами границы. Поскольку они сформированы вручную, нужно выбрать соответствующий метод:
+
+```{python}
+classreg = QgsApplication.classificationMethodRegistry()
+nms = classreg.methodNames()
+print(nms)
+```
+
+Будет выведено нечто следующее:
+```
+{'Equal Count (Quantile)': 'Quantile', 'Equal Interval': 'EqualInterval', 'Fixed Interval': 'Fixed', 'Logarithmic Scale': 'Logarithmic', 'Natural Breaks (Jenks)': 'Jenks', 'Pretty Breaks': 'Pretty', 'Standard Deviation': 'StdDev'}
+```
+
+С методами автоматической классификации мы познакомимся далее. А пока что надо выбрать вариант `Fixed` и присвоить его визуализатору:
+```{python}
+method = classreg.method('Fixed')
+renderer.setClassificationMethod(method)
+```
+
+Наконец, после того как визуализатор готов, его нажно назначить слою и обновить изображение:
+```{python}
+layer.setRenderer(renderer)
+layer.triggerRepaint()
+iface.layerTreeView().refreshLayerSymbology(layer.id())
+```
+
+
+
+
+
+
+
+

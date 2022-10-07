@@ -9,6 +9,7 @@ book:
   chapters:
     - index.qmd
     - 01_Basics.qmd
+    - 02_Scales.qmd
   appendices:
     - calibration.qmd
 
