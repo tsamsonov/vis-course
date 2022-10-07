@@ -79,7 +79,7 @@ print(nms)
 {'Equal Count (Quantile)': 'Quantile', 'Equal Interval': 'EqualInterval', 'Fixed Interval': 'Fixed', 'Logarithmic Scale': 'Logarithmic', 'Natural Breaks (Jenks)': 'Jenks', 'Pretty Breaks': 'Pretty', 'Standard Deviation': 'StdDev'}
 ```
 
-С методами автоматической классификации мы познакомимся далее. А пока что надо выбрать вариант `Fixed` и присвоить его визуализатору:
+С методами автоматической классификации мы познакомимся далее. А пока что надо выбрать вариант `Fixed` или `EqualInterval` и присвоить его визуализатору:
 ```{python}
 method = classreg.method('Fixed')
 renderer.setClassificationMethod(method)
