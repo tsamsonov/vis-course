@@ -10,6 +10,7 @@ book:
     - index.qmd
     - 01_Basics.qmd
     - 02_Scales.qmd
+    - 03_Colordist.qmd
   appendices:
     - calibration.qmd
 
