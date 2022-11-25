@@ -11,6 +11,7 @@ book:
     - 01_Basics.qmd
     - 02_Scales.qmd
     - 03_Colordist.qmd
+    - 04_Rubberband.qmd
   appendices:
     - calibration.qmd
 

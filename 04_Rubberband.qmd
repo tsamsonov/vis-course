@@ -1,0 +1,132 @@
+---
+jupyter: python3
+execute:
+  eval: false
+---
+
+# Косметические слои
+
+Косметические слои используются для визуализации временных объектов, которые дополняют визуализацию полезной информацией. Например, косметический слой используется в процессе создания векторных объектов. Когда вы оцифровываете границу полигона, его текущий контур отображается полупрозрачно поверх содержания карты.
+
+## Создание косметического слоя
+
+Косметический слой может хранить только один объект --- полигон, линию или точку. Для его создания используется функция `QgsRubberBand()`, которая принимает 2 параметра:
+
+-   `canvas` --- ссылка на текущий объект канвы карты (можно получить через `iface.mapCanvas()`)
+-   `geometryType` --- тип геометрии слоя, может принимать значения `QgsWkbTypes.LineGeometry`, `QgsWkbTypes.PolygonGeometry` или `QgsWkbTypes.PointGeometry`.
+
+Таким образом, для создания полигонального косметического слоя необходима следующая последовательность действий:
+
+```{python}
+canvas = iface.mapCanvas()
+lines = QgsRubberBand(canvas, QgsWkbTypes.LineGeometry)
+```
+
+## Настройка косметического слоя
+
+В процессе настройки косметический слой необходимо наполнить геометрией и задать символику. Для наполнения геометрией используйте метод класса `setToGeometry(geom)`, где `geom` --- это объект класса `QgsGeometry`. Аналогично для настройки цвета, размера, толщины, иконки и прочих параметров используются методы `setColor()`, `setIconSize()`, `setWidth()`, `setIcon()`. Например, при настройка линейного косметическеого слоя может выглядеть как:
+
+```{python}
+lines.setToGeometry(geom)
+lines.setColor(QColor(0,0,0))
+lines.setWidth(2)
+```
+
+> Полный список методов, который используется для настройки косметического слоя, доступен в [документации API](https://qgis.org/pyqgis/latest/gui/QgsRubberBand.html).
+
+Если вы работаете с точечным косметическом слоем и хотите отобразить множество точек, вам придется создать для каждой точки свой слой. Паттерн разработки в таком случае будет следующим:
+
+```{python}
+points = []
+for i in range(N):
+  pnt = QgsRubberBand(canvas, QgsWkbTypes.PointGeometry)
+  ... # настройка
+  points.append(pnt)
+```
+
+Если точки будут отбражаться одинаковым символом, то задачу можно упростить, создав точечный  слой, но подав при этом ему в качестве `geom` мультиточку:
+```{python}
+points = QgsRubberBand(canvas, QgsWkbTypes.PointGeometry)
+points.setGeometry(geom) # geom — мультиточка
+```
+
+
+### Создание геометрии
+
+Как было сказано выше, геометрия косметического слоя должна иметь класс `QgsGeometry`. Объекты этого класса создаются на основе геометрических примитивов разного типа. Для этого используются [конструкторы](https://qgis.org/pyqgis/3.0/core/Geometry/QgsGeometry.html):
+
+| [**`fromMultiPointXY`**](https://qgis.org/pyqgis/3.0/core/Geometry/QgsGeometry.html#qgis.core.QgsGeometry.fromMultiPointXY "qgis.core.QgsGeometry.fromMultiPointXY")          | Creates a new geometry from a QgsMultiPointXY object                                                                                                        |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**`fromMultiPolygonXY`**](https://qgis.org/pyqgis/3.0/core/Geometry/QgsGeometry.html#qgis.core.QgsGeometry.fromMultiPolygonXY "qgis.core.QgsGeometry.fromMultiPolygonXY")    | Creates a new geometry from a [**`QgsMultiPolygon`**](https://qgis.org/pyqgis/3.0/core/Multi/QgsMultiPolygon.html#module-QgsMultiPolygon "QgsMultiPolygon") |
+| [**`fromMultiPolylineXY`**](https://qgis.org/pyqgis/3.0/core/Geometry/QgsGeometry.html#qgis.core.QgsGeometry.fromMultiPolylineXY "qgis.core.QgsGeometry.fromMultiPolylineXY") | Creates a new geometry from a QgsMultiPolylineXY object                                                                                                     |
+| [**`fromPointXY`**](https://qgis.org/pyqgis/3.0/core/Geometry/QgsGeometry.html#qgis.core.QgsGeometry.fromPointXY "qgis.core.QgsGeometry.fromPointXY")                         | Creates a new geometry from a QgsPointXY object                                                                                                             |
+| [**`fromPolygonXY`**](https://qgis.org/pyqgis/3.0/core/Geometry/QgsGeometry.html#qgis.core.QgsGeometry.fromPolygonXY "qgis.core.QgsGeometry.fromPolygonXY")                   | Creates a new geometry from a [**`QgsPolygon`**](https://qgis.org/pyqgis/3.0/core/other/QgsPolygon.html#module-QgsPolygon "QgsPolygon")                     |
+| [**`fromPolyline`**](https://qgis.org/pyqgis/3.0/core/Geometry/QgsGeometry.html#qgis.core.QgsGeometry.fromPolyline "qgis.core.QgsGeometry.fromPolyline")                      | Creates a new LineString geometry from a list of QgsPoint points.                                                                                           |
+| [**`fromPolylineXY`**](https://qgis.org/pyqgis/3.0/core/Geometry/QgsGeometry.html#qgis.core.QgsGeometry.fromPolylineXY "qgis.core.QgsGeometry.fromPolylineXY")                | Creates a new LineString geometry from a list of QgsPointXY points.                                                                                         |
+
+Соответственно, чтобы создать точечный, линейный или полигональный объект, необходимо иметь в распоряжении объект [`QgsPointXY`](https://qgis.org/pyqgis/3.0/core/Point/QgsPointXY.html), либо список таких объектов. Вы можете соорудить такой объект вручную по координатам.
+
+Точку можно создать так:
+
+```{python}
+xy1 = QgsPointXY(10, 20) 
+xy2 = QgsPointXY(15, 30)
+xy3 = QgsPointXY(-5, 15) 
+xy4 = QgsPointXY(40, -2)
+```
+
+Далее на основе этих точек можно создать, например, две точечных геометрии и одну линейную (отрезок):
+```{python}
+pnt1 = QgsGeometry.fromPointXY(xy1)
+pnt2 = QgsGeometry.fromPointXY(xy2)
+pnt3 = QgsGeometry.fromPointXY(xy3)
+pnt4 = QgsGeometry.fromPointXY(xy4)
+
+line12 = QgsGeometry.fromPolylineXY([xy1, xy2])
+line34 = QgsGeometry.fromPolylineXY([xy3, xy4])
+```
+
+Если нужно в косметическом слое хранить множество точек или множество линий, можно сделать мультиточку или мультилинию, это вас избавит от необходимости создавать слой на каждый объект. Сделать это можно так:
+
+```{python}
+mpnt = QgsGeometry.fromMultiPointXY([xy1, xy2])
+mline = QgsGeometry.fromMultiLineXY([xy1, xy2], [xy3, xy4])
+```
+
+Полученные объекты можно использовать в функции `setGeometry()` для назначения геометрии косметическому слою:
+
+```{python}
+lines.setToGeometry(mline)
+points.setToGeometry(mline)
+```
+
+
+## Удаление косметического слоя
+
+Важно уметь не только создавать, но также удалять косметические слои. По этой причине важно не просто создать слой, но и записать его в переменную, чтобы потом можно было обратиться к ней для удаления слоя.
+
+Если вы знаете, как называется переменная косметического слой, нужно сначала проверить, существует ли она, и если да --- то удалить слой. Список существующих переменных можно получить через функцию `locals()`. Само же удаление делается посредством метода `canvas.scene().removeItem(layer)`, где `layer` --- ссылка на удаляемый косметический слой
+
+Таким образом, удаление созданного выше косметического слоя должно выполняться следующим образом:
+
+```{python}
+if ('links' in locals()):
+    canvas.scene().removeItem(links)
+```
+
+Аналогично будет для точек, но поскольку там может быть множество слоев, необходимо пройтись в цикле по списку для удаления каждого:
+
+```{python}
+if ('points' in locals()):
+    for p in points:
+        canvas.scene().removeItem(p)
+```
+
+Если же вы исползуете мультиточечный слой, то удаление надо производить один раз:
+
+```{python}
+if ('points' in locals()):
+        canvas.scene().removeItem(points)
+```
+
+
