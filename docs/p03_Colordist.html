@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Визуализация пространственных данных - 3&nbsp; Анализ цветовых щкал</title>
+<title>Визуализация пространственных данных - 6&nbsp; Анализ цветовых щкал</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,8 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./04_Rubberband.html" rel="next">
-<link href="./02_Scales.html" rel="prev">
+<link href="./p04_Rubberband.html" rel="next">
+<link href="./p02_Scales.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -162,34 +162,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./index.html" class="sidebar-item-text sidebar-link">Введение</a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./01_Basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./02_Scales.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Создание шкал</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./03_Colordist.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./04_Rubberband.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Косметические слои</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Лекции</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_Fundamentals.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основы компьютерной графики</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Color.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Цвет</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Blending.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Композиция и смешение</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Практикум</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p01_Basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p02_Scales.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Создание шкал</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p03_Colordist.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p04_Rubberband.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Косметические слои</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./calibration.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Калибровка монитора</span></a>
@@ -206,11 +241,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#установка-модуля-colorio" id="toc-установка-модуля-colorio" class="nav-link active" data-scroll-target="#установка-модуля-colorio"><span class="toc-section-number">3.1</span>  Установка модуля colorio</a></li>
-  <li><a href="#извлечение-цветовой-шкалы" id="toc-извлечение-цветовой-шкалы" class="nav-link" data-scroll-target="#извлечение-цветовой-шкалы"><span class="toc-section-number">3.2</span>  Извлечение цветовой шкалы</a></li>
-  <li><a href="#преобразование-цветовых-пространств" id="toc-преобразование-цветовых-пространств" class="nav-link" data-scroll-target="#преобразование-цветовых-пространств"><span class="toc-section-number">3.3</span>  Преобразование цветовых пространств</a></li>
-  <li><a href="#вычисление-цветовых-расстояний" id="toc-вычисление-цветовых-расстояний" class="nav-link" data-scroll-target="#вычисление-цветовых-расстояний"><span class="toc-section-number">3.4</span>  Вычисление цветовых расстояний</a></li>
-  <li><a href="#анализ-цветовых-расстояний" id="toc-анализ-цветовых-расстояний" class="nav-link" data-scroll-target="#анализ-цветовых-расстояний"><span class="toc-section-number">3.5</span>  Анализ цветовых расстояний</a></li>
+  <li><a href="#установка-модуля-colorio" id="toc-установка-модуля-colorio" class="nav-link active" data-scroll-target="#установка-модуля-colorio"><span class="toc-section-number">6.1</span>  Установка модуля colorio</a></li>
+  <li><a href="#извлечение-цветовой-шкалы" id="toc-извлечение-цветовой-шкалы" class="nav-link" data-scroll-target="#извлечение-цветовой-шкалы"><span class="toc-section-number">6.2</span>  Извлечение цветовой шкалы</a></li>
+  <li><a href="#преобразование-цветовых-пространств" id="toc-преобразование-цветовых-пространств" class="nav-link" data-scroll-target="#преобразование-цветовых-пространств"><span class="toc-section-number">6.3</span>  Преобразование цветовых пространств</a></li>
+  <li><a href="#вычисление-цветовых-расстояний" id="toc-вычисление-цветовых-расстояний" class="nav-link" data-scroll-target="#вычисление-цветовых-расстояний"><span class="toc-section-number">6.4</span>  Вычисление цветовых расстояний</a></li>
+  <li><a href="#анализ-цветовых-расстояний" id="toc-анализ-цветовых-расстояний" class="nav-link" data-scroll-target="#анализ-цветовых-расстояний"><span class="toc-section-number">6.5</span>  Анализ цветовых расстояний</a></li>
   </ul>
 </nav>
     </div>
@@ -219,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></h1>
 </div>
 
 
@@ -234,8 +269,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>Одна из ключевых задач картографической визуализации — обеспечить наглядность и равномерность цветовых шкал, используемых при визуализации данных. Использование неперцептивных цветовых пространств часто ведет к тому, что визальные различия между соседними градациями шкалы могут значительно варьироваться в пределах шкалы. В данном упражнении мы научимся извлекать уже заданную шкалу из слоя и оценивать ее цветовую равномерность.</p>
-<section id="установка-модуля-colorio" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="установка-модуля-colorio"><span class="header-section-number">3.1</span> Установка модуля colorio</h2>
+<section id="установка-модуля-colorio" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="установка-модуля-colorio"><span class="header-section-number">6.1</span> Установка модуля colorio</h2>
 <p>Перцептивная оценка цветовых градиентов требует вычислений в перцептивных цветовых пространствах. При этом стандартный класс <code>QColor</code> в QGIS ожидаемо <a href="https://doc.qt.io/qtforpython-5/PySide2/QtGui/QColor.html">поддерживает</a> только общеупотребительные пространства <strong>RBG</strong>, <strong>CMYK</strong>, <strong>HSL</strong> и <strong>HSV</strong>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -254,8 +289,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> colorio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="извлечение-цветовой-шкалы" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="извлечение-цветовой-шкалы"><span class="header-section-number">3.2</span> Извлечение цветовой шкалы</h2>
+<section id="извлечение-цветовой-шкалы" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="извлечение-цветовой-шкалы"><span class="header-section-number">6.2</span> Извлечение цветовой шкалы</h2>
 <p>Для того чтобы выполнить анализ равномерности цветовой шкалы, необходимо получить цвета всех её классов. Для этого необходимо выполнить следующую последовательность действий:</p>
 <ol type="1">
 <li>Выбрать активный слой (<code>layer = iface.activeLayer()</code>).</li>
@@ -281,8 +316,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Имея в распоряжении массив цветов, можно приступать к оценке качества цветовой шкалы.</p>
 </section>
-<section id="преобразование-цветовых-пространств" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="преобразование-цветовых-пространств"><span class="header-section-number">3.3</span> Преобразование цветовых пространств</h2>
+<section id="преобразование-цветовых-пространств" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="преобразование-цветовых-пространств"><span class="header-section-number">6.3</span> Преобразование цветовых пространств</h2>
 <p>Цветовые расстояния целесообразно рассчитывать в перцептивных цветовых пространствах. Для этих целей как правило используют CIE LAB. Следовательно, полученные цвета RGB необходимо в это пространство преобразовать. Для начала необходимо инициализировать эти цветовые пространства в <code>colorio</code>:</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>srgb <span class="op">=</span> colorio.cs.SRGB255()</span>
@@ -304,8 +339,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>labs <span class="op">=</span> [slab.from_xyz100(srgb.to_xyz100(color[<span class="dv">0</span>:<span class="dv">3</span>])) <span class="cf">for</span> color <span class="kw">in</span> colors]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="вычисление-цветовых-расстояний" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="вычисление-цветовых-расстояний"><span class="header-section-number">3.4</span> Вычисление цветовых расстояний</h2>
+<section id="вычисление-цветовых-расстояний" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="вычисление-цветовых-расстояний"><span class="header-section-number">6.4</span> Вычисление цветовых расстояний</h2>
 <p>Существует несколько распространенных методов вычисления цветовых расстояний (цветоразностей). Поскольку пространство CIE LAB является перцептивным, то предполагается, что изменения цвета в нем происходят линейно. Поэтому простейший подход <strong>CIE76</strong> к вычислению цветоразностей в этом пространстве базируется на Евклидовом расстоянии:</p>
 <p><span class="math display">\[\Delta E^*_{ab} = \sqrt{(\Delta L^*)^2 + (\Delta a^*)^2 + (\Delta b^*)^2}\]</span> При этом значение <span class="math inline">\(\Delta E^*_{ab} \approx 2.3\)</span> соответствует едва различимой цветоразности. Это означает, что цвета с такой разностью будет трудно дифференцировать (хотя, конечно, все еще зависит от условий наблюдения и размера цветового пятна). Существуют и более сложные формулы <strong>CIE94</strong>, <strong>CIE2000</strong> и <strong>CMC</strong>, в которых вводятся дополнительные перцептивные корректировки.</p>
 <p>Для вычисления цветовых разностей используйте соответствующие функции:</p>
@@ -323,8 +358,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  labdist.append(colorio.diff.ciede76(lab[i], labs[i<span class="op">+</span><span class="dv">1</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="анализ-цветовых-расстояний" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="анализ-цветовых-расстояний"><span class="header-section-number">3.5</span> Анализ цветовых расстояний</h2>
+<section id="анализ-цветовых-расстояний" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="анализ-цветовых-расстояний"><span class="header-section-number">6.5</span> Анализ цветовых расстояний</h2>
 <p>Для характеристики цветовых расстояний полезно посчитать их описательные статистики: среднее, стандартное отклонение, размах вариации. Для этого импортируем модуль <em>statistics</em>:</p>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statistics <span class="im">as</span> st</span>
@@ -439,13 +474,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./02_Scales.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Создание шкал</span></span>
+      <a href="./p02_Scales.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Создание шкал</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./04_Rubberband.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Косметические слои</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./p04_Rubberband.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Косметические слои</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

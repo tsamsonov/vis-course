@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Визуализация пространственных данных - 2&nbsp; Создание шкал</title>
+<title>Визуализация пространственных данных - 5&nbsp; Создание шкал</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,8 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./03_Colordist.html" rel="next">
-<link href="./01_Basics.html" rel="prev">
+<link href="./p03_Colordist.html" rel="next">
+<link href="./p01_Basics.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Создание шкал</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Создание шкал</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -161,34 +161,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./index.html" class="sidebar-item-text sidebar-link">Введение</a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./01_Basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./02_Scales.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Создание шкал</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./03_Colordist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./04_Rubberband.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Косметические слои</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Лекции</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_Fundamentals.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основы компьютерной графики</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Color.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Цвет</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Blending.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Композиция и смешение</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Практикум</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p01_Basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p02_Scales.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Создание шкал</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p03_Colordist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p04_Rubberband.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Косметические слои</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./calibration.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Калибровка монитора</span></a>
@@ -205,9 +240,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#доступ-к-атрибутивным-полям" id="toc-доступ-к-атрибутивным-полям" class="nav-link active" data-scroll-target="#доступ-к-атрибутивным-полям"><span class="toc-section-number">2.1</span>  Доступ к атрибутивным полям</a></li>
-  <li><a href="#формирование-интервалов" id="toc-формирование-интервалов" class="nav-link" data-scroll-target="#формирование-интервалов"><span class="toc-section-number">2.2</span>  Формирование интервалов</a></li>
-  <li><a href="#назначение-ручного-метода-классификации" id="toc-назначение-ручного-метода-классификации" class="nav-link" data-scroll-target="#назначение-ручного-метода-классификации"><span class="toc-section-number">2.3</span>  Назначение ручного метода классификации</a></li>
+  <li><a href="#доступ-к-атрибутивным-полям" id="toc-доступ-к-атрибутивным-полям" class="nav-link active" data-scroll-target="#доступ-к-атрибутивным-полям"><span class="toc-section-number">5.1</span>  Доступ к атрибутивным полям</a></li>
+  <li><a href="#формирование-интервалов" id="toc-формирование-интервалов" class="nav-link" data-scroll-target="#формирование-интервалов"><span class="toc-section-number">5.2</span>  Формирование интервалов</a></li>
+  <li><a href="#назначение-ручного-метода-классификации" id="toc-назначение-ручного-метода-классификации" class="nav-link" data-scroll-target="#назначение-ручного-метода-классификации"><span class="toc-section-number">5.3</span>  Назначение ручного метода классификации</a></li>
   </ul>
 </nav>
     </div>
@@ -216,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Создание шкал</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Создание шкал</span></h1>
 </div>
 
 
@@ -236,8 +271,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> <span class="st">'/Volumes/Data/Spatial/Natural Earth/natural_earth_vector.gpkg|layername=ne_10m_admin_0_countries'</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>layer <span class="op">=</span> iface.addVectorLayer(db, <span class="st">''</span>,<span class="st">'ogr'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="доступ-к-атрибутивным-полям" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="доступ-к-атрибутивным-полям"><span class="header-section-number">2.1</span> Доступ к атрибутивным полям</h2>
+<section id="доступ-к-атрибутивным-полям" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="доступ-к-атрибутивным-полям"><span class="header-section-number">5.1</span> Доступ к атрибутивным полям</h2>
 <p>Чтобы узнать перечень атрибутов, можно использовать метод <code>fields()</code>:</p>
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fields <span class="op">=</span> [field.name <span class="cf">for</span> field <span class="kw">in</span> layer.fields()]</span>
@@ -249,8 +284,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(admin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="формирование-интервалов" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="формирование-интервалов"><span class="header-section-number">2.2</span> Формирование интервалов</h2>
+<section id="формирование-интервалов" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="формирование-интервалов"><span class="header-section-number">5.2</span> Формирование интервалов</h2>
 <p>Данный метод может использоваться дли автоматизации таких способов как картограммы, картодиаграммы, значки. В этом упражнении мы рассмотрим как создать каждый интервал классификации вручную.</p>
 <p>Прежде всего необходимо понимать, какой тип геометрии у слоя:</p>
 <div class="cell" data-execution_count="4">
@@ -279,8 +314,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>renderer <span class="op">=</span> QgsGraduatedSymbolRenderer(<span class="st">'POP_EST'</span>, ranges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="назначение-ручного-метода-классификации" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="назначение-ручного-метода-классификации"><span class="header-section-number">2.3</span> Назначение ручного метода классификации</h2>
+<section id="назначение-ручного-метода-классификации" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="назначение-ручного-метода-классификации"><span class="header-section-number">5.3</span> Назначение ручного метода классификации</h2>
 <p>Чтобы визуализатор заработал, необходимо выбрать, к какому методу классификации относятся выбранные вами границы. Поскольку они сформированы вручную, нужно выбрать соответствующий метод:</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>classreg <span class="op">=</span> QgsApplication.classificationMethodRegistry()</span>
@@ -405,13 +440,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./01_Basics.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></span>
+      <a href="./p01_Basics.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./03_Colordist.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./p03_Colordist.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

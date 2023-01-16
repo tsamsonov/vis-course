@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Визуализация пространственных данных - 1&nbsp; Базовые операции рендеринга</title>
+<title>Визуализация пространственных данных - 4&nbsp; Базовые операции рендеринга</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,8 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02_Scales.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./p02_Scales.html" rel="next">
+<link href="./03_Blending.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -161,34 +161,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./index.html" class="sidebar-item-text sidebar-link">Введение</a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./01_Basics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./02_Scales.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Создание шкал</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./03_Colordist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./04_Rubberband.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Косметические слои</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Лекции</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_Fundamentals.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основы компьютерной графики</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Color.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Цвет</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Blending.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Композиция и смешение</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Практикум</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p01_Basics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p02_Scales.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Создание шкал</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p03_Colordist.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Анализ цветовых щкал</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./p04_Rubberband.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Косметические слои</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./calibration.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Калибровка монитора</span></a>
@@ -205,15 +240,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#функции-qgis" id="toc-функции-qgis" class="nav-link active" data-scroll-target="#функции-qgis"><span class="toc-section-number">1.1</span>  Функции QGIS</a>
+  <li><a href="#функции-qgis" id="toc-функции-qgis" class="nav-link active" data-scroll-target="#функции-qgis"><span class="toc-section-number">4.1</span>  Функции QGIS</a>
   <ul class="collapse">
-  <li><a href="#добавление-и-удаление-слоёв" id="toc-добавление-и-удаление-слоёв" class="nav-link" data-scroll-target="#добавление-и-удаление-слоёв"><span class="toc-section-number">1.1.1</span>  Добавление и удаление слоёв</a></li>
-  <li><a href="#символика" id="toc-символика" class="nav-link" data-scroll-target="#символика"><span class="toc-section-number">1.1.2</span>  Символика</a></li>
-  <li><a href="#подписи" id="toc-подписи" class="nav-link" data-scroll-target="#подписи"><span class="toc-section-number">1.1.3</span>  Подписи</a></li>
-  <li><a href="#фильтрация" id="toc-фильтрация" class="nav-link" data-scroll-target="#фильтрация"><span class="toc-section-number">1.1.4</span>  Фильтрация</a></li>
-  <li><a href="#перерисовка-карты-и-легенды" id="toc-перерисовка-карты-и-легенды" class="nav-link" data-scroll-target="#перерисовка-карты-и-легенды"><span class="toc-section-number">1.1.5</span>  Перерисовка карты и легенды</a></li>
+  <li><a href="#добавление-и-удаление-слоёв" id="toc-добавление-и-удаление-слоёв" class="nav-link" data-scroll-target="#добавление-и-удаление-слоёв"><span class="toc-section-number">4.1.1</span>  Добавление и удаление слоёв</a></li>
+  <li><a href="#символика" id="toc-символика" class="nav-link" data-scroll-target="#символика"><span class="toc-section-number">4.1.2</span>  Символика</a></li>
+  <li><a href="#подписи" id="toc-подписи" class="nav-link" data-scroll-target="#подписи"><span class="toc-section-number">4.1.3</span>  Подписи</a></li>
+  <li><a href="#фильтрация" id="toc-фильтрация" class="nav-link" data-scroll-target="#фильтрация"><span class="toc-section-number">4.1.4</span>  Фильтрация</a></li>
+  <li><a href="#перерисовка-карты-и-легенды" id="toc-перерисовка-карты-и-легенды" class="nav-link" data-scroll-target="#перерисовка-карты-и-легенды"><span class="toc-section-number">4.1.5</span>  Перерисовка карты и легенды</a></li>
   </ul></li>
-  <li><a href="#пример-использования" id="toc-пример-использования" class="nav-link" data-scroll-target="#пример-использования"><span class="toc-section-number">1.2</span>  Пример использования</a></li>
+  <li><a href="#пример-использования" id="toc-пример-использования" class="nav-link" data-scroll-target="#пример-использования"><span class="toc-section-number">4.2</span>  Пример использования</a></li>
   </ul>
 </nav>
     </div>
@@ -222,7 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовые операции рендеринга</span></h1>
 </div>
 
 
@@ -236,11 +271,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="функции-qgis" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="функции-qgis"><span class="header-section-number">1.1</span> Функции QGIS</h2>
+<section id="функции-qgis" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="функции-qgis"><span class="header-section-number">4.1</span> Функции QGIS</h2>
 <p>Визуализация данных в QGIS возможна не только посредством графического интерфейса, но также путем программной компоновки карт. Преимущество программного отображения в QGIS по сравнению с тем, что вы можете сделать на чистом Python — в том, что становится доступен невероятно мощный функционал и производительность графического движка QGIS.</p>
-<section id="добавление-и-удаление-слоёв" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="добавление-и-удаление-слоёв"><span class="header-section-number">1.1.1</span> Добавление и удаление слоёв</h3>
+<section id="добавление-и-удаление-слоёв" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="добавление-и-удаление-слоёв"><span class="header-section-number">4.1.1</span> Добавление и удаление слоёв</h3>
 <p>Первая операция, которая может быть полезной, это получение ссылки на экземпляр проекта:</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>QgsProject.instance()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -259,8 +294,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>где <code>path</code> — полный путь к данным, <code>layer</code> — переменная, которая будет хранить ссылку на слой в таблице содержания. Вы можете ее называть любым подходящим именем.</p>
 <p>Обратите внимание на переменную <code>iface</code>. <strong>Это самая важная переменная в скрипте</strong>. Создавать её не нужно, она доступна всегда по умолчанию и представляет собой экземпляр класса <code>QgsInterface</code>. Через него вы получаете доступ к компоненте карты, меню, панелям инструментов и другим компонентам.</p>
 </section>
-<section id="символика" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="символика"><span class="header-section-number">1.1.2</span> Символика</h3>
+<section id="символика" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="символика"><span class="header-section-number">4.1.2</span> Символика</h3>
 <p>После того как слой добавлен на карту, можно заниматься его оформлением. Для того необходимо получить символику:</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>symbol <span class="op">=</span> layer.renderer().symbol()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -303,8 +338,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </figure>
 </div>
 </section>
-<section id="подписи" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="подписи"><span class="header-section-number">1.1.3</span> Подписи</h3>
+<section id="подписи" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="подписи"><span class="header-section-number">4.1.3</span> Подписи</h3>
 <p>Для того чтобы включить <strong>подписи</strong> слоя, необходимо сделать ряд настроек. Для начала следует получить экземпляры классов, отвечающих за настройки слоя в целом и форматирование текста в частности:</p>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>settings  <span class="op">=</span> QgsPalLayerSettings()</span>
@@ -326,15 +361,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>layer.setLabeling(labeling)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="фильтрация" class="level3" data-number="1.1.4">
-<h3 data-number="1.1.4" class="anchored" data-anchor-id="фильтрация"><span class="header-section-number">1.1.4</span> Фильтрация</h3>
+<section id="фильтрация" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="фильтрация"><span class="header-section-number">4.1.4</span> Фильтрация</h3>
 <p>Чтобы осуществить фильтрацию слоя по атрибуту, достаточно активировать соответствующую настройку посредством <code>setSubsetString</code>:</p>
 <div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>layer.setSubsetString(<span class="st">"SIZE &gt; 2000"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="перерисовка-карты-и-легенды" class="level3" data-number="1.1.5">
-<h3 data-number="1.1.5" class="anchored" data-anchor-id="перерисовка-карты-и-легенды"><span class="header-section-number">1.1.5</span> Перерисовка карты и легенды</h3>
+<section id="перерисовка-карты-и-легенды" class="level3" data-number="4.1.5">
+<h3 data-number="4.1.5" class="anchored" data-anchor-id="перерисовка-карты-и-легенды"><span class="header-section-number">4.1.5</span> Перерисовка карты и легенды</h3>
 <p>После того как вы настроили внешний вид слоя, необходимо сделать 2 вещи: инициировать его перерисовку на карте, а также обновить его легенду, для того чтобы она соответствовала символике. Делается это следующим образом:</p>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>layer.triggerRepaint() <span class="co"># перерисовать слой</span></span>
@@ -352,8 +387,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="пример-использования" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="пример-использования"><span class="header-section-number">1.2</span> Пример использования</h2>
+<section id="пример-использования" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="пример-использования"><span class="header-section-number">4.2</span> Пример использования</h2>
 <p>В данном примере рассматривается добавление на карту и раскрашивание полигона суши:</p>
 <div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>QgsProject.instance().removeAllMapLayers()</span>
@@ -485,13 +520,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Введение</span>
+      <a href="./03_Blending.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Композиция и смешение</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02_Scales.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Создание шкал</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./p02_Scales.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Создание шкал</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
