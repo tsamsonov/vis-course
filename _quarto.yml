@@ -8,11 +8,11 @@ book:
   date: "22.09.2022"
   chapters:
     - index.qmd
-    - part: "Лекции"
-      chapters: 
-        - 01_Fundamentals.qmd
-        - 02_Color.qmd
-        - 03_Blending.qmd
+    # - part: "Лекции"
+    #   chapters: 
+    #     - 01_Fundamentals.qmd
+    #     - 02_Color.qmd
+    #     - 03_Blending.qmd
     - part: "Практикум"
       chapters: 
         - p01_Basics.qmd
