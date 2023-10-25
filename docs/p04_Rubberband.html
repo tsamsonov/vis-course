@@ -247,7 +247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>geometryType</code> — тип геометрии слоя, может принимать значения <code>QgsWkbTypes.LineGeometry</code>, <code>QgsWkbTypes.PolygonGeometry</code> или <code>QgsWkbTypes.PointGeometry</code>.</li>
 </ul>
 <p>Таким образом, для создания полигонального косметического слоя необходима следующая последовательность действий:</p>
-<div id="445b54ed" class="cell" data-execution_count="1">
+<div id="c4597f78" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>canvas <span class="op">=</span> iface.mapCanvas()</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>lines <span class="op">=</span> QgsRubberBand(canvas, QgsWkbTypes.LineGeometry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -255,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="настройка-косметического-слоя" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="настройка-косметического-слоя"><span class="header-section-number">4.2</span> Настройка косметического слоя</h2>
 <p>В процессе настройки косметический слой необходимо наполнить геометрией и задать символику. Для наполнения геометрией используйте метод класса <code>setToGeometry(geom)</code>, где <code>geom</code> — это объект класса <code>QgsGeometry</code>. Аналогично для настройки цвета, размера, толщины, иконки и прочих параметров используются методы <code>setColor()</code>, <code>setIconSize()</code>, <code>setWidth()</code>, <code>setIcon()</code>. Например, при настройка линейного косметическеого слоя может выглядеть как:</p>
-<div id="9ba4135b" class="cell" data-execution_count="2">
+<div id="bfc73880" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lines.setToGeometry(geom)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lines.setColor(QColor(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lines.setWidth(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -264,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Полный список методов, который используется для настройки косметического слоя, доступен в <a href="https://qgis.org/pyqgis/latest/gui/QgsRubberBand.html">документации API</a>.</p>
 </blockquote>
 <p>Если вы работаете с точечным косметическом слоем и хотите отобразить множество точек, вам придется создать для каждой точки свой слой. Паттерн разработки в таком случае будет следующим:</p>
-<div id="a319671a" class="cell" data-execution_count="3">
+<div id="8006969d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> []</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  pnt <span class="op">=</span> QgsRubberBand(canvas, QgsWkbTypes.PointGeometry)</span>
@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  points.append(pnt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Если точки будут отбражаться одинаковым символом, то задачу можно упростить, создав точечный слой, но подав при этом ему в качестве <code>geom</code> мультиточку:</p>
-<div id="c2707885" class="cell" data-execution_count="4">
+<div id="dd9581a3" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> QgsRubberBand(canvas, QgsWkbTypes.PointGeometry)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>points.setGeometry(geom) <span class="co"># geom — мультиточка</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -315,14 +315,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>Соответственно, чтобы создать точечный, линейный или полигональный объект, необходимо иметь в распоряжении объект <a href="https://qgis.org/pyqgis/3.0/core/Point/QgsPointXY.html"><code>QgsPointXY</code></a>, либо список таких объектов. Вы можете соорудить такой объект вручную по координатам.</p>
 <p>Точку можно создать так:</p>
-<div id="49fecc2a" class="cell" data-execution_count="5">
+<div id="43d48f5e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>xy1 <span class="op">=</span> QgsPointXY(<span class="dv">10</span>, <span class="dv">20</span>) </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>xy2 <span class="op">=</span> QgsPointXY(<span class="dv">15</span>, <span class="dv">30</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>xy3 <span class="op">=</span> QgsPointXY(<span class="op">-</span><span class="dv">5</span>, <span class="dv">15</span>) </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>xy4 <span class="op">=</span> QgsPointXY(<span class="dv">40</span>, <span class="op">-</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Далее на основе этих точек можно создать, например, две точечных геометрии и одну линейную (отрезок):</p>
-<div id="92bb205c" class="cell" data-execution_count="6">
+<div id="437c2c1b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pnt1 <span class="op">=</span> QgsGeometry.fromPointXY(xy1)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pnt2 <span class="op">=</span> QgsGeometry.fromPointXY(xy2)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pnt3 <span class="op">=</span> QgsGeometry.fromPointXY(xy3)</span>
@@ -332,12 +332,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>line34 <span class="op">=</span> QgsGeometry.fromPolylineXY([xy3, xy4])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Если нужно в косметическом слое хранить множество точек или множество линий, можно сделать мультиточку или мультилинию, это вас избавит от необходимости создавать слой на каждый объект. Сделать это можно так:</p>
-<div id="eac6eb14" class="cell" data-execution_count="7">
+<div id="8b637cc2" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mpnt <span class="op">=</span> QgsGeometry.fromMultiPointXY([xy1, xy2])</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>mline <span class="op">=</span> QgsGeometry.fromMultiLineXY([xy1, xy2], [xy3, xy4])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Полученные объекты можно использовать в функции <code>setGeometry()</code> для назначения геометрии косметическому слою:</p>
-<div id="a12e5921" class="cell" data-execution_count="8">
+<div id="64e1f618" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lines.setToGeometry(mline)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>points.setToGeometry(mline)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -348,18 +348,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Важно уметь не только создавать, но также удалять косметические слои. По этой причине важно не просто создать слой, но и записать его в переменную, чтобы потом можно было обратиться к ней для удаления слоя.</p>
 <p>Если вы знаете, как называется переменная косметического слой, нужно сначала проверить, существует ли она, и если да — то удалить слой. Список существующих переменных можно получить через функцию <code>locals()</code>. Само же удаление делается посредством метода <code>canvas.scene().removeItem(layer)</code>, где <code>layer</code> — ссылка на удаляемый косметический слой</p>
 <p>Таким образом, удаление созданного выше косметического слоя должно выполняться следующим образом:</p>
-<div id="7f624343" class="cell" data-execution_count="9">
+<div id="12395a41" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">'links'</span> <span class="kw">in</span> <span class="bu">locals</span>()):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    canvas.scene().removeItem(links)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Аналогично будет для точек, но поскольку там может быть множество слоев, необходимо пройтись в цикле по списку для удаления каждого:</p>
-<div id="09f4baa6" class="cell" data-execution_count="10">
+<div id="476f2731" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">'points'</span> <span class="kw">in</span> <span class="bu">locals</span>()):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> points:</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        canvas.scene().removeItem(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Если же вы исползуете мультиточечный слой, то удаление надо производить один раз:</p>
-<div id="1dbd62b5" class="cell" data-execution_count="11">
+<div id="69c37266" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">'points'</span> <span class="kw">in</span> <span class="bu">locals</span>()):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        canvas.scene().removeItem(points)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
