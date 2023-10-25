@@ -18,7 +18,7 @@ execute:
 
 ```{python}
 import pip
-pip.main(['install', 'colour'])
+pip.main(['install', 'colour-science'])
 ```
 
 После этого можно подключить требуемые библиотеки в начале скрипта:
