@@ -247,17 +247,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="добавление-и-удаление-слоёв" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="добавление-и-удаление-слоёв"><span class="header-section-number">1.1.1</span> Добавление и удаление слоёв</h3>
 <p>Первая операция, которая может быть полезной, это получение ссылки на экземпляр проекта:</p>
-<div id="48a638c0" class="cell" data-execution_count="1">
+<div id="55ee4995" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>QgsProject.instance()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Главное, для чего он может быть полезен — это управление списком отображаемых слоёв. Можно получить список слоев или удалить все слои из содержимого карты:</p>
-<div id="b1646a3d" class="cell" data-execution_count="2">
+<div id="f29e8391" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>QgsProject.instance().mapLayers().values() <span class="co"># список слоёв</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>QgsProject.instance().removeAllMapLayers() <span class="co"># удаление всех слоёв</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Если необходимо чтобы скрипт собирал карту с нуля каждый раз при запуске, следует расположить вызов <code>removeAllMapLayers()</code> в самом начале. Это будет гарантировать, что сборка проекта начнется с чистого листа.</p>
 <p>Сборку логично начать с добавления слоёв, которое осуществляется посредством следующей команды:</p>
-<div id="6fda9754" class="cell" data-execution_count="3">
+<div id="b79a6ce9" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>layer <span class="op">=</span> iface.addVectorLayer(path)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>layer <span class="op">=</span> iface.addRasterLayer(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -267,35 +267,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="символика" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="символика"><span class="header-section-number">1.1.2</span> Символика</h3>
 <p>После того как слой добавлен на карту, можно заниматься его оформлением. Для того необходимо получить символику:</p>
-<div id="10d927b7" class="cell" data-execution_count="4">
+<div id="c93fee8f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>symbol <span class="op">=</span> layer.renderer().symbol()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>В целом, не обязательно записывать символ в какую-то переменную, но если вы планируете осуществлять более чем одну настройку символа, то лучше это сделать, чтобы каждый раз не вызывать указанную последовательность функций.</p>
 <p>Часть функций по оформлению слоя доступна непосредственно через объект символа. Например, глобальный цвет, толщину линии или размер пунсона можно задать следующим образом:</p>
-<div id="cee5018a" class="cell" data-execution_count="5">
+<div id="6d5c2c3e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>symbol.setColor(color) <span class="co"># заливка</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>symbol.setWidth(width) <span class="co"># толщина</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>symbol.setSize(size)   <span class="co"># размер</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>где <code>color</code> — объект класса <code>QColor</code>, определяющий цвет (см. далее).</p>
 <p>Большинство же настроек символики делается через слои символов, извлечь каждый из которых можно следующим образом:</p>
-<div id="4cbd3263" class="cell" data-execution_count="6">
+<div id="ccd72bd8" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>symbol.symbolLayer(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>где <code>i</code> — номер слоя символа. По умолчанию каждый символ имеет один слой с индексом <strong>0</strong>. Для доступа к нему соответственно надо вызвать <code>symbol.symbolLayer(0)</code>.</p>
 <p>Например, цвет и паттерн линии или обводки полигона устанавливаются так:</p>
-<div id="2f434f66" class="cell" data-execution_count="7">
+<div id="b4e4ef13" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>symbol.symbolLayer(<span class="dv">0</span>).setStrokeColor(color) <span class="co"># цвет линии</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>symbol.symbolLayer(<span class="dv">0</span>).setStrokeStyle(style) <span class="co"># паттерн линии</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>где <code>style</code> — экземпляр класс <code>PenStyle</code>.</p>
 <p>Для создания цветов и стилей линий существуют свои классы. Цвет можно создать по названию или цветовым компонентам:</p>
-<div id="14da874d" class="cell" data-execution_count="8">
+<div id="ceda97fd" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> QColor(<span class="st">'azure'</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> QColor(<span class="dv">120</span>, <span class="dv">240</span>, <span class="dv">75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>А вот создание стиля линии делается не через нативные классы QGIS, а посредством классов библиотеки Qt, на которой реализован вообще весь QGIS:</p>
-<div id="9df2ee5d" class="cell" data-execution_count="9">
+<div id="279c7ab5" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>style <span class="op">=</span> Qt.PenStyle(Qt.NoPen) <span class="co"># Нет обводки</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>style <span class="op">=</span> Qt.PenStyle(Qt.DotLine) <span class="co"># Пунктир</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>style <span class="op">=</span> Qt.PenStyle(Qt.SolidLine) <span class="co"># Сплошная</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -311,12 +311,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="подписи" class="level3" data-number="1.1.3">
 <h3 data-number="1.1.3" class="anchored" data-anchor-id="подписи"><span class="header-section-number">1.1.3</span> Подписи</h3>
 <p>Для того чтобы включить <strong>подписи</strong> слоя, необходимо сделать ряд настроек. Для начала следует получить экземпляры классов, отвечающих за настройки слоя в целом и форматирование текста в частности:</p>
-<div id="51840fac" class="cell" data-execution_count="10">
+<div id="3f0b3eb0" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>settings  <span class="op">=</span> QgsPalLayerSettings()</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>text_format <span class="op">=</span> QgsTextFormat()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Далее осуществляется последовательная настройка подписей:</p>
-<div id="831c3810" class="cell" data-execution_count="11">
+<div id="5ad25710" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>text_format.setFont(QFont(<span class="st">"Arial"</span>, <span class="dv">14</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>text_format.setSize(<span class="dv">14</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -325,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>settings.setFormat(text_format)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>На основе полученных настроек необходимо инициализировать класс подписей и назначить его слою:</p>
-<div id="9d99fc37" class="cell" data-execution_count="12">
+<div id="c5592d3d" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>labeling <span class="op">=</span> QgsVectorLayerSimpleLabeling(settings)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>layer.setLabelsEnabled(<span class="va">True</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>layer.setLabeling(labeling)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -334,20 +334,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="фильтрация" class="level3" data-number="1.1.4">
 <h3 data-number="1.1.4" class="anchored" data-anchor-id="фильтрация"><span class="header-section-number">1.1.4</span> Фильтрация</h3>
 <p>Чтобы осуществить фильтрацию слоя по атрибуту, достаточно активировать соответствующую настройку посредством <code>setSubsetString</code>:</p>
-<div id="f3f3c631" class="cell" data-execution_count="13">
+<div id="9c77c4a9" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>layer.setSubsetString(<span class="st">"SIZE &gt; 2000"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="перерисовка-карты-и-легенды" class="level3" data-number="1.1.5">
 <h3 data-number="1.1.5" class="anchored" data-anchor-id="перерисовка-карты-и-легенды"><span class="header-section-number">1.1.5</span> Перерисовка карты и легенды</h3>
 <p>После того как вы настроили внешний вид слоя, необходимо сделать 2 вещи: инициировать его перерисовку на карте, а также обновить его легенду, для того чтобы она соответствовала символике. Делается это следующим образом:</p>
-<div id="c517fd37" class="cell" data-execution_count="14">
+<div id="d80a0119" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>layer.triggerRepaint() <span class="co"># перерисовать слой</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>iface.layerTreeView().refreshLayerSymbology(layer.<span class="bu">id</span>()) <span class="co"># обновить легенду</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Обратите внимание на то, что легендой слоя владеет не сам слой, а компонента таблицы содержания (<code>layerTreeView</code>).</p>
 <p>Команды перерисовки карты и легенды должны быть вызваны для каждого слоя, оформление которого изменено программным путём. Если необходимо одинаковым образом обновить все слои карты (например, задать им прозрачность или покрасить в черный цвет), то это можно сделать в цикле:</p>
-<div id="a4694a2a" class="cell" data-execution_count="15">
+<div id="9604209c" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>layers <span class="op">=</span> QgsProject.instance().mapLayers().values()</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> layer <span class="kw">in</span> layers:</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  ... <span class="co"># изменение символики</span></span>
@@ -360,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="пример-использования" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="пример-использования"><span class="header-section-number">1.2</span> Пример использования</h2>
 <p>В данном примере рассматривается добавление на карту и раскрашивание полигона суши:</p>
-<div id="6ff644f8" class="cell" data-execution_count="16">
+<div id="b2499378" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>QgsProject.instance().removeAllMapLayers()</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>land <span class="op">=</span> <span class="st">'/Volumes/Data/Spatial/Natural Earth/natural_earth_vector.gpkg|layername=ne_110m_land'</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>

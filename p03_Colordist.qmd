@@ -14,14 +14,14 @@ execute:
 
 ![Методы класса QColor для возврата значения цвета в виде массива цветовых компонент](images/paste-83DE56B6.png)
 
-Для преобразования из этих пространств в перцептивные можно использовать библиотеку [colour](https://colour.readthedocs.io/en/develop/index.html) . Чтобы ее установить в Python при QGIS введите в консоли Python следующие команды:
+Для преобразования из этих пространств в перцептивные можно использовать библиотеку [colour](https://colour.readthedocs.io/en/develop/index.html) . Чтобы ее установить в Python при QGIS введите в консоли Python следующие команды (обратите внимание, что имя модуля при установке должно быть `colour-science`):
 
 ```{python}
 import pip
 pip.main(['install', 'colour-science'])
 ```
 
-После этого можно подключить требуемые библиотеки в начале скрипта:
+Но подключается он как `colour`:
 
 ```{python}
 import numpy as np
@@ -71,33 +71,24 @@ colors = [
 
 ## Преобразование цветовых пространств
 
-Цветовые расстояния целесообразно рассчитывать в перцептивных цветовых пространствах. Для этих целей как правило используют CIE LAB. Следовательно, полученные цвета RGB необходимо в это пространство преобразовать. Для начала необходимо инициализировать эти цветовые пространства в `colour`:
+Цветовые расстояния целесообразно рассчитывать в перцептивных цветовых пространствах. Для этих целей как правило используют CIE LAB. Следовательно, полученные цвета RGB необходимо в это пространство преобразовать. В соответствии с общей методикой сначала выполняется преобразование RGB в XYZ, а затем уже в перцептивное пространство:
 
 ```{python}
-srgb = colorio.cs.SRGB255()
-slab = colorio.cs.CIELAB()
-```
-
-Приставка 255 указывает, что цвета RGB будут задаваться в диапазоне от 0 до 255 --- что соответствует стандартному формату, возвращаемому QColor.
-
-Как мы уже знаем, для преобразований между любыми цветовыми пространствами в качестве прокси используется пространство XYZ с виртуальными источниками освещения. Соответственно, любое цветовое пространство в `colour` реализует 2 метода: `to_xyz100()` и `from_xyz100()` . Имея их, можно получить искомое преобразование на примере цвета `[255, 217, 64]` следующим образом:
-
-```{python}
-rgb = np.array([255, 217, 64])
-xyz = srgb.to_xyz100(rgb)
-lab = slab.from_xyz100(xyz)
+rgb = np.array([255, 217, 64]) / 255 # нормировать от 0 до 1
+xyz = colour.sRGB_to_XYZ(rgb)
+lab = colour.XYZ_to_Lab(xyz)
 ```
 
 Или одним выражением:
 
 ```{python}
-lab = slab.from_xyz100(srgb.to_xyz100(rgb))
+lab = colour.XYZ_to_Lab(colour.sRGB_to_XYZ(rgb))
 ```
 
 Чтобы сделать это преобразование для каждого элемента списка цветов можно использовать уже знакомый нам подход. При этом важно избавиться от 4-й компоненты цвета (прозрачности):
 
 ```{python}
-labs = [slab.from_xyz100(srgb.to_xyz100(color[0:3])) for color in colors]
+labs = [colour.XYZ_to_Lab(colour.sRGB_to_XYZ(color[0:3]/255)) for color in colors]
 ```
 
 ## Вычисление цветовых расстояний
@@ -109,10 +100,10 @@ $$\Delta E^*_{ab} = \sqrt{(\Delta L^*)^2 + (\Delta a^*)^2 + (\Delta b^*)^2}$$
 
 Для вычисления цветовых разностей используйте соответствующие функции:
 ```{python}
-colorio.diff.ciede76(lab1, lab2)
-colorio.diff.ciede94(lab1, lab2)
-colorio.diff.ciede2000(lab1, lab2)
-colorio.diff.cmc(lab1, lab2)
+colour.difference.delta_E_CIE1976(lab1, lab2)
+colour.difference.delta_E_CIE1994(lab1, lab2)
+colour.difference.delta_E_CIE2000(lab1, lab2)
+colour.difference.delta_E_CMC(lab1, lab2)
 ```
 
 где `lab1` и `lab2` — вектора `numpy` с цветами в пространстве CIE LAB.
@@ -121,7 +112,7 @@ colorio.diff.cmc(lab1, lab2)
 ```{python}
 labdist = []
 for i in range(len(labs)-1):
-  labdist.append(colorio.diff.ciede76(lab[i], labs[i+1]))
+  labdist.append(colour.difference.delta_E_CIE1976(lab[i], labs[i+1]))
 ```
 
 ## Анализ цветовых расстояний

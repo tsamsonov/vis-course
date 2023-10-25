@@ -236,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>В данном упражнении мы будем работать со слоем стран, поэтому его необходимо загрузить:</p>
-<div id="c26c31b0" class="cell" data-execution_count="1">
+<div id="72d46f4a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>QgsProject.instance().removeAllMapLayers()</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> <span class="st">'/Volumes/Data/Spatial/Natural Earth/natural_earth_vector.gpkg|layername=ne_10m_admin_0_countries'</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>layer <span class="op">=</span> iface.addVectorLayer(db, <span class="st">''</span>,<span class="st">'ogr'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -244,12 +244,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="доступ-к-атрибутивным-полям" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="доступ-к-атрибутивным-полям"><span class="header-section-number">2.1</span> Доступ к атрибутивным полям</h2>
 <p>Чтобы узнать перечень атрибутов, можно использовать метод <code>fields()</code>:</p>
-<div id="d2c94142" class="cell" data-execution_count="2">
+<div id="d79d748c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fields <span class="op">=</span> [field.name <span class="cf">for</span> field <span class="kw">in</span> layer.fields()]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fields)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Аналогичным образом можно вытащить все значения атрибута:</p>
-<div id="31deecd0" class="cell" data-execution_count="3">
+<div id="e6840c3d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>admin <span class="op">=</span> [feature[<span class="st">"ADMIN"</span>] <span class="cf">for</span> feature <span class="kw">in</span> layer.getFeatures()]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(admin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -258,15 +258,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="2.2" class="anchored" data-anchor-id="формирование-интервалов"><span class="header-section-number">2.2</span> Формирование интервалов</h2>
 <p>Данный метод может использоваться дли автоматизации таких способов как картограммы, картодиаграммы, значки. В этом упражнении мы рассмотрим как создать каждый интервал классификации вручную.</p>
 <p>Прежде всего необходимо понимать, какой тип геометрии у слоя:</p>
-<div id="19750585" class="cell" data-execution_count="4">
+<div id="65343140" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>geom_type <span class="op">=</span> layer.geometryType()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Далее нужно создать пустой список интервалов классификации:</p>
-<div id="e12cb984" class="cell" data-execution_count="5">
+<div id="9ad7aaea" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ranges <span class="op">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Если известно количество классов (<code>N</code>), которое необходимо получить, следует заполнить этот список объектами интервалов. Для каждого интервала надо вычислить его цвет, минимальную и максимальную границу, а также подпись (то, что будет отображаться в легенде). Далее на основе этих данных создается объект символа (<code>QgsSymbol</code>) и объект интервала (<code>QgsRendererRange</code>), который добавляется в список интеовалов. Примерный шаблон кода выглядит следующим образом:</p>
-<div id="1edd4ac2" class="cell" data-execution_count="6">
+<div id="a5fae510" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  col <span class="op">=</span> ...</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  low <span class="op">=</span> ...</span>
@@ -280,14 +280,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  ranges.append(interval)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Далее на основе созданных интервалов можно уже соорудить визуализатор градуированных символов:</p>
-<div id="e4685a64" class="cell" data-execution_count="7">
+<div id="a2ce9d8f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>renderer <span class="op">=</span> QgsGraduatedSymbolRenderer(<span class="st">'POP_EST'</span>, ranges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="назначение-ручного-метода-классификации" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="назначение-ручного-метода-классификации"><span class="header-section-number">2.3</span> Назначение ручного метода классификации</h2>
 <p>Чтобы визуализатор заработал, необходимо выбрать, к какому методу классификации относятся выбранные вами границы. Поскольку они сформированы вручную, нужно выбрать соответствующий метод:</p>
-<div id="8592a3a2" class="cell" data-execution_count="8">
+<div id="ff3d04ed" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>classreg <span class="op">=</span> QgsApplication.classificationMethodRegistry()</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>nms <span class="op">=</span> classreg.methodNames()</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -295,12 +295,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Будет выведено нечто следующее:</p>
 <pre><code>{'Equal Count (Quantile)': 'Quantile', 'Equal Interval': 'EqualInterval', 'Fixed Interval': 'Fixed', 'Logarithmic Scale': 'Logarithmic', 'Natural Breaks (Jenks)': 'Jenks', 'Pretty Breaks': 'Pretty', 'Standard Deviation': 'StdDev'}</code></pre>
 <p>С методами автоматической классификации мы познакомимся далее. А пока что надо выбрать вариант <code>Fixed</code> или <code>EqualInterval</code> и присвоить его визуализатору:</p>
-<div id="dd5fc6b2" class="cell" data-execution_count="9">
+<div id="86eedf7c" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>method <span class="op">=</span> classreg.method(<span class="st">'Fixed'</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>renderer.setClassificationMethod(method)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Наконец, после того как визуализатор готов, его нyжно назначить слою и обновить изображение:</p>
-<div id="46b30fe8" class="cell" data-execution_count="10">
+<div id="c3a15e93" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>layer.setRenderer(renderer)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>layer.triggerRepaint()</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>iface.layerTreeView().refreshLayerSymbology(layer.<span class="bu">id</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
