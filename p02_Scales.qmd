@@ -85,7 +85,7 @@ method = classreg.method('Fixed')
 renderer.setClassificationMethod(method)
 ```
 
-Наконец, после того как визуализатор готов, его нажно назначить слою и обновить изображение:
+Наконец, после того как визуализатор готов, его нyжно назначить слою и обновить изображение:
 ```{python}
 layer.setRenderer(renderer)
 layer.triggerRepaint()
