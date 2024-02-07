@@ -29,7 +29,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -349,18 +369,6 @@
 </ul>
 
 <img data-src="images/people.png" style="width:100.0%" class="r-stretch"></section>
-<section id="мультидисциплинарность" class="slide level2">
-<h2>Мультидисциплинарность</h2>
-<ul>
-<li><p>физика</p></li>
-<li><p>математика</p></li>
-<li><p>человеческое зрение</p></li>
-<li><p>человеко-машинное взимодействие</p></li>
-<li><p>программная и аппаратная инженерия</p></li>
-<li><p>графический дизайн</p></li>
-<li><p>…</p></li>
-</ul>
-</section>
 <section id="связь-с-компьютерным-зрением" class="slide level2">
 <h2>Связь с компьютерным зрением</h2>
 <p><strong>Компьютерная графика</strong>: реализация с определенного ракурса внешнего вида сцены, в которую погружены модели объектов под заданными условиями освещения.</p>
@@ -440,12 +448,174 @@
 </div>
 </div>
 </section>
-<section id="библиография" class="slide level2">
+<section id="отрисовка-векторных-объектов" class="slide level2">
+<h2>Отрисовка векторных объектов</h2>
+<ul>
+<li>Две основных операции: обводка и заливка</li>
+<li>В случае точечных данных применяются не к самой точке, а используемой для ее отображения фигуре.</li>
+</ul>
+<p>Общий алгоритм для обводки:</p>
+<ol type="1">
+<li>Установить тип отображаемого объекта</li>
+<li>Организовать обход по всем уровням вложенности с помощью цикла</li>
+<li>На самом низком уровне вложенности получить матрицу координат.</li>
+<li>Последовательно соединяя соседние координаты в матрице, отрисовать границу отрезками.</li>
+</ol>
+</section>
+<section id="отрисовка-отрезков" class="slide level2">
+<h2>Отрисовка отрезков</h2>
+<p><strong>Алгоритм Брезенхема</strong> <span class="citation" data-cites="bresenham1965">(<a href="#/библиография" role="doc-biblioref" onclick="">Bresenham 1965</a>)</span></p>
+<p><code>draw_line(i0, j0, i1, j1, image, color)</code></p>
+
+<img data-src="images/bresenham.gif" style="width:55.0%" class="r-stretch"></section>
+<section id="алгоритм-брезенхэма" class="slide level2">
+<h2>Алгоритм Брезенхэма</h2>
+<p>Cистема экранных координат <span class="math inline">\(ij\)</span>, где <span class="math inline">\(i\)</span> — строка (увеличивается сверху вниз), <span class="math inline">\(j\)</span> — столбец (увеличивается слева направо),</p>
+<ul>
+<li><span class="math inline">\((i_0, j_0)\)</span> — начальная точка отрезка в экранных координатах</li>
+<li><span class="math inline">\((i_1, j_1)\)</span> — конечная точка отрезка в экранных координатах</li>
+</ul>
+<p>Уравнение отрезка: <span class="math display">\[\frac{i - i_0}{i_1-i_0} = \frac{j - j_0}{j_1-j_0}\]</span></p>
+<p>Выразив <span class="math inline">\(i\)</span>, получаем: <span class="math display">\[i = \color{red}{\underbrace{\frac{i_1 - i_0}{j_1-j_0}}_{\textbf{d (уклон)}}} (j - j_0) + i_0\]</span></p>
+</section>
+<section id="отрисовка-отрезков-1" class="slide level2">
+<h2>Отрисовка отрезков</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><em>Стандартно</em> рассматривается отрисовка линии, которая располагается в секторе <code>В-ЮВ</code>, т.е. идет относительно начальной точки вправо и полого вниз при соблюдении следующих условий:</p>
+<ul>
+<li><span class="math inline">\(j_0 \geq 0,~i_0 \geq 0\)</span>;</li>
+<li><span class="math inline">\(j_0 &lt; j_1,~i_0 \leq i_1\)</span>;</li>
+<li><span class="math inline">\(j_1 - j_0 \geq i_1 - i_0\)</span>.</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<p><img data-src="images/coords.png" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+<section id="алгоритм-брезенхэма-1" class="slide level2">
+<h2>Алгоритм Брезенхэма</h2>
+<p>Для сектора <code>В-ЮВ</code> алгоритм опирается на координаты <span class="math inline">\(x\)</span>:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Вычисляем заранее</strong>:</p>
+<ul>
+<li><span class="math inline">\(dj = j_1 - j_0\)</span>.</li>
+<li><span class="math inline">\(di = i_1 - i_0\)</span>.</li>
+<li><span class="math inline">\(\color{blue}{d = di / dj}\)</span>;</li>
+<li><span class="math inline">\(\color{blue}{i = i_0}\)</span>;</li>
+<li><span class="math inline">\(e = 0\)</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Для</strong> <span class="math inline">\(\color{blue}{j = j_0, ... j_1}\)</span>, <strong>выполняем</strong>:</p>
+<ol type="1">
+<li>Рисуем пиксель <span class="math inline">\((i, j)\)</span>.</li>
+<li>Обновляем ошибку <span class="math inline">\(e = e + |d|\)</span>.</li>
+<li>Если <span class="math inline">\(e \geq 0.5\)</span>, то:</li>
+</ol>
+<ul>
+<li><span class="math inline">\(\color{blue}{i = i + \texttt{sign}(di)}\)</span>,</li>
+<li><span class="math inline">\(e = e - 1\)</span>.</li>
+</ul>
+</div>
+</div>
+<p>Использование функции <span class="math inline">\(\texttt{sign}\)</span> позволяет применять алгоритм также и для сектора <code>В-СВ</code> (только <span class="math inline">\(i\)</span> будет уменьшаться).</p>
+<p>Обозначим случай <code>draw_line_byJ(i0, j0, i1, j1, image, color)</code></p>
+</section>
+<section id="алгоритм-брезенхэма-2" class="slide level2">
+<h2>Алгоритм Брезенхэма</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><em>Альтернативно</em> рассматривается отрисовка линии, которая располагается в секторе <code>Ю-ЮВ</code>, т.е. идет относительно начальной точки вправо и круто вниз при соблюдении следующих условий:</p>
+<ul>
+<li><span class="math inline">\(j_0 \geq 0,~i_0 \geq 0\)</span>;</li>
+<li><span class="math inline">\(j_0 \leq j_1,~i_0 &lt; i_1\)</span>;</li>
+<li><span class="math inline">\(j_1 - j_0 &lt; i_1 - i_0\)</span>.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/coords2.png" style="width:55.0%"></p>
+</div>
+</div>
+</section>
+<section id="алгоритм-брезенхэма-3" class="slide level2">
+<h2>Алгоритм Брезенхэма</h2>
+<p>Для сектора <code>Ю-ЮВ</code> алгоритм опирается на координаты <span class="math inline">\(i\)</span>:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Вычисляем заранее</strong>:</p>
+<ul>
+<li><span class="math inline">\(dj = j_1 - j_0\)</span>.</li>
+<li><span class="math inline">\(di = i_1 - i_0\)</span>.</li>
+<li><span class="math inline">\(\color{red}{d = dj / di}\)</span>;</li>
+<li><span class="math inline">\(\color{red}{j = j_0}\)</span>;</li>
+<li><span class="math inline">\(e = 0\)</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Для</strong> <span class="math inline">\(\color{red}{i = i_0, ... i_1}\)</span> <strong>выполняем</strong>:</p>
+<ol type="1">
+<li>Рисуем пиксель <span class="math inline">\((i, j)\)</span>.</li>
+<li>Обновляем ошибку <span class="math inline">\(e = e + |d|\)</span>.</li>
+<li>Если <span class="math inline">\(e \geq 0.5\)</span>, то:</li>
+</ol>
+<ul>
+<li><span class="math inline">\(\color{red}{j = j + \texttt{sign}(dj)}\)</span>,</li>
+<li><span class="math inline">\(e = e - 1\)</span>.</li>
+</ul>
+</div>
+</div>
+<p>Использование функции <span class="math inline">\(\texttt{sign}\)</span> позволяет применять алгоритм также и для сектора <code>Ю-ЮЗ</code> (только <span class="math inline">\(j\)</span> будет уменьшаться).</p>
+<p>Обозначим случай <code>draw_line_byI(i0, j0, i1, j1, image, color)</code></p>
+</section>
+<section id="алгоритм-брезенхэма-4" class="slide level2">
+<h2>Алгоритм Брезенхэма</h2>
+<p>Для оставшихся направлений построение линий реализуется путем перестановки местами начальной и конечной точки. Код результирующей функции на <strong>Python</strong>:</p>
+<pre><code>def draw_line(i0, j0, i1, j1, image, color):
+    if abs(i1 - i0) &lt; abs(j1 - j0): # пологая линия
+        if j0 &gt; j1:
+            draw_line_byX(i1, j1, i0, j0, image, color)
+        else:
+            draw_line_byX(i0, j0, i1, j1, image, color)
+    else:
+        if i0 &gt; i1:                 # крутая линия
+            draw_line_byY(i1, j1, i0, j0, image, color)
+        else:
+            draw_line_byY(i0, j0, i1, j1, image, color)</code></pre>
+<p>где <code>abs()</code> — функция вычисления модуля.</p>
+</section>
+<section id="заливка-полигона" class="slide level2">
+<h2>Заливка полигона</h2>
+
+<img data-src="images/polyfill.png" style="width:70.0%" class="r-stretch"></section>
+<section id="алгоритм-сканирующей-линии" class="slide level2">
+<h2>Алгоритм сканирующей линии</h2>
+<p>Для каждого <span class="math inline">\(i_k = i_{min},...,i_{max}\)</span> получить упорядоченное по возрастанию множество <span class="math inline">\(J = \{j_0, j_1, ..., j_{n-1}\}\)</span> столбцов пересечений с исходными линиями:</p>
+<ol type="1">
+<li>Для каждой линии <span class="math inline">\(l_m, m = 0,...,N-1\)</span>:</li>
+</ol>
+<ul>
+<li>вычислить флаг пересечения <span class="math inline">\(f: i^m_0 &gt; i_k \neq i^m_1 &gt; i_k\)</span>;</li>
+<li>если <span class="math inline">\(f = \texttt{TRUE}\)</span>, то
+<ul>
+<li>вычислить <span class="math inline">\(j^m = j^m_0 + (j^m_1 - j^m_0)\frac{i_k - i^m_0}{i^m_1 - i^m_0}\)</span>;</li>
+<li>добавить <span class="math inline">\(j^m\)</span> в множество <span class="math inline">\(J\)</span>.</li>
+</ul></li>
+</ul>
+<ol start="2" type="1">
+<li>Если <span class="math inline">\(J\)</span> не пусто, то упорядочить его по возрастанию и выполнить закрашивание между его элементами в порядке:</li>
+</ol>
+<p><span class="math display">\[\lceil j_0 \rceil \to \lfloor j_1 \rfloor,~\lceil j_2 \rceil \to \lfloor j_3 \rfloor,~...~,~\lceil j_{n-2} \rceil \to \lfloor j_{n-1} \rfloor\]</span></p>
+</section>
+<section id="библиография" class="slide level2 smaller scrollable">
 <h2>Библиография</h2>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 <p>Самсонов Т. Е. Визуализация пространственных данных: курс лекций</p>
+</div>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bresenham1965" class="csl-entry" role="listitem">
+Bresenham, J. E. 1965. <span>«Algorithm for Computer Control of a Digital Plotter»</span>. <em>IBM Systems Journal</em> 4 (1): 25–30. <a href="https://doi.org/10.1147/sj.41.0025">https://doi.org/10.1147/sj.41.0025</a>.
 </div>
 </div>
 </section>
@@ -659,44 +829,6 @@
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
