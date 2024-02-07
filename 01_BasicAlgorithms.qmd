@@ -251,14 +251,14 @@ __Для__ $\color{red}{i = i_0, ... i_1}$ __выполняем__:
 def draw_line(i0, j0, i1, j1, image, color):
     if abs(i1 - i0) < abs(j1 - j0): # пологая линия
         if j0 > j1:
-            draw_line_byX(i1, j1, i0, j0, image, color)
+            draw_line_byJ(i1, j1, i0, j0, image, color)
         else:
-            draw_line_byX(i0, j0, i1, j1, image, color)
+            draw_line_byJ(i0, j0, i1, j1, image, color)
     else:
         if i0 > i1:                 # крутая линия
-            draw_line_byY(i1, j1, i0, j0, image, color)
+            draw_line_byI(i1, j1, i0, j0, image, color)
         else:
-            draw_line_byY(i0, j0, i1, j1, image, color)
+            draw_line_byI(i0, j0, i1, j1, image, color)
 ```
 
 где `abs()` — функция вычисления модуля.
