@@ -683,7 +683,11 @@ f(\mathrm p) = \mathbf A \cdot \widehat{\mathrm p} = \left[ \begin{array}{ccc|c}
 <p><strong>Масштабирование</strong> с коэффициентами <span class="math inline">\(s_x, s_y\)</span>:</p>
 <p><span class="math display">\[
 \begin{bmatrix} x' \\ y' \\ 1 \end{bmatrix} = \underbrace{\begin{bmatrix} s_x &amp;  0 &amp; 0 \\ 0 &amp; s_y  &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}}_{\mathbf S(s_x, s_y)} \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} x s_x \\ y s_y \\ 1 \end{bmatrix},
-\]</span> - при навигации по карте <span class="math inline">\(s_x = s_y = a\)</span> - для зеркального отражения по соответствующим осям <span class="math inline">\(s_x\)</span> или <span class="math inline">\(s_y\)</span> будут иметь отрицательные значения.</p>
+\]</span></p>
+<ul>
+<li>при навигации по карте <span class="math inline">\(s_x = s_y = a\)</span></li>
+<li>для зеркального отражения по соответствующим осям <span class="math inline">\(s_x\)</span> или <span class="math inline">\(s_y\)</span> будут иметь отрицательные значения.</li>
+</ul>
 </section>
 <section id="стандартные-сценарии" class="slide level2">
 <h2>Стандартные сценарии</h2>
@@ -691,11 +695,11 @@ f(\mathrm p) = \mathbf A \cdot \widehat{\mathrm p} = \left[ \begin{array}{ccc|c}
 <p>Пусть ограничивающий прямоугольник (<em>экстент</em>) данных имеет размеры <span class="math inline">\([x_0, y_0]\times[x_1, y_1]\)</span>, а размер порта просмотра <span class="math inline">\([0, di]\times[0, dj]\)</span>. Тогде необходимо выполнить следующие преобразования:</p>
 <ul>
 <li><p>Совместить начало координат с центром экстента данных — точкой <span class="math inline">\([(x_1 + x_0)/2, (y_1 + y_0)/2]\)</span>.</p></li>
-<li><p>На овнове сравнения пропорций экстента <span class="math inline">\(\frac{dx}{dy}\)</span> и порта просмотра <span class="math inline">\(\frac{di}{dj}\)</span> выбрать коэффициент масштабирования <span class="math inline">\(s\)</span>:</p></li>
+<li><p>На оcнове сравнения пропорций экстента <span class="math inline">\(\frac{dy}{dx}\)</span> и порта просмотра <span class="math inline">\(\frac{di}{dj}\)</span> выбрать коэффициент масштабирования <span class="math inline">\(s\)</span>:</p></li>
 </ul>
 <p><span class="math display">\[s = \begin{cases}
-\frac{di}{dx},~\texttt{если}~\frac{dx}{dy} \leq \frac{di}{dj}\\
-\frac{dj}{dy},~\texttt{если}~\frac{dx}{dy} &gt; \frac{di}{dj}\\
+\frac{dj}{dx},~\texttt{если}~\frac{dy}{dx} \leq \frac{di}{dj}\\
+\frac{di}{dy},~\texttt{если}~\frac{dy}{dx} &gt; \frac{di}{dj}\\
 \end{cases}\]</span></p>
 </section>
 <section id="стандартные-сценарии-1" class="slide level2">
@@ -725,6 +729,84 @@ f(\mathrm p) = \mathbf A \cdot \widehat{\mathrm p} = \left[ \begin{array}{ccc|c}
 </ul>
 <p><span class="math display">\[\mathbf A = \mathbf T(i, j)~\mathbf S(-\frac{1}{ks}, -\frac{1}{ks})~\mathbf T(-i, -j)~\mathbf A\]</span></p>
 <p>Каждый оборот соответствует изменению масштаба в <span class="math inline">\(s\)</span> раз. Отрицательные обороты соответствуют уменьшению масштаба, положительные — увеличению.</p>
+</section>
+<section id="передискретизация-resampling" class="slide level2">
+<h2>Передискретизация (resampling)</h2>
+<p>Передискретизация необходима при визуализации растрового изображения на растровом экране. Как правило, разрешение этих растров не совпадает.</p>
+
+<img data-src="images/res_screen.png" style="width:50.0%" class="r-stretch"></section>
+<section id="метод-ближайшего-соседа" class="slide level2">
+<h2>Метод ближайшего соседа</h2>
+<p>Используется значение ближайшего пикселя:</p>
+
+<img data-src="images/res_nn.png" style="width:50.0%" class="r-stretch"></section>
+<section id="метод-билинейной-интерполяции" class="slide level2">
+<h2>Метод билинейной интерполяции</h2>
+<p>Восстанавливается поверхность в ячейке из 4 узлов:</p>
+
+<img data-src="images/res_bln.png" style="width:50.0%" class="r-stretch"></section>
+<section id="метод-билинейной-интерполяции-1" class="slide level2">
+<h2>Метод билинейной интерполяции</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/res_bln_crop.png"></p>
+</div><div class="column" style="width:50%;">
+<p>Коэффициенты определяются по 4 точкам:</p>
+<p><span class="math display">\[\begin{cases}
+a_{00} = f_{00},\\
+a_{10} = f_{10} - f_{00},\\
+a_{01} = f_{01} - f_{00},\\
+a_{01} = f_{00} + f_{11} - f_{10} - f_{01}.
+\end{cases}\]</span></p>
+<p><span class="math display">\[f(x, y) = a_{00} + a_{10}x + a_{01}y + a_{11}xy\]</span></p>
+<p>Координаты <span class="math inline">\(x\)</span> и <span class="math inline">\(y\)</span> меняются в диапазоне от <span class="math inline">\(0\)</span> до <span class="math inline">\(1\)</span> в пределах ячейки.</p>
+</div>
+</div>
+</section>
+<section id="метод-бикубической-интерполяции" class="slide level2">
+<h2>Метод бикубической интерполяции</h2>
+<p>Восстанавливается поверхность в 9 ячейках, окружающих узел:</p>
+
+<img data-src="images/res_bcb.png" style="width:55.0%" class="r-stretch"></section>
+<section id="метод-бикубической-интерполяции-1" class="slide level2">
+<h2>Метод бикубической интерполяции</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/res_bcb_crop.png"></p>
+</div><div class="column" style="width:50%;">
+<p>Коэффициенты определяются по 16 точкам:</p>
+<p><span class="math display">\[\begin{cases}
+f(0,0) = a_{00},\\
+f(1,0) = a_{00} + a_{10} + a_{20} + a_{30},\\
+f(0,1) = a_{00} + a_{01} + a_{02} + a_{03},\\
+f(1,1) = \sum_{i=0}^3 \sum_{j=0}^3 a_{ij},\\
+\dots
+\end{cases}\]</span></p>
+<p><span class="math display">\[f(x, y) = \sum_{i=0}^3 \sum_{j=0}^3 a_{ij} x^i y^j\]</span></p>
+<p>Координаты <span class="math inline">\(x\)</span> и <span class="math inline">\(y\)</span> меняются в диапазоне от <span class="math inline">\(0\)</span> до <span class="math inline">\(1\)</span> в пределах окрестности <span class="math inline">\(3 \times 3\)</span> ячеек.</p>
+</div>
+</div>
+</section>
+<section id="сглаживание-antialiasing" class="slide level2">
+<h2>Сглаживание (antialiasing)</h2>
+<p>При крупном размере пиксела выводящего устройства ступенчатость линий и границ полигонов становится заметной.</p>
+<p>Для устранения эффекта ступенчатости используется <strong>сглаживание</strong> (<em>antialiasing</em>).</p>
+
+<img data-src="images/antialiasing.png" class="r-stretch"></section>
+<section id="сглаживание-antialiasing-1" class="slide level2">
+<h2>Сглаживание (antialiasing)</h2>
+
+<img data-src="images/aa_settings.jpg" class="r-stretch"></section>
+<section id="суперсемплинг-antialiasing" class="slide level2">
+<h2>Суперсемплинг (antialiasing)</h2>
+<p>Пусть результирующее растровое изображение <span class="math inline">\(R\)</span> имеет размеры <span class="math inline">\(m \times n\)</span>.</p>
+<ol type="1">
+<li>Создается буферное изображение <span class="math inline">\(R_b\)</span> размером <span class="math inline">\(km \times kn\)</span>, где <span class="math inline">\(k \in \mathbb{N^*}\)</span> — коэффициент сглаживания (положительное натуральное число).</li>
+<li>Объекты отрисовываются в <span class="math inline">\(R_b\)</span>.</li>
+<li>Производится передискретизация <span class="math inline">\(R_b \to R\)</span> с использованием блочной фильтрации (<em>box filter</em>). Значение результирующего пиксела <span class="math inline">\(R[i, j]\)</span> равняется среднему арифметическому значений <span class="math inline">\(R_b\)</span>, попадающих в его пределы:</li>
+</ol>
+<p><span class="math display">\[R[i, j] = \sum_{l = 1}^L s(R_b) / L,\]</span></p>
+<p>где <span class="math inline">\(s(R_b)\)</span> — выборочное значение (сэмпл), взятое с <span class="math inline">\(R_b\)</span>, <span class="math inline">\(L\)</span> — количество сэмплов</p>
 </section>
 <section id="библиография" class="slide level2 smaller scrollable">
 <h2>Библиография</h2>
