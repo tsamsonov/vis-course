@@ -1,0 +1,39 @@
+project:
+  type: website
+  output-dir: docs
+  
+execute:
+  freeze: true
+
+website:
+  title: "Основы геоинформатики"
+  page-footer: |
+        © 2023, Тимофей Самсонов, Географический факультет МГУ имени М. В. Ломоносова
+  navbar:
+    left:
+      - href: index.qmd
+        text: Лекции
+      - href: translations.qmd
+        text: Словарь
+      - href: exam.qmd
+        text: Зачёт
+      - href: https://aentin.github.io/qgis-course/
+        text: Практикум в QGIS
+      - href: https://tsamsonov.github.io/arcgis-course/
+        text: Практикум в ArcGIS
+    right: 
+      - href: https://instagram.com/gis_in_pictures?igshid=NDk5N2NlZjQ=
+        icon: instagram
+      - icon: github
+        href: https://github.com/tsamsonov/gis-course
+        aria-label: GitHub
+format:
+  html:
+    theme: yeti
+    css: styles.css
+    toc: true
+
+editor: visual
+
+lang: ru
+

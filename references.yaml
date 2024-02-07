@@ -1,0 +1,744 @@
+---
+references:
+- id: gost:52438-2005
+  author:
+  - family: ГОСТ Р 52438-2005
+  issued: 2018
+  key: SG8AA5JA
+  language: ru
+  libraryID: 2
+  providerKey: 2509FBBE-5BB0-44C4-B119-6083A81ED673
+  publisher: Стандартинформ
+  publisher-place: Москва
+  title: Географические информационные системы. Термины и определения
+  type: report
+  URL: "https://docs.cntd.ru/document/1200044680"
+- id: gost:33707-2016
+  author:
+  - family: "ГОСТ 33707---2016 (ISO/IEC 2382:2015)"
+  Citation key: "gost-33707:2016"
+  ISBN: 978-12345-12345
+  issued: 2016
+  key: VIGGFX8S
+  language: ru
+  libraryID: 2
+  note: "Citation key: gost-33707:2016"
+  page: 206
+  providerKey: Zotero
+  publisher: Стандартинформ
+  publisher-place: Москва
+  title: Информационные технологии. Словарь
+  type: report
+  URL: "https://docs.cntd.ru/document/1200139532"
+- id: gost:7.0-99
+  author:
+  - family: ГОСТ 7.0-99 СИБИД
+  issued: 1999
+  key: RSKHCSXM
+  libraryID: 2
+  note: "Citation Key: gost:7.0-99"
+  providerKey: Zotero
+  publisher: ИПК Издательство стандартов
+  publisher-place: Москва
+  title: Информационно-библиотечная деятельность, библиография. Термины
+    и определения
+  URL: "https://docs.cntd.ru/document/1200004287"
+  type: report
+- id: gost:19105-2003
+  author:
+  - family: ГОСТ Р ИСО 19105-2003
+  issued: 2004
+  key: BS8ST478
+  language: ru
+  libraryID: 2
+  note: "Citation Key: gost:19105-2003"
+  page: 20
+  providerKey: Zotero
+  publisher: ИПК Издательство стандартов
+  publisher-place: Москва
+  title: Географическая информация. Соответствие и тестирование
+  type: report
+  URL: "https://docs.cntd.ru/document/1200034855"
+- id: gost:70316-2022
+  author:
+  - family: "ГОСТ Р 70316-2022 (ИСО 19112:2019)"
+  issued: 2022
+  key: XM3MUXUK
+  language: ru
+  libraryID: 2
+  note: "Citation Key: gost:70316-2022"
+  page: 24
+  providerKey: Zotero
+  publisher: Российский институт стандартизации
+  publisher-place: Москва
+  title: Пространственные данные. Пространственная привязка по
+    географическим идентификаторам.
+  type: report
+  URL: "https://docs.cntd.ru/document/1200193002"
+- id: gost:43.0.3-2009
+  author:
+  - family: ГОСТ Р 43.0.3-2009
+  issued: 2018
+  key: IKV3RNFS
+  libraryID: 2
+  note: "Citation Key: gost:43.0.3-2009"
+  page: 24
+  providerKey: Zotero
+  publisher: Стандартинформ
+  publisher-place: Москва
+  title: Информационное обеспечение техники и операторской деятельности.
+    НООН-технология в технической деятельности. Общие положения
+  type: report
+  URL: "https://docs.cntd.ru/document/1200079260"
+- id: lurie:2016
+  author:
+  - family: Лурье
+    given: И. К.
+  edition: 3
+  ISBN: 978-5-98227-706-0
+  issued: 2016
+  key: ZXYV4DRN
+  language: ru
+  libraryID: 2
+  note: "Citation Key: lurie:2016"
+  number-of-pages: 424
+  providerKey: Zotero
+  publisher: Книжный дом Университет
+  publisher-place: Москва
+  title: Геоинформационное картографирование. Методы геоинформатики и
+    цифровой обработки космических снимков
+  type: book
+- id: OGC2010
+  author:
+  - family: OGC
+  issued: 2010
+  key: GCYEC266
+  libraryID: 2
+  note: "Citation Key: OGC2010"
+  page: 93
+  providerKey: 2509FBBE-5BB0-44C4-B119-6083A81ED673
+  publisher: Open Geospatial Consortium
+  title: "OpenGIS® Implementation Standard for Geographic information -
+    Simple feature access - Part 1: Common architecture"
+  type: report
+  URL: "https://www.ogc.org/standards/sfa"
+- id: egenhofer1991a
+  author:
+  - family: Egenhofer
+    given: Max J.
+  container-title: Advances in Spatial Databases
+  editor:
+  - family: Günther
+    given: Oliver
+  - family: Schek
+    given: Hans-Jörg
+  ISBN: 978-3-540-47615-3
+  issued: 1991
+  key: VALBPY49
+  libraryID: 2
+  page: 141-160
+  providerKey: 2509FBBE-5BB0-44C4-B119-6083A81ED673
+  publisher: Springer Berlin Heidelberg
+  publisher-place: Berlin, Heidelberg
+  title: Reasoning about binary topological relations
+  type: paper-conference
+- id: yurtseven2019
+  accessed: "06:57:36"
+  author:
+  - family: Yurtseven
+    given: Huseyin
+  - family: Akgul
+    given: Mustafa
+  - family: Coban
+    given: Suleyman
+  - family: Gulci
+    given: Sercan
+  container-title: Measurement
+  container-title-short: Measurement
+  DOI: 10.1016/j.measurement.2019.05.092
+  ISSN: 02632241
+  issued: 2019-10
+  key: CNW79JXB
+  language: en
+  libraryID: 2
+  page: 651-664
+  providerKey: 2509FBBE-5BB0-44C4-B119-6083A81ED673
+  source: DOI.org (Crossref)
+  title: Determination and accuracy analysis of individual tree crown
+    parameters using UAV based imagery and OBIA techniques
+  type: article-journal
+  URL: "https://linkinghub.elsevier.com/retrieve/pii/S0263224119305421"
+  volume: 145
+- id: gost:10032-2007
+  author:
+  - family: ГОСТ Р ИСО МЭК ТО 10032-2007
+  issued: 2009
+  key: 7I2E26KA
+  libraryID: 2
+  note: "Citation Key: gost:10032-2007"
+  page: 45
+  providerKey: Zotero
+  publisher: Стандартинформ
+  publisher-place: Москва
+  title: Эталонная модель управления данными
+  type: report
+- id: jarvis1973
+  accessed: "17:46:06"
+  author:
+  - family: Jarvis
+    given: R.A.
+  container-title: Information Processing Letters
+  container-title-short: Information Processing Letters
+  DOI: 10.1016/0020-0190(73)90020-3
+  ISSN: 00200190
+  issue: 1
+  issued: 1973-03
+  key: VG5L6EJI
+  language: en
+  libraryID: 2
+  page: 18-21
+  providerKey: Zotero
+  source: DOI.org (Crossref)
+  title: On the identification of the convex hull of a finite set of
+    points in the plane
+  type: article-journal
+  URL: "https://linkinghub.elsevier.com/retrieve/pii/0020019073900203"
+  volume: 2
+- id: ogc-07-011:2005
+  author:
+  - family: Open Geospatial Consortium Inc.
+  issued: 2005
+  key: 2IDLZAS7
+  language: ут
+  libraryID: 2
+  note: "Citation Key: ogc-07-011:2005"
+  page: 75
+  providerKey: Zotero
+  publisher: Open Geospatial Consortium Inc.
+  title: "OGC 07-011 (ISO 19123:2005). The OpenGIS® Abstract
+    Specification Topic 6: Schema for coverage geometry and functions"
+  type: report
+- id: evans:1980
+  author:
+  - family: Evans
+    given: I S
+  container-title: Zeitschrift fur Geomorphologie
+  issued: 1980
+  key: UVA4K527
+  libraryID: 2
+  page: 274-295
+  providerKey: Zotero
+  title: An integrated system of terrain analysis and slope mapping
+  type: article-journal
+  volume: 36
+- id: OCallaghan:1984bu
+  author:
+  - family: O'Callaghan
+    given: John F
+  - family: Mark
+    given: David M
+  container-title: Computer Vision, Graphics, and Image Processing
+  DOI: 10.1016/S0734-189X(84)80011-0
+  issue: 3
+  issued: 1984
+  key: CWXQYP3Z
+  libraryID: 2
+  note: "tex.mendeley-groups: \\_DSc tex.mendeley-tags: r02881 Citation
+    Key: OCallaghan:1984bu"
+  page: 323-344
+  providerKey: Zotero
+  tex.mendeley-groups: \_DSc
+  tex.mendeley-tags: r02881
+  title: The extraction of drainage networks from digital elevation data
+  type: article-journal
+  URL: "http://linkinghub.elsevier.com/retrieve/pii/S0734189X84800110"
+  volume: 28
+- id: matheron1962
+  author:
+  - family: Matheron
+    given: Georges
+  issued: 1962
+  key: CQE6D3L7
+  libraryID: 2
+  number-of-pages: 333
+  providerKey: Zotero
+  publisher: Technip
+  publisher-place: Paris
+  title: Traité de géostatistique appliquée
+  type: book
+- id: krige:1951
+  author:
+  - family: Krige
+    given: Daniel
+  container-title: J. of the Chem., Metal. and Mining Soc. of South
+    Africa
+  container-title-short: J. of the Chem., Metal. and Mining Soc. of
+    South Africa
+  issue: 6
+  issued: 1951
+  key: SZU2EW7U
+  language: en
+  libraryID: 2
+  page: 119-139
+  providerKey: Zotero
+  source: Zotero
+  title: A statistical approach to some basic mine valuation problems on
+    the Witwatersrand
+  type: article-journal
+  volume: 52
+- id: ripley:1981
+  author:
+  - family: Ripley
+    given: Brian D
+  ISBN: 3-17-572399-3
+  issued: 1981
+  key: 777VKJNZ
+  libraryID: 2
+  note: "Citation Key: ripley:1981"
+  number-of-pages: 260
+  providerKey: Zotero
+  publisher: John Wiley & Sons
+  title: Spatial Statistics
+  type: book
+- id: cressie:1993
+  author:
+  - family: Cressie
+    given: Noel
+  edition: 2nd Edition
+  ISBN: 978-1-119-11461-1
+  issued: 1993
+  key: ZUPMPSFQ
+  libraryID: 2
+  note: "Citation Key: cressie:1993"
+  number-of-pages: 928
+  providerKey: Zotero
+  publisher: John Wiley & Sons, Inc
+  publisher-place: Hoboken, NJ
+  title: Statistics for Spatial Data
+  type: book
+- id: chilès2012
+  author:
+  - family: Chilès
+    given: J.P.
+  - family: Delfiner
+    given: P.
+  collection-title: Wiley series in probability and statistics
+  ISBN: 978-0-470-18315-1
+  issued: 2012
+  key: K7BGPFA7
+  libraryID: 2
+  number-of-pages: 726
+  providerKey: Zotero
+  publisher: WIley
+  title: Geostatistics. Modeling spatial uncertainty
+  type: book
+- id: anselin:1988
+  arXiv: "arXiv:1011.1669v3"
+  author:
+  - family: Anselin
+    given: Luc
+  DOI: 10.1007/978-94-015-7799-1
+  ISBN: 90-247-3735-4
+  ISSN: 00130095
+  issued: 1988
+  key: 9JYHI9TS
+  libraryID: 2
+  note: "tex.arxivid: arXiv:1011.1669v3 tex.mendeley-groups: Spatial
+    Statistics tex.pmid: 25246403 Citation Key: Anselin1988 DOI:
+    10.1007/978-94-015-7799-1 ISSN: 00130095 arXiv: arXiv:1011.1669v3"
+  number-of-pages: 284 p
+  providerKey: Zotero
+  publisher: Springer Netherlands
+  publisher-place: Dordrecht Statistics
+  tex.pmid: 25246403
+  tex.arxivid: "arXiv:1011.1669v3"
+  tex.mendeley-groups: Spatial
+  title: "Spatial Econometrics: Methods and Models"
+  type: book
+- id: fotheringham:2002
+  author:
+  - family: Fotheringham
+    given: Stewart A.
+  - family: Brunsdon
+    given: Chris
+  - family: Charlton
+    given: Martin
+  DOI: 10.1007/978-3-642-03647-7
+  ISBN: 0-471-49616-2
+  issued: 2002
+  key: XD2UX27G
+  libraryID: 2
+  note: "Citation Key: Fotheringham2002 DOI: 10.1007/978-3-642-03647-7"
+  number-of-pages: 283
+  providerKey: Zotero
+  publisher: Wiley
+  publisher-place: Chichester, UK
+  title: "Geographically weighted regression: the analysis of spatially
+    varying relationships"
+  type: book
+- id: hubert:1981
+  accessed: "10:59:37"
+  author:
+  - family: Hubert
+    given: L. J.
+  - family: Golledge
+    given: R. G.
+  - family: Costanzo
+    given: C. M.
+  container-title: Geographical Analysis
+  DOI: 10.1111/j.1538-4632.1981.tb00731.x
+  ISSN: 00167363
+  issue: 3
+  issued: 1981
+  key: NHPLAFTD
+  language: en
+  libraryID: 2
+  page: 224-233
+  providerKey: Zotero
+  source: DOI.org (Crossref)
+  title: Generalized Procedures for Evaluating Spatial Autocorrelation
+  type: article-journal
+  URL: "https://onlinelibrary.wiley.com/doi/10.1111/j.1538-4632.1981.tb00731.x"
+  volume: 13
+- id: moran1950
+  author:
+  - family: Moran
+    given: P A P
+  container-title: Biometrika
+  DOI: 10.2307/2332142
+  issue: 1/2
+  issued: 1950
+  key: ME34QKJH
+  language: en
+  libraryID: 2
+  page: 17-23
+  providerKey: Zotero
+  source: Zotero
+  title: Notes on Continuous Stochastic Phenomena
+  type: article-journal
+  volume: 37
+- id: newman2018
+  author:
+  - family: Newman
+    given: M. E. J.
+  call-number: T57.85 .N523 2018
+  edition: Second edition
+  ISBN: 978-0-19-880509-0
+  issued: 2018
+  key: XCY3JTF8
+  libraryID: 2
+  number-of-pages: 780
+  providerKey: 2509FBBE-5BB0-44C4-B119-6083A81ED673
+  publisher: Oxford University Press
+  publisher-place: Oxford, United Kingdom ; New York, NY, United States
+    of America
+  source: Library of Congress ISBN
+  title: Networks
+  type: book
+- id: barthelemy:2022
+  accessed: "11:01:40"
+  author:
+  - family: Barthelemy
+    given: Marc
+  DOI: 10.1007/978-3-030-94106-2
+  ISBN: 978-3-030-94105-5 978-3-030-94106-2
+  issued: 2022
+  key: Y6HGHRM4
+  language: en
+  libraryID: 2
+  providerKey: Zotero
+  publisher: Springer International Publishing
+  publisher-place: Cham
+  source: DOI.org (Crossref)
+  title: "Spatial Networks: A Complete Introduction: From Graph Theory
+    and Statistical Physics to Real-World Applications"
+  title-short: Spatial Networks
+  type: book
+  URL: "https://link.springer.com/10.1007/978-3-030-94106-2"
+- id: duckham:2013
+  tex.pmid: 25246403
+  arXiv: "arXiv:1011.1669v3"
+  author:
+  - family: Duckham
+    given: Matt
+  DOI: 10.1007/978-3-642-30853-6
+  ISBN: 978-3-642-30853-6
+  ISSN: 1098-6596
+  issued: 2013
+  key: P2FUASW3
+  libraryID: 2
+  number-of-pages: 1-320
+  providerKey: Zotero
+  publisher: Springer
+  tex.arxivid: "arXiv:1011.1669v3"
+  tex.mendeley-groups: Geosensors
+  title: "Decentralized spatial computing: Foundations of geosensor
+    networks"
+  type: book
+- id: dobson:2003
+  author:
+  - family: Dobson
+    given: J.E.
+  - family: Fisher
+    given: P.F.
+  container-title: IEEE Technology and Society Magazine
+  DOI: 10.1109/MTAS.2003.1188276
+  Citation Key: Dobson2003
+  ISSN: 0278-0097
+  issue: 1
+  issued: 2003
+  key: UL6T7VBX
+  libraryID: 2
+  note: "tex.isbn: 0278-0097 tex.mendeley-groups: Geographical
+    Information Science,Geosensors & LBS Citation Key: Dobson2003"
+  page: 47-52
+  providerKey: Zotero
+  tex.isbn: 0278-0097
+  tex.mendeley-groups: Geographical
+  title: Geoslavery
+  type: article-journal
+  URL: "https://msu.edu/{\\~}kg/874/geoslavery.pdf"
+  volume: 22
+- id: geospatialworld:2022
+  author:
+  - family: Geospatial
+    given: World
+  - family: UN
+    given: Statistics Division
+  issued: 2022
+  key: MYSWFEQW
+  language: en
+  libraryID: 2
+  page: 160
+  providerKey: Zotero
+  publisher: Geospatial World & UN Statistics Division
+  title: Geospatial Knowledge Infrastructure Readiness Index and Value
+    Proposition in World Economy, Society, and Environment
+  type: report
+  URL: "https://www.geospatialworld.net/consulting/gki-phase-2/gw-assets/pdf/GKI-Report.pdf"
+- id: egenhofer1991
+  Citation Key: "egenhofer1991"
+  author:
+  - family: Egenhofer
+    given: Max J.
+  - family: Franzosa
+    given: Robert D.
+  container-title: International Journal of Geographical Information
+    Systems
+  DOI: 10.1080/02693799108927841
+  ISSN: 02693798
+  issue: 2
+  issued: 1991
+  key: X4VG3ILV
+  libraryID: 2
+  note: "tex.isbn: 0269-3798 tex.mendeley-groups: Relations & Topology
+    Citation Key: egenhofer:1991"
+  page: 161-174
+  providerKey: 2509FBBE-5BB0-44C4-B119-6083A81ED673
+  tex.isbn: 0269-3798
+  tex.mendeley-groups: Relations
+  title: Point-set topological spatial relations
+  type: article-journal
+  volume: 5
+- id: egenhofer1991b
+  author:
+  - family: Egenhofer
+    given: Max J
+  - family: Herring
+    given: John R.
+  genre: Technical Report
+  issued: 1991
+  key: 9P6YXVW8
+  language: en
+  libraryID: 2
+  page: 28
+  providerKey: 2509FBBE-5BB0-44C4-B119-6083A81ED673
+  publisher: Department of Surveying Engineering, University of Maine
+  publisher-place: Orono, ME
+  source: Zotero
+  title: Categorizing Binary Topological Relations Between Regions,
+    Lines, and Points in Geographic Databases
+  type: report
+- id: clementini1993
+  accessed: "13:50:38"
+  author:
+  - family: Clementini
+    given: Eliseo
+  - family: Di Felice
+    given: Paolino
+  - family: Oosterom
+    given: Peter
+    non-dropping-particle: van
+  collection-editor:
+  - family: Goos
+    given: G.
+  - family: Hartmanis
+    given: J.
+  container-title: Advances in Spatial Databases
+  editor:
+  - family: Abel
+    given: David
+  - family: Chin Ooi
+    given: Beng
+  ISBN: 978-3-540-56869-8 978-3-540-47765-5
+  issued: 1993
+  key: G7SFBZ7D
+  language: en
+  libraryID: 2
+  DOI: 10.1007/3-540-56869-7_16
+  page: 277-295
+  providerKey: Zotero
+  publisher: Springer Berlin Heidelberg
+  publisher-place: Berlin, Heidelberg
+  Series Title: Lecture Notes in Computer Science
+  source: DOI.org (Crossref)
+  title: A small set of formal topological relationships suitable for
+    end-user interaction
+  type: chapter
+  URL: "http://link.springer.com/10.1007/3-540-56869-7_16"
+  volume: 692
+- id: clementini1995
+  accessed: "07:38:32"
+  author:
+  - family: Clementini
+    given: Eliseo
+  - family: Di Felice
+    given: Paolino
+  container-title: Information Sciences - Applications
+  container-title-short: Information Sciences - Applications
+  DOI: 10.1016/1069-0115(94)00033-X
+  ISSN: 10690115
+  issue: 3
+  issued: 1995-05
+  key: 4MNPK7F8
+  language: en
+  libraryID: 2
+  page: 149-178
+  providerKey: Zotero
+  source: DOI.org (Crossref)
+  title: A comparison of methods for representing topological
+    relationships
+  type: article-journal
+  URL: "https://linkinghub.elsevier.com/retrieve/pii/106901159400033X"
+  volume: 3
+- id: Freeman:1975
+  author:
+  - family: Freeman
+    given: H
+  - family: Shapira
+    given: R
+  container-title: Communications of the ACM
+  DOI: 10.1145/360881.360919
+  issue: 7
+  issued: 1975
+  key: 4IYXDFU2
+  libraryID: 2
+  note: "tex.mendeley-groups: \\_DSc tex.mendeley-tags: r02951 Citation
+    Key: Freeman:1975"
+  page: 409-413
+  providerKey: 2509FBBE-5BB0-44C4-B119-6083A81ED673
+  tex.mendeley-groups: \_DSc
+  tex.mendeley-tags: r02951
+  title: Determining the minimum-area encasing rectangle for an
+    arbitrary closed curve
+  type: article-journal
+  URL: "http://portal.acm.org/citation.cfm?doid=360881.360919"
+  volume: 18
+- id: toussaint:1983
+  author:
+  - family: Toussaint
+    given: Gottfried T.
+  container-title: Proceedings of IEEE MELECON'83
+  event: MELECON'83
+  issued: 1983-05
+  key: DK85FWJC
+  libraryID: 2
+  page: 1-4
+  providerKey: Zotero
+  publisher-place: Athens, Greece
+  title: Solving geometric problems with the rotating calipers
+  type: paper-conference
+  volume: A10. 02
+- id: bentley1979
+  accessed: "13:04:06"
+  author:
+  - family: Bentley
+  - family: Ottmann
+  container-title: IEEE Transactions on Computers
+  container-title-short: IEEE Trans. Comput.
+  DOI: 10.1109/TC.1979.1675432
+  ISSN: 0018-9340
+  issue: 9
+  issued: 1979-09
+  key: ZCRRGYUN
+  libraryID: 2
+  page: 643-647
+  providerKey: 2509FBBE-5BB0-44C4-B119-6083A81ED673
+  source: DOI.org (Crossref)
+  title: Algorithms for Reporting and Counting Geometric Intersections
+  type: article-journal
+  URL: "http://ieeexplore.ieee.org/document/1675432/"
+  volume: C-28
+- id: sacristán2022
+  author:
+  - family: Sacristán
+    given: Vera
+  event: Computational Geometry Course
+  genre: Lecture
+  issued: 2022
+  key: 7JBS2WI3
+  language: en
+  libraryID: 2
+  providerKey: 2509FBBE-5BB0-44C4-B119-6083A81ED673
+  publisher-place: Universitat Politecnica de Catalunya
+  title: Intersecting line segments
+  type: speech
+  URL: "https://dccg.upc.edu/wp-content/uploads/2022/09/GeoC-Intersecting-line-segments2022.pdf"
+- id: deberg:2008
+  author:
+  - family: Berg
+    given: Mark
+    non-dropping-particle: de
+  - family: Cheong
+    given: Ottfried
+  - family: Kreveld
+    given: Marc
+    non-dropping-particle: van
+  - family: Overmars
+    given: Mark
+  call-number: QA448.D38 C65 2008
+  edition: 3rd ed
+  ISBN: 978-3-540-77973-5
+  issued: 2008
+  key: 7WIJ336C
+  libraryID: 2
+  number-of-pages: 386
+  providerKey: Zotero
+  publisher: Springer
+  publisher-place: Berlin
+  source: Library of Congress ISBN
+  title: "Computational geometry: algorithms and applications"
+  title-short: Computational geometry
+  type: book
+- id: bresenham1965
+  accessed: "13:34:47"
+  author:
+  - family: Bresenham
+    given: J. E.
+  container-title: IBM Systems Journal
+  container-title-short: IBM Syst. J.
+  DOI: 10.1147/sj.41.0025
+  ISSN: 0018-8670
+  issue: 1
+  issued: 1965
+  key: EJU9E4YL
+  language: en
+  libraryID: 2
+  page: 25-30
+  providerKey: 2509FBBE-5BB0-44C4-B119-6083A81ED673
+  source: DOI.org (Crossref)
+  title: Algorithm for computer control of a digital plotter
+  type: article-journal
+  URL: "http://ieeexplore.ieee.org/document/5388473/"
+  volume: 4
+...
