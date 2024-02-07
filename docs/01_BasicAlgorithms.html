@@ -572,14 +572,14 @@
 <pre><code>def draw_line(i0, j0, i1, j1, image, color):
     if abs(i1 - i0) &lt; abs(j1 - j0): # пологая линия
         if j0 &gt; j1:
-            draw_line_byX(i1, j1, i0, j0, image, color)
+            draw_line_byJ(i1, j1, i0, j0, image, color)
         else:
-            draw_line_byX(i0, j0, i1, j1, image, color)
+            draw_line_byJ(i0, j0, i1, j1, image, color)
     else:
         if i0 &gt; i1:                 # крутая линия
-            draw_line_byY(i1, j1, i0, j0, image, color)
+            draw_line_byI(i1, j1, i0, j0, image, color)
         else:
-            draw_line_byY(i0, j0, i1, j1, image, color)</code></pre>
+            draw_line_byI(i0, j0, i1, j1, image, color)</code></pre>
 <p>где <code>abs()</code> — функция вычисления модуля.</p>
 </section>
 <section id="заливка-полигона" class="slide level2">
@@ -604,6 +604,127 @@
 <li>Если <span class="math inline">\(J\)</span> не пусто, то упорядочить его по возрастанию и выполнить закрашивание между его элементами в порядке:</li>
 </ol>
 <p><span class="math display">\[\lceil j_0 \rceil \to \lfloor j_1 \rfloor,~\lceil j_2 \rceil \to \lfloor j_3 \rfloor,~...~,~\lceil j_{n-2} \rceil \to \lfloor j_{n-1} \rfloor\]</span></p>
+</section>
+<section id="отсечение-отрезков" class="slide level2">
+<h2>Отсечение отрезков</h2>
+<p>Один из самых широко используемых — <strong>алгоритм Коэна-Сазерленда</strong>, в котором используется разбиение плоскости на 9 частей прямыми, координаты которых определяются границами прямоугольника (в частности — порта просмотра):</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/cohen_sutherland.svg" style="width:100.0%"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><code>INSIDE = 0</code> — <span class="math inline">\(0000\)</span></li>
+<li><code>LEFT = 1</code> — <span class="math inline">\(0001\)</span></li>
+<li><code>RIGHT = 2</code> — <span class="math inline">\(0010\)</span></li>
+<li><code>BOTTOM = 4</code> — <span class="math inline">\(0100\)</span></li>
+<li><code>TOP = 8</code> — <span class="math inline">\(1000\)</span></li>
+</ul>
+<p>Отрезки, обе точки которых находятся по одну сторону от прямоугольника, имеют совпадающий единичный бит в одной и той же позиции</p>
+</div>
+</div>
+</section>
+<section id="вычисление-кодов-коэна-сазерленда" class="slide level2">
+<h2>Вычисление кодов Коэна-Сазерленда</h2>
+<p>Пусть дана точка <span class="math inline">\((i, j)\)</span>, а также границы порта просмотра <span class="math inline">\((i_{min}, i_{max})\)</span>, <span class="math inline">\((j_{min}, j_{max})\)</span>.</p>
+<p>Тогда код вычисляется следующим образом:</p>
+<pre><code>def code(i, j, imax, jmax):
+    code = INSIDE
+    if j &lt; jmin:
+        code |= LEFT
+    elif j &gt; jmax:
+        code |= RIGHT
+    if i &lt; imin:
+        code |= BOTTOM
+    elif i &gt; imax:
+        code |= TOP
+    return code</code></pre>
+<p>В данном случае применяется операция <em>логическое ИЛИ</em>, которая устанавливает в каждый бит <span class="math inline">\(1\)</span>, если хотя бы у одного из операндов соответствующий бит равен <span class="math inline">\(1\)</span>.</p>
+</section>
+<section id="алгоритм-коэна-сазерленда" class="slide level2">
+<h2>Алгоритм Коэна-Сазерленда</h2>
+<p>Для каждого отрезка <span class="math inline">\((i_0, j_0), (i_1, j_1)\)</span> выполняется бесконечный цикл, внутри которого ведутся следующие действия:</p>
+<ol type="1">
+<li><p>Вычисляются коды <code>code0</code> и <code>code1</code> для концов отрезка.</p></li>
+<li><p>Если оба конца находятся внутри порта просмотра (<code>code0 | code1 == 0</code>), то отрезок принимается целиком и цикл прерывается.</p></li>
+<li><p>Если оба конца находятся по одну сторону от порта просмотра (<code>code0 &amp; code1 != 0</code>), то отрезок отклоняется целиком и цикл прерывается.</p></li>
+<li><p>В противном случае (оба конца находятся по разные стороны от порта просмотра), выполняются следующие действия:</p>
+<ul>
+<li>Выбирается любая точка, находящаяся за пределами порта просмотра.</li>
+<li>Выполняется пересечение отрезка с прямой, определяющей ту сторону, в которой находится выбранная точка.</li>
+<li>Выбранная точка заменяется на найденное пересечение.</li>
+</ul></li>
+</ol>
+</section>
+<section id="аффинные-преобразования" class="slide level2">
+<h2>Аффинные преобразования</h2>
+<p><strong>Аффинное преобразование</strong> <span class="math inline">\(f\colon\mathbb{R}^{n}\to \mathbb{R}^{n}\)</span> есть преобразование вида:</p>
+<p><span class="math display">\[
+f(\mathrm p) = \mathbf M \cdot \mathrm p + \mathrm v
+\]</span></p>
+<p>где <span class="math inline">\(\mathbf M\)</span> — <em>обратимая матрица</em> (квадратная матрица, определитель которой отличен от нуля) и <span class="math inline">\(v\in \mathbb{R}^{n}\)</span>.</p>
+<p><span class="math inline">\(\mathbf M\)</span> и <span class="math inline">\(\mathrm v\)</span> обычно объединяются в одну матрицу <span class="math inline">\(\mathbf A\)</span>, что требует представления <span class="math inline">\(p\)</span> в <em>однородных</em> координатах: <span class="math inline">\(\widehat{\mathrm p} = (x_p, y_p,..., 1)\)</span>. В этом случае аффинное преобразование можно записать как:</p>
+<p><span class="math display">\[
+f(\mathrm p) = \mathbf A \cdot \widehat{\mathrm p} = \left[ \begin{array}{ccc|c} \, &amp; \mathbf M &amp; &amp; \mathrm v \ \\ 0 &amp; \ldots &amp; 0 &amp; 1 \end{array} \right] \begin{bmatrix} \mathrm p \\ 1 \end{bmatrix}
+\]</span></p>
+</section>
+<section id="аффинные-преобразования-1" class="slide level2">
+<h2>Аффинные преобразования</h2>
+<p><strong>Сдвиг</strong> на вектор трансляции <span class="math inline">\(t = (t_x, t_y)\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix} x' \\ y' \\ 1 \end{bmatrix} = \underbrace{\begin{bmatrix} 1 &amp;  0 &amp; t_x \\ 0 &amp; 1 &amp; t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}}_{\mathbf T(t_x, t_y)} \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} 1x + 0y + t_x1 \\ 0x + 1y + t_y1 \\ 0x + 0y + 1 \end{bmatrix} = \begin{bmatrix} x + t_x \\ y + t_y \\ 1 \end{bmatrix},
+\]</span></p>
+<p><strong>Поворот</strong> на угол <span class="math inline">\(\theta\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix} x' \\ y' \\ 0 \end{bmatrix} = \underbrace{\begin{bmatrix} \cos \theta &amp;  -\sin \theta &amp; 0 \\ \sin \theta &amp; \cos \theta  &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}}_{\mathbf R(\theta)} \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} x \cos \theta - y \sin \theta \\ x \sin \theta + y \cos \theta \\ 1 \end{bmatrix},
+\]</span></p>
+</section>
+<section id="аффинные-преобразования-2" class="slide level2">
+<h2>Аффинные преобразования</h2>
+<p><strong>Масштабирование</strong> с коэффициентами <span class="math inline">\(s_x, s_y\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix} x' \\ y' \\ 1 \end{bmatrix} = \underbrace{\begin{bmatrix} s_x &amp;  0 &amp; 0 \\ 0 &amp; s_y  &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}}_{\mathbf S(s_x, s_y)} \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} x s_x \\ y s_y \\ 1 \end{bmatrix},
+\]</span> - при навигации по карте <span class="math inline">\(s_x = s_y = a\)</span> - для зеркального отражения по соответствующим осям <span class="math inline">\(s_x\)</span> или <span class="math inline">\(s_y\)</span> будут иметь отрицательные значения.</p>
+</section>
+<section id="стандартные-сценарии" class="slide level2">
+<h2>Стандартные сценарии</h2>
+<p>При загрузке слоя данных в пустой проект объекты вписываются в порт просмотра.</p>
+<p>Пусть ограничивающий прямоугольник (<em>экстент</em>) данных имеет размеры <span class="math inline">\([x_0, y_0]\times[x_1, y_1]\)</span>, а размер порта просмотра <span class="math inline">\([0, di]\times[0, dj]\)</span>. Тогде необходимо выполнить следующие преобразования:</p>
+<ul>
+<li><p>Совместить начало координат с центром экстента данных — точкой <span class="math inline">\([(x_1 + x_0)/2, (y_1 + y_0)/2]\)</span>.</p></li>
+<li><p>На овнове сравнения пропорций экстента <span class="math inline">\(\frac{dx}{dy}\)</span> и порта просмотра <span class="math inline">\(\frac{di}{dj}\)</span> выбрать коэффициент масштабирования <span class="math inline">\(s\)</span>:</p></li>
+</ul>
+<p><span class="math display">\[s = \begin{cases}
+\frac{di}{dx},~\texttt{если}~\frac{dx}{dy} \leq \frac{di}{dj}\\
+\frac{dj}{dy},~\texttt{если}~\frac{dx}{dy} &gt; \frac{di}{dj}\\
+\end{cases}\]</span></p>
+</section>
+<section id="стандартные-сценарии-1" class="slide level2">
+<h2>Стандартные сценарии</h2>
+<ul>
+<li><p>Отмасштабировать координаты на полученный коэффициент <span class="math inline">\(s\)</span>.</p></li>
+<li><p>Переместить отмасштабированное изображение в точку <span class="math inline">\((di/2, dj/2)\)</span>.</p></li>
+</ul>
+<p>Итоговая матрица преобразования <span class="math inline">\(\textbf{A}\)</span> будет выглядеть следующим образом:</p>
+<p><span class="math display">\[\textbf A = \textbf T(di/2, dj/2)~\textbf S(s)~\textbf T(-(x_1 + x_0)/2, -(y_1 + y_0)/2)\]</span></p>
+<p>Точки исходных объектов <span class="math inline">\(p\)</span> будут трансформированы в точки внутри порта просмотра <span class="math inline">\(p'\)</span> как:</p>
+<p><span class="math display">\[p' = \textbf A p\]</span></p>
+</section>
+<section id="стандартные-сценарии-2" class="slide level2">
+<h2>Стандартные сценарии</h2>
+<p>Пусть текущая матрица отображения равна <span class="math inline">\(A\)</span>. Пользователь:</p>
+<ul>
+<li>перетащил изображение из точки <span class="math inline">\((i_1, j_1)\)</span> в точку <span class="math inline">\((i_2, j_2)\)</span>:</li>
+</ul>
+<p><span class="math display">\[\mathbf A = \mathbf T(i_2-i_1, j_2 - j_1)\mathbf A\]</span></p>
+<ul>
+<li>в точке <span class="math inline">\((i, j)\)</span> прокрутил колесико мыши на <span class="math inline">\(k &gt; 0\)</span> оборота:</li>
+</ul>
+<p><span class="math display">\[\mathbf A = \mathbf T(i, j)~\mathbf S(ks, ks)~\mathbf T(-i, -j)~\mathbf A\]</span></p>
+<ul>
+<li>в точке <span class="math inline">\((i, j)\)</span> прокрутил колесико мыши на <span class="math inline">\(k &lt; 0\)</span> оборота:</li>
+</ul>
+<p><span class="math display">\[\mathbf A = \mathbf T(i, j)~\mathbf S(-\frac{1}{ks}, -\frac{1}{ks})~\mathbf T(-i, -j)~\mathbf A\]</span></p>
+<p>Каждый оборот соответствует изменению масштаба в <span class="math inline">\(s\)</span> раз. Отрицательные обороты соответствуют уменьшению масштаба, положительные — увеличению.</p>
 </section>
 <section id="библиография" class="slide level2 smaller scrollable">
 <h2>Библиография</h2>
