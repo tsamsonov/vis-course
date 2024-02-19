@@ -358,7 +358,7 @@
 </div>
 </div>
 
-  <p class="date">7 февраля 2024 г.</p>
+  <p class="date">8 февраля 2024 г.</p>
 </section>
 <section id="компьютерная-графика" class="slide level2">
 <h2>Компьютерная графика</h2>
@@ -374,87 +374,140 @@
 <p><strong>Компьютерная графика</strong>: реализация с определенного ракурса внешнего вида сцены, в которую погружены модели объектов под заданными условиями освещения.</p>
 <p><strong>Компьютерное зрение</strong>: определение параметров сцены и погруженных в нее объектов при заданных допущениях.</p>
 
-<img data-src="images/sketch.png" style="width:75.0%" class="r-stretch"><p>[Lesage, Visvalingam, 2002]</p>
+<img data-src="images/sketch.png" style="width:75.0%" class="r-stretch"></section>
+<section id="аффинные-преобразования" class="slide level2">
+<h2>Аффинные преобразования</h2>
+<p><strong>Аффинное преобразование</strong> <span class="math inline">\(f\colon\mathbb{R}^{n}\to \mathbb{R}^{n}\)</span> есть преобразование вида:</p>
+<p><span class="math display">\[
+f(\mathrm p) = \mathbf M \cdot \mathrm p + \mathrm v
+\]</span></p>
+<p>где <span class="math inline">\(\mathbf M\)</span> — <em>обратимая матрица</em> (квадратная матрица, определитель которой отличен от нуля) и <span class="math inline">\(v\in \mathbb{R}^{n}\)</span>.</p>
+<p><span class="math inline">\(\mathbf M\)</span> и <span class="math inline">\(\mathrm v\)</span> обычно объединяются в одну матрицу <span class="math inline">\(\mathbf A\)</span>, что требует представления <span class="math inline">\(p\)</span> в <em>однородных</em> координатах: <span class="math inline">\(\widehat{\mathrm p} = (x_p, y_p,..., 1)\)</span>. В этом случае аффинное преобразование можно записать как:</p>
+<p><span class="math display">\[
+f(\mathrm p) = \mathbf A \cdot \widehat{\mathrm p} = \left[ \begin{array}{ccc|c} \, &amp; \mathbf M &amp; &amp; \mathrm v \ \\ 0 &amp; \ldots &amp; 0 &amp; 1 \end{array} \right] \begin{bmatrix} \mathrm p \\ 1 \end{bmatrix}
+\]</span></p>
 </section>
-<section id="графический-конвейер" class="slide level2">
-<h2>Графический конвейер</h2>
-
-<img data-src="images/conveyor1.png" style="width:80.0%" class="r-stretch"><p>В статичной сцене графический конвейер определяет последовательность отрисовки изображения.</p>
+<section id="аффинные-преобразования-1" class="slide level2">
+<h2>Аффинные преобразования</h2>
+<p><strong>Сдвиг</strong> на вектор трансляции <span class="math inline">\(t = (t_x, t_y)\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix} x' \\ y' \\ 1 \end{bmatrix} = \underbrace{\begin{bmatrix} 1 &amp;  0 &amp; t_x \\ 0 &amp; 1 &amp; t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}}_{\mathbf T(t_x, t_y)} \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} 1x + 0y + t_x1 \\ 0x + 1y + t_y1 \\ 0x + 0y + 1 \end{bmatrix} = \begin{bmatrix} x + t_x \\ y + t_y \\ 1 \end{bmatrix},
+\]</span></p>
+<p><strong>Поворот</strong> на угол <span class="math inline">\(\theta\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix} x' \\ y' \\ 0 \end{bmatrix} = \underbrace{\begin{bmatrix} \cos \theta &amp;  -\sin \theta &amp; 0 \\ \sin \theta &amp; \cos \theta  &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}}_{\mathbf R(\theta)} \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} x \cos \theta - y \sin \theta \\ x \sin \theta + y \cos \theta \\ 1 \end{bmatrix},
+\]</span></p>
 </section>
-<section id="графический-конвейер-1" class="slide level2">
-<h2>Графический конвейер</h2>
-
-<img data-src="images/conveyor2.png" style="width:65.0%" class="r-stretch"><p>Взаимодействие с пользователем может оказывать влияние на последующее поведение графического приложения</p>
-</section>
-<section id="структура-2d-приложения" class="slide level2">
-<h2>Структура 2D-приложения</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p><img data-src="images/2D_app.png" style="width:100.0%"></p>
-</div><div class="column" style="width:60%;">
+<section id="аффинные-преобразования-2" class="slide level2">
+<h2>Аффинные преобразования</h2>
+<p><strong>Масштабирование</strong> с коэффициентами <span class="math inline">\(s_x, s_y\)</span>:</p>
+<p><span class="math display">\[
+\begin{bmatrix} x' \\ y' \\ 1 \end{bmatrix} = \underbrace{\begin{bmatrix} s_x &amp;  0 &amp; 0 \\ 0 &amp; s_y  &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}}_{\mathbf S(s_x, s_y)} \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} x s_x \\ y s_y \\ 1 \end{bmatrix},
+\]</span></p>
 <ul>
-<li><p><strong>Графическая платформа</strong> отвечает за взаимодействие приложения и оборудования</p></li>
-<li><p><strong>Модель приложения</strong> (application model) представляет визуализируемые данные</p></li>
-<li><p><strong>Клиентская область</strong> (client area) определяет пространство, в котором приложение выполняет отрисовку.</p></li>
-<li><p><strong>Порт просмотра</strong> (viewport) определяет часть клиентской области, где генератор сцены выполняет отрисовку модели</p></li>
+<li>при навигации по карте <span class="math inline">\(s_x = s_y = a\)</span></li>
+<li>для зеркального отражения по соответствующим осям <span class="math inline">\(s_x\)</span> или <span class="math inline">\(s_y\)</span> будут иметь отрицательные значения.</li>
 </ul>
-</div>
-</div>
 </section>
-<section id="эволюция-графической-платформы" class="slide level2">
-<h2>Эволюция графической платформы</h2>
-<p><strong>1980-е — начало 1990-х</strong> <em>(Apple QuickDraw, Microsoft GDI)</em>: отрисовка пикселей на прямоугольной канве в целочисленных координатах. Отрисовка <em>примитивов</em>: геометрических форм или битмапов (пиксельных карт).</p>
+<section id="стандартные-сценарии" class="slide level2">
+<h2>Стандартные сценарии</h2>
+<p>При загрузке слоя данных в пустой проект объекты вписываются в порт просмотра.</p>
+<p>Пусть ограничивающий прямоугольник (<em>экстент</em>) данных имеет размеры <span class="math inline">\([x_0, y_0]\times[x_1, y_1]\)</span>, а размер порта просмотра <span class="math inline">\([0, di]\times[0, dj]\)</span>. Тогде необходимо выполнить следующие преобразования:</p>
 <ul>
-<li>Каждый примитив заполняется путем вызова определенной функции (например, <code>FillRectangle</code>).</li>
-<li>Размер объекта зависит от разрешения объекта. Более низкое разрешение (крупные пикселы) — больше размеры объектов.</li>
+<li><p>Совместить начало координат с центром экстента данных — точкой <span class="math inline">\([(x_1 + x_0)/2, (y_1 + y_0)/2]\)</span>.</p></li>
+<li><p>На оcнове сравнения пропорций экстента <span class="math inline">\(\frac{dy}{dx}\)</span> и порта просмотра <span class="math inline">\(\frac{di}{dj}\)</span> выбрать коэффициент масштабирования <span class="math inline">\(s\)</span>:</p></li>
 </ul>
-<p><strong>Середина 1990-х — н.вр.</strong> Переход к координатам с плавающей точкой позволил решить проблему зависимости размера изображения от системы координат.</p>
+<p><span class="math display">\[s = \begin{cases}
+\frac{dj}{dx},~\texttt{если}~\frac{dy}{dx} \leq \frac{di}{dj}\\
+\frac{di}{dy},~\texttt{если}~\frac{dy}{dx} &gt; \frac{di}{dj}\\
+\end{cases}\]</span></p>
 </section>
-<section id="непосредственный-режим" class="slide level2">
-<h2>Непосредственный режим</h2>
-<p>В <strong>непосредственном режиме</strong> <em>(immediate mode)</em> клиент через графическую платформу обращается непосредственно к выводящему устройству.</p>
+<section id="стандартные-сценарии-1" class="slide level2">
+<h2>Стандартные сценарии</h2>
 <ul>
-<li>Запись примитивов, переданных приложением, не выполняется.</li>
-<li>При смене сцены приложение должно перерисовать ее целиком.</li>
+<li><p>Отмасштабировать координаты на полученный коэффициент <span class="math inline">\(s\)</span>.</p></li>
+<li><p>Переместить отмасштабированное изображение в точку <span class="math inline">\((di/2, dj/2)\)</span>.</p></li>
 </ul>
-
-<img data-src="images/immediate.png" style="width:100.0%" class="r-stretch"></section>
-<section id="сохраненный-режим" class="slide level2">
-<h2>Сохраненный режим</h2>
-<p>В <strong>сохраненном режиме</strong> <em>(retained mode)</em> графическая платформа хранит спецификацию сцены в виде графа сцены <em>(scene graph)</em>.</p>
+<p>Итоговая матрица преобразования <span class="math inline">\(\textbf{A}\)</span> будет выглядеть следующим образом:</p>
+<p><span class="math display">\[\textbf A = \textbf T(di/2, dj/2)~\textbf S(s)~\textbf T(-(x_1 + x_0)/2, -(y_1 + y_0)/2)\]</span></p>
+<p>Точки исходных объектов <span class="math inline">\(p\)</span> будут трансформированы в точки внутри порта просмотра <span class="math inline">\(p'\)</span> как:</p>
+<p><span class="math display">\[p' = \textbf A p\]</span></p>
+</section>
+<section id="стандартные-сценарии-2" class="slide level2">
+<h2>Стандартные сценарии</h2>
+<p>Пусть текущая матрица отображения равна <span class="math inline">\(A\)</span>. Пользователь:</p>
 <ul>
-<li>Объекты могут добавляться в граф сцены последовательно.</li>
-<li>Каждое изменение графа приводит к перерисовке сцены</li>
+<li>перетащил изображение из точки <span class="math inline">\((i_1, j_1)\)</span> в точку <span class="math inline">\((i_2, j_2)\)</span>:</li>
 </ul>
-
-<img data-src="images/retained.png" style="width:100.0%" class="r-stretch"></section>
-<section id="процедурный-и-декларативный-подходы" class="slide level2">
-<h2>Процедурный и декларативный подходы</h2>
+<p><span class="math display">\[\mathbf A = \mathbf T(i_2-i_1, j_2 - j_1)\mathbf A\]</span></p>
+<ul>
+<li>в точке <span class="math inline">\((i, j)\)</span> прокрутил колесико мыши на <span class="math inline">\(k &gt; 0\)</span> оборота:</li>
+</ul>
+<p><span class="math display">\[\mathbf A = \mathbf T(i, j)~\mathbf S(ks, ks)~\mathbf T(-i, -j)~\mathbf A\]</span></p>
+<ul>
+<li>в точке <span class="math inline">\((i, j)\)</span> прокрутил колесико мыши на <span class="math inline">\(k &lt; 0\)</span> оборота:</li>
+</ul>
+<p><span class="math display">\[\mathbf A = \mathbf T(i, j)~\mathbf S(-\frac{1}{ks}, -\frac{1}{ks})~\mathbf T(-i, -j)~\mathbf A\]</span></p>
+<p>Каждый оборот соответствует изменению масштаба в <span class="math inline">\(s\)</span> раз.</p>
+</section>
+<section id="отсечение-отрезков" class="slide level2">
+<h2>Отсечение отрезков</h2>
+<p>Один из самых широко используемых — <strong>алгоритм Коэна-Сазерленда</strong>, в котором используется разбиение плоскости на 9 частей прямыми, координаты которых определяются границами прямоугольника (в частности — порта просмотра):</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Процедурный код</strong> пишется на императивном языке программирования</p>
-<ul>
-<li>Описывает <em>действия</em></li>
-<li>Стандарт при взаимодействии с графической платформой</li>
-<li>В геоинформационных пакетах применяется на низком уровне, невидимом для пользователя</li>
-</ul>
+<p><img data-src="images/cohen_sutherland.svg" style="width:100.0%"></p>
 </div><div class="column" style="width:50%;">
-<p><strong>Декларативные спецификации</strong> фиксируются на языке разметки</p>
 <ul>
-<li>Описывают <em>результаты</em></li>
-<li>Вспомогательное средство в графических платформах</li>
-<li>В геоинформационных пакетах применяется на высоком уровне при описании стилей карт (CSS, LYR, QML, SLD, YSLD)</li>
+<li><code>INSIDE = 0</code> — <span class="math inline">\(0000\)</span></li>
+<li><code>LEFT = 1</code> — <span class="math inline">\(0001\)</span></li>
+<li><code>RIGHT = 2</code> — <span class="math inline">\(0010\)</span></li>
+<li><code>BOTTOM = 4</code> — <span class="math inline">\(0100\)</span></li>
+<li><code>TOP = 8</code> — <span class="math inline">\(1000\)</span></li>
 </ul>
+<p>Отрезки, обе точки которых находятся по одну сторону от прямоугольника, имеют совпадающий единичный бит в одной и той же позиции</p>
 </div>
 </div>
 </section>
-<section id="отрисовка-векторных-объектов" class="slide level2">
-<h2>Отрисовка векторных объектов</h2>
+<section id="вычисление-кодов-коэна-сазерленда" class="slide level2">
+<h2>Вычисление кодов Коэна-Сазерленда</h2>
+<p>Пусть дана точка <span class="math inline">\((i, j)\)</span>, а также границы порта просмотра <span class="math inline">\((i_{min}, i_{max})\)</span>, <span class="math inline">\((j_{min}, j_{max})\)</span>.</p>
+<p>Тогда код вычисляется следующим образом:</p>
+<pre><code>def code(i, j, imax, jmax):
+    code = INSIDE
+    if j &lt; jmin:
+        code |= LEFT
+    elif j &gt; jmax:
+        code |= RIGHT
+    if i &lt; imin:
+        code |= TOP
+    elif i &gt; imax:
+        code |= BOTTOM
+    return code</code></pre>
+<p>В данном случае применяется операция <em>логическое ИЛИ</em>, которая устанавливает в каждый бит <span class="math inline">\(1\)</span>, если хотя бы у одного из операндов соответствующий бит равен <span class="math inline">\(1\)</span>.</p>
+</section>
+<section id="алгоритм-коэна-сазерленда" class="slide level2">
+<h2>Алгоритм Коэна-Сазерленда</h2>
+<p>Для каждого отрезка <span class="math inline">\((i_0, j_0), (i_1, j_1)\)</span> выполняется бесконечный цикл, внутри которого ведутся следующие действия:</p>
+<ol type="1">
+<li><p>Вычисляются коды <code>code0</code> и <code>code1</code> для концов отрезка.</p></li>
+<li><p>Если оба конца находятся внутри порта просмотра (<code>code0 | code1 == 0</code>), то отрезок принимается целиком и цикл прерывается.</p></li>
+<li><p>Если оба конца находятся по одну сторону от порта просмотра (<code>code0 &amp; code1 != 0</code>), то отрезок отклоняется целиком и цикл прерывается.</p></li>
+<li><p>В противном случае (оба конца находятся по разные стороны от порта просмотра), выполняются следующие действия:</p>
 <ul>
+<li>Выбирается любая точка, находящаяся за пределами порта просмотра.</li>
+<li>Выполняется пересечение отрезка с прямой, определяющей ту сторону, в которой находится выбранная точка.</li>
+<li>Выбранная точка заменяется на найденное пересечение.</li>
+</ul></li>
+</ol>
+</section>
+<section id="отрисовка-объектов" class="slide level2">
+<h2>Отрисовка объектов</h2>
+<ul>
+<li>Выполняется после отсечения</li>
 <li>Две основных операции: обводка и заливка</li>
 <li>В случае точечных данных применяются не к самой точке, а используемой для ее отображения фигуре.</li>
 </ul>
-<p>Общий алгоритм для обводки:</p>
+<p><strong>Общий алгоритм для обводки:</strong></p>
 <ol type="1">
 <li>Установить тип отображаемого объекта</li>
 <li>Организовать обход по всем уровням вложенности с помощью цикла</li>
@@ -585,7 +638,7 @@
 <section id="заливка-полигона" class="slide level2">
 <h2>Заливка полигона</h2>
 
-<img data-src="images/polyfill.png" style="width:70.0%" class="r-stretch"></section>
+<img data-src="images/filling.png" style="width:70.0%" class="r-stretch"></section>
 <section id="алгоритм-сканирующей-линии" class="slide level2">
 <h2>Алгоритм сканирующей линии</h2>
 <p>Для каждого <span class="math inline">\(i_k = i_{min},...,i_{max}\)</span> получить упорядоченное по возрастанию множество <span class="math inline">\(J = \{j_0, j_1, ..., j_{n-1}\}\)</span> столбцов пересечений с исходными линиями:</p>
@@ -605,132 +658,22 @@
 </ol>
 <p><span class="math display">\[\lceil j_0 \rceil \to \lfloor j_1 \rfloor,~\lceil j_2 \rceil \to \lfloor j_3 \rfloor,~...~,~\lceil j_{n-2} \rceil \to \lfloor j_{n-1} \rfloor\]</span></p>
 </section>
-<section id="отсечение-отрезков" class="slide level2">
-<h2>Отсечение отрезков</h2>
-<p>Один из самых широко используемых — <strong>алгоритм Коэна-Сазерленда</strong>, в котором используется разбиение плоскости на 9 частей прямыми, координаты которых определяются границами прямоугольника (в частности — порта просмотра):</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="images/cohen_sutherland.svg" style="width:100.0%"></p>
-</div><div class="column" style="width:50%;">
-<ul>
-<li><code>INSIDE = 0</code> — <span class="math inline">\(0000\)</span></li>
-<li><code>LEFT = 1</code> — <span class="math inline">\(0001\)</span></li>
-<li><code>RIGHT = 2</code> — <span class="math inline">\(0010\)</span></li>
-<li><code>BOTTOM = 4</code> — <span class="math inline">\(0100\)</span></li>
-<li><code>TOP = 8</code> — <span class="math inline">\(1000\)</span></li>
-</ul>
-<p>Отрезки, обе точки которых находятся по одну сторону от прямоугольника, имеют совпадающий единичный бит в одной и той же позиции</p>
-</div>
-</div>
-</section>
-<section id="вычисление-кодов-коэна-сазерленда" class="slide level2">
-<h2>Вычисление кодов Коэна-Сазерленда</h2>
-<p>Пусть дана точка <span class="math inline">\((i, j)\)</span>, а также границы порта просмотра <span class="math inline">\((i_{min}, i_{max})\)</span>, <span class="math inline">\((j_{min}, j_{max})\)</span>.</p>
-<p>Тогда код вычисляется следующим образом:</p>
-<pre><code>def code(i, j, imax, jmax):
-    code = INSIDE
-    if j &lt; jmin:
-        code |= LEFT
-    elif j &gt; jmax:
-        code |= RIGHT
-    if i &lt; imin:
-        code |= BOTTOM
-    elif i &gt; imax:
-        code |= TOP
-    return code</code></pre>
-<p>В данном случае применяется операция <em>логическое ИЛИ</em>, которая устанавливает в каждый бит <span class="math inline">\(1\)</span>, если хотя бы у одного из операндов соответствующий бит равен <span class="math inline">\(1\)</span>.</p>
-</section>
-<section id="алгоритм-коэна-сазерленда" class="slide level2">
-<h2>Алгоритм Коэна-Сазерленда</h2>
-<p>Для каждого отрезка <span class="math inline">\((i_0, j_0), (i_1, j_1)\)</span> выполняется бесконечный цикл, внутри которого ведутся следующие действия:</p>
-<ol type="1">
-<li><p>Вычисляются коды <code>code0</code> и <code>code1</code> для концов отрезка.</p></li>
-<li><p>Если оба конца находятся внутри порта просмотра (<code>code0 | code1 == 0</code>), то отрезок принимается целиком и цикл прерывается.</p></li>
-<li><p>Если оба конца находятся по одну сторону от порта просмотра (<code>code0 &amp; code1 != 0</code>), то отрезок отклоняется целиком и цикл прерывается.</p></li>
-<li><p>В противном случае (оба конца находятся по разные стороны от порта просмотра), выполняются следующие действия:</p>
-<ul>
-<li>Выбирается любая точка, находящаяся за пределами порта просмотра.</li>
-<li>Выполняется пересечение отрезка с прямой, определяющей ту сторону, в которой находится выбранная точка.</li>
-<li>Выбранная точка заменяется на найденное пересечение.</li>
-</ul></li>
-</ol>
-</section>
-<section id="аффинные-преобразования" class="slide level2">
-<h2>Аффинные преобразования</h2>
-<p><strong>Аффинное преобразование</strong> <span class="math inline">\(f\colon\mathbb{R}^{n}\to \mathbb{R}^{n}\)</span> есть преобразование вида:</p>
-<p><span class="math display">\[
-f(\mathrm p) = \mathbf M \cdot \mathrm p + \mathrm v
-\]</span></p>
-<p>где <span class="math inline">\(\mathbf M\)</span> — <em>обратимая матрица</em> (квадратная матрица, определитель которой отличен от нуля) и <span class="math inline">\(v\in \mathbb{R}^{n}\)</span>.</p>
-<p><span class="math inline">\(\mathbf M\)</span> и <span class="math inline">\(\mathrm v\)</span> обычно объединяются в одну матрицу <span class="math inline">\(\mathbf A\)</span>, что требует представления <span class="math inline">\(p\)</span> в <em>однородных</em> координатах: <span class="math inline">\(\widehat{\mathrm p} = (x_p, y_p,..., 1)\)</span>. В этом случае аффинное преобразование можно записать как:</p>
-<p><span class="math display">\[
-f(\mathrm p) = \mathbf A \cdot \widehat{\mathrm p} = \left[ \begin{array}{ccc|c} \, &amp; \mathbf M &amp; &amp; \mathrm v \ \\ 0 &amp; \ldots &amp; 0 &amp; 1 \end{array} \right] \begin{bmatrix} \mathrm p \\ 1 \end{bmatrix}
-\]</span></p>
-</section>
-<section id="аффинные-преобразования-1" class="slide level2">
-<h2>Аффинные преобразования</h2>
-<p><strong>Сдвиг</strong> на вектор трансляции <span class="math inline">\(t = (t_x, t_y)\)</span>:</p>
-<p><span class="math display">\[
-\begin{bmatrix} x' \\ y' \\ 1 \end{bmatrix} = \underbrace{\begin{bmatrix} 1 &amp;  0 &amp; t_x \\ 0 &amp; 1 &amp; t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}}_{\mathbf T(t_x, t_y)} \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} 1x + 0y + t_x1 \\ 0x + 1y + t_y1 \\ 0x + 0y + 1 \end{bmatrix} = \begin{bmatrix} x + t_x \\ y + t_y \\ 1 \end{bmatrix},
-\]</span></p>
-<p><strong>Поворот</strong> на угол <span class="math inline">\(\theta\)</span>:</p>
-<p><span class="math display">\[
-\begin{bmatrix} x' \\ y' \\ 0 \end{bmatrix} = \underbrace{\begin{bmatrix} \cos \theta &amp;  -\sin \theta &amp; 0 \\ \sin \theta &amp; \cos \theta  &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}}_{\mathbf R(\theta)} \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} x \cos \theta - y \sin \theta \\ x \sin \theta + y \cos \theta \\ 1 \end{bmatrix},
-\]</span></p>
-</section>
-<section id="аффинные-преобразования-2" class="slide level2">
-<h2>Аффинные преобразования</h2>
-<p><strong>Масштабирование</strong> с коэффициентами <span class="math inline">\(s_x, s_y\)</span>:</p>
-<p><span class="math display">\[
-\begin{bmatrix} x' \\ y' \\ 1 \end{bmatrix} = \underbrace{\begin{bmatrix} s_x &amp;  0 &amp; 0 \\ 0 &amp; s_y  &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}}_{\mathbf S(s_x, s_y)} \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} x s_x \\ y s_y \\ 1 \end{bmatrix},
-\]</span></p>
-<ul>
-<li>при навигации по карте <span class="math inline">\(s_x = s_y = a\)</span></li>
-<li>для зеркального отражения по соответствующим осям <span class="math inline">\(s_x\)</span> или <span class="math inline">\(s_y\)</span> будут иметь отрицательные значения.</li>
-</ul>
-</section>
-<section id="стандартные-сценарии" class="slide level2">
-<h2>Стандартные сценарии</h2>
-<p>При загрузке слоя данных в пустой проект объекты вписываются в порт просмотра.</p>
-<p>Пусть ограничивающий прямоугольник (<em>экстент</em>) данных имеет размеры <span class="math inline">\([x_0, y_0]\times[x_1, y_1]\)</span>, а размер порта просмотра <span class="math inline">\([0, di]\times[0, dj]\)</span>. Тогде необходимо выполнить следующие преобразования:</p>
-<ul>
-<li><p>Совместить начало координат с центром экстента данных — точкой <span class="math inline">\([(x_1 + x_0)/2, (y_1 + y_0)/2]\)</span>.</p></li>
-<li><p>На оcнове сравнения пропорций экстента <span class="math inline">\(\frac{dy}{dx}\)</span> и порта просмотра <span class="math inline">\(\frac{di}{dj}\)</span> выбрать коэффициент масштабирования <span class="math inline">\(s\)</span>:</p></li>
-</ul>
-<p><span class="math display">\[s = \begin{cases}
-\frac{dj}{dx},~\texttt{если}~\frac{dy}{dx} \leq \frac{di}{dj}\\
-\frac{di}{dy},~\texttt{если}~\frac{dy}{dx} &gt; \frac{di}{dj}\\
-\end{cases}\]</span></p>
-</section>
-<section id="стандартные-сценарии-1" class="slide level2">
-<h2>Стандартные сценарии</h2>
-<ul>
-<li><p>Отмасштабировать координаты на полученный коэффициент <span class="math inline">\(s\)</span>.</p></li>
-<li><p>Переместить отмасштабированное изображение в точку <span class="math inline">\((di/2, dj/2)\)</span>.</p></li>
-</ul>
-<p>Итоговая матрица преобразования <span class="math inline">\(\textbf{A}\)</span> будет выглядеть следующим образом:</p>
-<p><span class="math display">\[\textbf A = \textbf T(di/2, dj/2)~\textbf S(s)~\textbf T(-(x_1 + x_0)/2, -(y_1 + y_0)/2)\]</span></p>
-<p>Точки исходных объектов <span class="math inline">\(p\)</span> будут трансформированы в точки внутри порта просмотра <span class="math inline">\(p'\)</span> как:</p>
-<p><span class="math display">\[p' = \textbf A p\]</span></p>
-</section>
-<section id="стандартные-сценарии-2" class="slide level2">
-<h2>Стандартные сценарии</h2>
-<p>Пусть текущая матрица отображения равна <span class="math inline">\(A\)</span>. Пользователь:</p>
-<ul>
-<li>перетащил изображение из точки <span class="math inline">\((i_1, j_1)\)</span> в точку <span class="math inline">\((i_2, j_2)\)</span>:</li>
-</ul>
-<p><span class="math display">\[\mathbf A = \mathbf T(i_2-i_1, j_2 - j_1)\mathbf A\]</span></p>
-<ul>
-<li>в точке <span class="math inline">\((i, j)\)</span> прокрутил колесико мыши на <span class="math inline">\(k &gt; 0\)</span> оборота:</li>
-</ul>
-<p><span class="math display">\[\mathbf A = \mathbf T(i, j)~\mathbf S(ks, ks)~\mathbf T(-i, -j)~\mathbf A\]</span></p>
-<ul>
-<li>в точке <span class="math inline">\((i, j)\)</span> прокрутил колесико мыши на <span class="math inline">\(k &lt; 0\)</span> оборота:</li>
-</ul>
-<p><span class="math display">\[\mathbf A = \mathbf T(i, j)~\mathbf S(-\frac{1}{ks}, -\frac{1}{ks})~\mathbf T(-i, -j)~\mathbf A\]</span></p>
-<p>Каждый оборот соответствует изменению масштаба в <span class="math inline">\(s\)</span> раз. Отрицательные обороты соответствуют уменьшению масштаба, положительные — увеличению.</p>
-</section>
 <section id="передискретизация-resampling" class="slide level2">
+<h2>Передискретизация (resampling)</h2>
+<p><strong>Передискретизация</strong> —&nbsp;изменение частоты дискретизации. Нужна при визуали-зации растров, если размер ячейки не соответствует размеру пикселя монитора.</p>
+
+<img data-src="images/clipboard-2394961780.png" class="quarto-figure quarto-figure-left r-stretch"><p class="caption">Исходное изображение</p></section>
+<section id="передискретизация-resampling-1" class="slide level2">
+<h2>Передискретизация (resampling)</h2>
+<p><strong>Передискретизация</strong> —&nbsp;изменение частоты дискретизации. Нужна при визуали-зации растров, если размер ячейки не соответствует размеру пикселя монитора.</p>
+
+<img data-src="images/clipboard-2530888533.png" class="quarto-figure quarto-figure-left r-stretch"><p class="caption">Ближайший сосед (укрупнение пикселя)</p></section>
+<section id="передискретизация-resampling-2" class="slide level2">
+<h2>Передискретизация (resampling)</h2>
+<p><strong>Передискретизация</strong> —&nbsp;изменение частоты дискретизации. Нужна при визуали-зации растров, если размер ячейки не соответствует размеру пикселя монитора.</p>
+
+<img data-src="images/clipboard-3824530245.png" class="quarto-figure quarto-figure-left r-stretch"><p class="caption">Билинейная интерполяция (уменьшение пикселя)</p></section>
+<section id="передискретизация-resampling-3" class="slide level2">
 <h2>Передискретизация (resampling)</h2>
 <p>Передискретизация необходима при визуализации растрового изображения на растровом экране. Как правило, разрешение этих растров не совпадает.</p>
 
@@ -807,6 +750,26 @@ f(1,1) = \sum_{i=0}^3 \sum_{j=0}^3 a_{ij},\\
 </ol>
 <p><span class="math display">\[R[i, j] = \sum_{l = 1}^L s(R_b) / L,\]</span></p>
 <p>где <span class="math inline">\(s(R_b)\)</span> — выборочное значение (сэмпл), взятое с <span class="math inline">\(R_b\)</span>, <span class="math inline">\(L\)</span> — количество сэмплов</p>
+</section>
+<section id="суперсемплинг-antialiasing-1" class="slide level2">
+<h2>Суперсемплинг (antialiasing)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Без сглаживания</p>
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<p><img data-src="images/clipboard-3254345689.png" class="quarto-figure quarto-figure-left"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Со сглаживанием</p>
+<div class="quarto-figure quarto-figure-left">
+<figure>
+<p><img data-src="images/clipboard-3877073781.png" class="quarto-figure quarto-figure-left"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="библиография" class="slide level2 smaller scrollable">
 <h2>Библиография</h2>
