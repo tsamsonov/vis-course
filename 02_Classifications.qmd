@@ -1,0 +1,330 @@
+---
+title: "Классификация одномерных рядов"
+subtitle: "Визуализация пространственных данных"
+date: today
+date-format: long
+author: "Самсонов Тимофей Евгеньевич"
+execute:
+  echo: false
+  freeze: true
+jupyter: python3
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    margin: 0.2
+    width: 1280
+    height: 720
+    slide-number: true
+    footer: "Самсонов Т. Е. Визуализация пространственных данных: курс лекций"
+    header-includes: <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/pt-sans" type="text/css"/>
+bibliography: references.yaml
+mainfont: PT Sans
+---
+
+## Функция распределения
+
+Функция распределения $F(x) = P(X < x)$ является одной из основных характеристик случайной величины.
+
+В практической работе используется выборочная ФР $\widehat F(x)$.
+
+```{python}
+#| out-width: 2000px 
+import matplotlib.pyplot as plt
+import mapclassify as mc
+import numpy as np
+
+mu = 50
+sigma = 15
+n_bins = 25
+data_exp = np.random.exponential(20, size=100)
+data_norm = np.random.normal(mu, sigma, size=100)
+data_lnorm = np.random.lognormal(3, 1, size=100)
+
+plt.figure(figsize=(12,6))
+plt.ecdf(data_norm, label="CDF")
+plt.xlabel("x")
+plt.ylabel("F")
+plt.show()
+```
+
+## Выборочная функция распределения
+
+**Выборочная функция распределения** $\widehat F(x)$ определяется следующим образом:
+
+$$
+\widehat F(x) = \frac{1}{n}\sum_{i=1}^n \theta(x-X_i),
+$$
+
+где $\theta(x)$ — *функция Хевисайда*:
+
+$$
+\theta(x)=\begin{cases} 0, & x<0;
+\\ 1, & x\geqslant 0.\end{cases}
+$$
+
+При $n \rightarrow \infty$ функция $\widehat F(x)$ равномерно сходится к $F(x)$ (*теорема Колмогорова*).
+
+::: callout-tip
+## Проще говоря
+
+Чем больше выборка, тем точнее выборочная ФР описывает реальную.
+:::
+
+## Нормальное распределение
+
+```{python}
+plt.figure(figsize=(12,8))
+plt.ecdf(data_norm, label="ECDF")
+plt.xlabel("x")
+plt.ylabel("F")
+plt.show()
+```
+
+## Логнормальное распределение
+
+```{python}
+plt.figure(figsize=(12,8))
+plt.ecdf(data_lnorm, label="ECDF")
+plt.xlabel("x")
+plt.ylabel("F")
+plt.show()
+```
+
+## Экспоненциальное распределение
+
+```{python}
+plt.figure(figsize=(12,8))
+plt.ecdf(data_exp, label="ECDF")
+plt.xlabel("x")
+plt.ylabel("F")
+plt.show()
+```
+
+## Равные интервалы
+
+Размер класса равен $[\max(X) - \min(X)] / k$, где $k$ — число классов.
+
+```{python}
+functions = {
+    'Quantile': mc.Quantiles,
+    'Jenks-Caspall': mc.JenksCaspall,
+    'Fisher-Jenks': mc.FisherJenks,
+    'Natural-Breaks': mc.NaturalBreaks,
+    'Equal Breaks': mc.EqualInterval,
+    'Maximum Breaks': mc.MaximumBreaks,
+    'Standard Deviations': mc.StdMean,
+    'Head-Tail': mc.HeadTailBreaks
+}
+
+def vis_classes(data, method,  k = 6, m = [-3, -2, -1, 1, 2, 3],):
+    match method:
+      case 'Standard Deviations':
+        classes = functions[method](data, multiples = m)
+        breaks = classes.bins
+      case 'Head-Tail':
+        classes = functions[method](data)
+        breaks = classes.bins
+      case _:
+        classes = functions[method](data, k = k)
+        breaks = np.concatenate(([min(data)], classes.bins))
+    
+    plt.rcParams.update({'font.size': 20})
+    
+    plt.figure(figsize=(12,6))
+    
+    plt.ecdf(data, label="CDF")
+    plt.vlines(breaks, 0, 1, colors='red')
+    for brk in breaks:
+        plt.text(brk, 1.02, round(brk, 1), color = 'red')
+    
+    plt.xlabel("x")
+    plt.ylabel("F")
+    plt.show()
+    
+    return
+  
+vis_classes(data_norm, 'Equal Breaks')
+```
+
+## Квантили
+
+Количество элементов в каждом классе $c \approx n/k$.
+
+```{python}
+vis_classes(data_norm, 'Quantile')
+```
+
+## Стандартные отклонения
+
+Границы классов определяются значениями $\overline X \pm \alpha S$, где $\alpha = 1, 2, ..., (k+1)/2$
+
+```{python}
+vis_classes(data_norm, 'Standard Deviations')
+```
+
+> Метод подходит только для данных с нормальным распределением.
+
+## Стандартные отклонения
+
+Данный метод не подходит для распределений, отличающихся от нормального. Например, для экспоненциального:
+
+```{python}
+vis_classes(data_exp, 'Standard Deviations')
+```
+
+> Метод подходит только для данных с нормальным распределением.
+
+## Метод Дженкса-Кэспалла (1971)
+
+Границы классов определяются путем минимизации суммы расстояний от элементов классов до их медиан (*ADCM* — a*bsolute deviation about class median*):
+
+$$
+ADCM = \sum_{j=1}^k \sum_{i=1}^{n_k} |X_{ij} - \operatorname{med}(X_j)|
+$$
+
+Метод базируется на итеративном алгоритме:
+
+1.  Классифицировать выборку методом квантилей на $k$ классов.
+2.  Вычислить для каждого элемента его отклонение от медианы собственного *и соседних* классов.
+3.  Пока есть элементы, располагающиеся ближе к соседней медиане, чем к своей:
+    -   Переместить элемент в ближайший соседний класс
+    -   Обновить значения медиан и расстояний для изменившихся классов и их соседей
+
+## Метод Дженкса-Кэспалла (1971)
+
+Границы классов определяются путем минимизации ADCM
+
+```{python}
+vis_classes(data_norm, 'Jenks-Caspall')
+```
+
+## Метод Фишера-Дженкса (1958, 1977)
+
+Так же как и метод Дженкса-Кэспалла, минимизирует ADCM, однако использует *рекурсивную*, а не итеративную процедуру. В основе лежит теорема:
+
+> Каждое оптимальное разбиение множества есть объединение оптимальных разбиение его подмножеств
+
+Тогда границей $j$ оптимального разбиения $X$ на 2 класса будем считать
+
+$$
+\operatorname{argmin}_j \big[D(1, j) + D(j+1, n)\big],\\D(a, b) = \sum_{i = a}^b |X_i - \operatorname{med}(X_{[a,b]})|
+$$
+
+Если число классов $k > 2$, то выбирается тот из них, у которого максимальное значение $D$ и аналогичным образом разбивается на $2$ класса.
+
+## Метод Фишера-Дженкса (1958, 1977)
+
+Данный метод также известен автоматизированный вариант классификации методом *Natural Breaks*
+
+```{python}
+vis_classes(data_norm, 'Fisher-Jenks')
+```
+
+## Метод Head/Tail (Jiang, 2013)
+
+В данном методе используется рекурсивное разбиение выборки средним значением.
+
+1.  Разбить выборку на $2$ класса, используя среднее значение
+2.  Повторять процедуру для класса выше среднего, до тех пор пока не будет достигнуто
+    -   требуемое число классов или
+    -   доля значений выше среднего не превысит $40\%$
+
+Пороговый критерий в $40\%$ является экспертным (предложен автором метода) и может быть модифицирован.
+
+> Метод годится для распределений с "тяжелым хвостом", т.е. подчиняющихся экспоненциальному закону.
+
+## Метод Head/Tail (Jiang, 2013)
+
+Данный метод плохо работает с нормальным распределением:
+
+```{python}
+vis_classes(data_norm, 'Head-Tail')
+```
+
+## Метод Head/Tail (Jiang, 2013)
+
+Но хорошо справляется с экспоненциальным:
+
+```{python}
+vis_classes(data_exp, 'Head-Tail')
+```
+
+## GADF 
+
+**GADF** **(Goodness of Absolute Deviation Fit)** — метрика, характеризующая эффективность классификации:
+
+$$
+GADF = 1 - \frac{\sum_{j=1}^k \sum_{i=1}^{n_k} |X_{ij} - \operatorname{med}(X_j)|}{\sum_{i=1}^{n} |X_{i} - \operatorname{med}(X)|}
+$$
+
+GADF показывает как отклонения внутри классов соотносятся с отклонениями всей выборки. Чем
+
+::: callout-tip
+## Применение
+
+Метрику GADF можно использовать для того чтобы определить оптимальный метод классификации
+:::
+
+## GADF 
+
+**GADF** для **нормального** распределения:
+
+```{python}
+functions = {
+    'Fisher-Jenks': mc.FisherJenks,
+    'Jenks-Caspall': mc.JenksCaspall,
+    'Quantile': mc.Quantiles,
+    'Equal Breaks': mc.EqualInterval,
+}
+
+gadf_norm = {
+    'Fisher-Jenks': [],
+    'Jenks-Caspall': [],
+    'Quantile': [],
+    'Equal Breaks': []
+}
+
+
+gadf_exp = {
+    'Fisher-Jenks': [],
+    'Jenks-Caspall': [],
+    'Quantile': [],
+    'Equal Breaks': []
+}
+
+x = np.arange(1, 11, 1)
+
+for fun in functions:
+  for k in x:
+    classes_norm = functions[fun](data_norm, k = k)
+    gadf_norm[fun].append(classes_norm.get_gadf())
+    classes_exp = functions[fun](data_exp, k = k)
+    gadf_exp[fun].append(classes_exp.get_gadf())
+    
+
+plt.figure(figsize=(12,7))
+for fun in gadf_norm:
+  plt.plot(x, gadf_norm[fun], label=fun, linewidth=3)
+plt.xlabel("N")
+plt.ylabel("GADF")
+plt.grid(True)
+plt.legend()
+plt.show()
+```
+
+## GADF 
+
+**GADF** для **экспоненциального** распределения:
+
+```{python}
+plt.figure(figsize=(12,7))
+for fun in gadf_exp:
+  plt.plot(x, gadf_exp[fun], label=fun, linewidth=3)
+plt.xlabel("N")
+plt.ylabel("GADF")
+plt.grid(True)
+plt.legend()
+plt.show()
+```
+
+## Библиография
