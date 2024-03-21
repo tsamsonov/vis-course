@@ -344,7 +344,7 @@
 <h2>Функция распределения</h2>
 <p>Функция распределения <span class="math inline">\(F(x) = P(X &lt; x)\)</span> является одной из основных характеристик случайной величины.</p>
 <p>В практической работе используется выборочная ФР <span class="math inline">\(\widehat F(x)\)</span>.</p>
-<div id="e346bb12" class="cell" data-execution_count="1">
+<div id="f8d5c2fe" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -382,11 +382,14 @@
 </section>
 <section id="нормальное-распределение" class="slide level2">
 <h2>Нормальное распределение</h2>
-<div id="5483116a" class="cell" data-execution_count="2">
+<p><span class="math display">\[
+\Phi(x) = \frac 1 {\sqrt{2\pi}} \int\limits_{-\infty}^{x} e^{-t^2/2} \, dt.
+\]</span></p>
+<div id="4ce46eb3" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="02_Classifications_files/figure-revealjs/cell-3-output-1.png" width="995" height="687"></p>
+<p><img data-src="02_Classifications_files/figure-revealjs/cell-3-output-1.png" width="995" height="540"></p>
 </figure>
 </div>
 </div>
@@ -394,11 +397,14 @@
 </section>
 <section id="логнормальное-распределение" class="slide level2">
 <h2>Логнормальное распределение</h2>
-<div id="d5c8dad7" class="cell" data-execution_count="3">
+<p><span class="math display">\[
+F(x) = \Phi\left( \frac{(\ln x) - \mu} \sigma \right)
+\]</span></p>
+<div id="913b4068" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="02_Classifications_files/figure-revealjs/cell-4-output-1.png" width="995" height="687"></p>
+<p><img data-src="02_Classifications_files/figure-revealjs/cell-4-output-1.png" width="995" height="540"></p>
 </figure>
 </div>
 </div>
@@ -406,11 +412,17 @@
 </section>
 <section id="экспоненциальное-распределение" class="slide level2">
 <h2>Экспоненциальное распределение</h2>
-<div id="4c9e4a7a" class="cell" data-execution_count="4">
+<p><span class="math display">\[
+F(x) = \left\{\begin{matrix}
+1-e^{-\lambda x}&amp;,\; x \ge 0, \\
+0 &amp;,\; x &lt; 0.
+\end{matrix}\right.
+\]</span></p>
+<div id="867f4f98" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="02_Classifications_files/figure-revealjs/cell-5-output-1.png" width="1008" height="687"></p>
+<p><img data-src="02_Classifications_files/figure-revealjs/cell-5-output-1.png" width="995" height="540"></p>
 </figure>
 </div>
 </div>
@@ -419,7 +431,7 @@
 <section id="равные-интервалы" class="slide level2">
 <h2>Равные интервалы</h2>
 <p>Размер класса равен <span class="math inline">\([\max(X) - \min(X)] / k\)</span>, где <span class="math inline">\(k\)</span> — число классов.</p>
-<div id="1e0a49ad" class="cell" data-execution_count="5">
+<div id="7bfec4e8" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -432,7 +444,7 @@
 <section id="квантили" class="slide level2">
 <h2>Квантили</h2>
 <p>Количество элементов в каждом классе <span class="math inline">\(c \approx n/k\)</span>.</p>
-<div id="29ec01d7" class="cell" data-execution_count="6">
+<div id="8ee26b52" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -445,7 +457,7 @@
 <section id="стандартные-отклонения" class="slide level2">
 <h2>Стандартные отклонения</h2>
 <p>Границы классов определяются значениями <span class="math inline">\(\overline X \pm \alpha S\)</span>, где <span class="math inline">\(\alpha = 1, 2, ..., (k+1)/2\)</span></p>
-<div id="d92eb41f" class="cell" data-execution_count="7">
+<div id="103945a4" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -461,7 +473,7 @@
 <section id="стандартные-отклонения-1" class="slide level2">
 <h2>Стандартные отклонения</h2>
 <p>Данный метод не подходит для распределений, отличающихся от нормального. Например, для экспоненциального:</p>
-<div id="d8fb170b" class="cell" data-execution_count="8">
+<div id="6741dd3e" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -494,7 +506,7 @@ ADCM = \sum_{j=1}^k \sum_{i=1}^{n_k} |X_{ij} - \operatorname{med}(X_j)|
 <section id="метод-дженкса-кэспалла-1971-1" class="slide level2">
 <h2>Метод Дженкса-Кэспалла (1971)</h2>
 <p>Границы классов определяются путем минимизации ADCM</p>
-<div id="fc2e253c" class="cell" data-execution_count="9">
+<div id="fbb05dae" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -519,7 +531,7 @@ ADCM = \sum_{j=1}^k \sum_{i=1}^{n_k} |X_{ij} - \operatorname{med}(X_j)|
 <section id="метод-фишера-дженкса-1958-1977-1" class="slide level2">
 <h2>Метод Фишера-Дженкса (1958, 1977)</h2>
 <p>Данный метод также известен автоматизированный вариант классификации методом <em>Natural Breaks</em></p>
-<div id="963e7197" class="cell" data-execution_count="10">
+<div id="51a52a06" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -548,7 +560,7 @@ ADCM = \sum_{j=1}^k \sum_{i=1}^{n_k} |X_{ij} - \operatorname{med}(X_j)|
 <section id="метод-headtail-jiang-2013-1" class="slide level2">
 <h2>Метод Head/Tail (Jiang, 2013)</h2>
 <p>Данный метод плохо работает с нормальным распределением:</p>
-<div id="5abf350c" class="cell" data-execution_count="11">
+<div id="89dc10d8" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -561,7 +573,7 @@ ADCM = \sum_{j=1}^k \sum_{i=1}^{n_k} |X_{ij} - \operatorname{med}(X_j)|
 <section id="метод-headtail-jiang-2013-2" class="slide level2">
 <h2>Метод Head/Tail (Jiang, 2013)</h2>
 <p>Но хорошо справляется с экспоненциальным:</p>
-<div id="4d9dbadb" class="cell" data-execution_count="12">
+<div id="bff9d507" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -595,7 +607,7 @@ GADF = 1 - \frac{\sum_{j=1}^k \sum_{i=1}^{n_k} |X_{ij} - \operatorname{med}(X_j)
 <section id="gadf-1" class="slide level2">
 <h2>GADF</h2>
 <p><strong>GADF</strong> для <strong>нормального</strong> распределения:</p>
-<div id="0ccbd0e9" class="cell" data-execution_count="13">
+<div id="1a3b4279" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -608,7 +620,7 @@ GADF = 1 - \frac{\sum_{j=1}^k \sum_{i=1}^{n_k} |X_{ij} - \operatorname{med}(X_j)
 <section id="gadf-2" class="slide level2">
 <h2>GADF</h2>
 <p><strong>GADF</strong> для <strong>экспоненциального</strong> распределения:</p>
-<div id="c8964b3d" class="cell" data-execution_count="14">
+<div id="3ac349e5" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -617,6 +629,60 @@ GADF = 1 - \frac{\sum_{j=1}^k \sum_{i=1}^{n_k} |X_{ij} - \operatorname{med}(X_j)
 </div>
 </div>
 </div>
+</section>
+<section id="полезные-функции" class="slide level2">
+<h2>Полезные функции</h2>
+<table>
+<colgroup>
+<col style="width: 40%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Функция</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x = np.random.exponential()</code></td>
+<td>генерация экспоненциальной выборки</td>
+</tr>
+<tr class="even">
+<td><code>x = np.random.normal()</code></td>
+<td>генерация нормальной выборки</td>
+</tr>
+<tr class="odd">
+<td><code>x = np.random.lognormal()</code></td>
+<td>генерация логнормальной выборки</td>
+</tr>
+<tr class="even">
+<td><code>matplotlib.pyplot.ecdf(x)</code></td>
+<td>визуализация выборочной ФР</td>
+</tr>
+<tr class="odd">
+<td><code>classes = mapclassify.&lt;method&gt;(x)</code></td>
+<td>классификация методами <code>mapclassify</code></td>
+</tr>
+<tr class="even">
+<td><code>breaks = classes.bins</code></td>
+<td>извлечение границ классов</td>
+</tr>
+<tr class="odd">
+<td><code>gadf = classes.get_gadf()</code></td>
+<td>извлечение GADF</td>
+</tr>
+<tr class="even">
+<td><code>plt.vlines(breaks)</code></td>
+<td>визуализация линий классов на графике <span class="math inline">\(F(x)\)</span></td>
+</tr>
+<tr class="odd">
+<td><p><code>for brk in breaks:</code></p>
+<p><code>plt.text(brk,...)</code></p></td>
+<td>визуализация значений границ классов на графике <span class="math inline">\(F(x)\)</span></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="библиография" class="slide level2">
 <h2>Библиография</h2>
