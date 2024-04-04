@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Самсонов Тимофей Евгеньевич">
-  <title>Визуализация пространственных данных - Картограммы</title>
+  <title>Визуализация пространственных данных - Значки и картодиаграммы</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,7 +327,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Картограммы</h1>
+  <h1 class="title">Значки и картодиаграммы</h1>
   <p class="subtitle">Визуализация пространственных данных</p>
 
 <div class="quarto-title-authors">
@@ -338,328 +338,114 @@
 </div>
 </div>
 
-  <p class="date">21 марта 2024 г.</p>
+  <p class="date">4 апреля 2024 г.</p>
 </section>
-<section id="картограммы" class="slide level2">
-<h2>Картограммы</h2>
-<p>При использовании картограмм для визуализации пространственных данных необходимо учитывать следующие аспекты:</p>
+<section id="значки-и-картодиаграммы" class="slide level2">
+<h2>Значки и картодиаграммы</h2>
+
+<img data-src="images/clipboard-687983613.png" style="width:100.0%" class="r-stretch"></section>
+<section id="значки-и-картодиаграммы-1" class="slide level2">
+<h2>Значки и картодиаграммы</h2>
+<p>В западной (американской) школе эти способы изображения считаются одним — <strong>proportional symbols</strong>.</p>
+<ul>
+<li>Символы диаграмм размещаются в точках, но точки бывают двух видов — реальные и концептуальные.</li>
+<li>Реальные точки соответствуют точечным объектам в масштабе картографирования</li>
+<li>Концептуальные точки используются для размещения диаграмм внутри площадных территориальных единиц.</li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Концептуальные точки</strong></p>
+</div>
+<div class="callout-content">
+<p>Поиск оптимального местоположения для концептуальной точки — отдельная вычислительная задача</p>
+</div>
+</div>
+</div>
+</section>
+<section id="вычисление-размера" class="slide level2">
+<h2>Вычисление размера</h2>
+<div class="columns">
+<div class="column" style="width:20%;">
+<p><img data-src="images/clipboard-935605907.png" style="width:100.0%"></p>
+</div><div class="column" style="width:80%;">
+<p>В отличие от картограмм для порпорциональных символов редко используется классификация, т.к. легко оценить размеры.</p>
 <ol type="1">
-<li>Стандартизация данных</li>
-<li>Различия в цветовых шкалах и критерии их выбора</li>
-<li>Использование методов классификации или непрерывных шкал</li>
-<li>Оформление легенды</li>
-<li>Оценка визуальной сложности</li>
-<li>Технические возможности программных библиотек</li>
+<li><p>Задается площадь символа <span class="math inline">\(S_{min}\)</span>, соответствующая минимальному значению показателя <span class="math inline">\(V_{min}\)</span></p></li>
+<li><p>Площадь символа для произвольного значения <span class="math inline">\(V\)</span> будет равна:</p>
+<p><span class="math display">\[
+S = S_{min} \frac{V}{V_{min}}
+\]</span></p>
+<p>Однако шкала может быть и относительной, если задается максимальный размер диаграммы <span class="math inline">\(S_{max}\)</span>:</p>
+<p><span class="math display">\[
+S = S_{min} + (S_{max} - S_{min}) \frac{V - V_{min}}{V_{max} - V_{min}}
+\]</span></p></li>
 </ol>
-</section>
-<section id="стандартизация" class="slide level2">
-<h2>Стандартизация</h2>
-<p>Поскольку единицы картографирования имеют разный размер, необходимо выполнять <strong>стандартизацию</strong> данных — нормировку сумм и площадей.</p>
-<p>При стандартизации используются отношения:</p>
-<ol type="1">
-<li><p>Площадь на площадь</p></li>
-<li><p>Сумма на площадь</p></li>
-<li><p>Сумма на сумму</p></li>
-</ol>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Сумма и площадь</strong></p>
-</div>
-<div class="callout-content">
-<p>Под суммой в данном случае понимается показатель, не являющийся площадью. Например, объем заготавливаемой древесины. Ему можно противопоставить площадь лесов.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Стандартизация без площадей</strong></p>
-</div>
-<div class="callout-content">
-<p>При делении суммы на сумму косвенным образом учитывается и неравенство площадей, т.к. более крупные площади часто имеют и более крупные суммы показателей.</p>
-</div>
 </div>
 </div>
 </section>
-<section id="стандартизация-1" class="slide level2">
-<h2>Стандартизация</h2>
-<p><strong>Пример</strong>: доля возделываемых площадей, с которых собирается урожай (А) и урожайность с единицы площади (В)</p>
-
-<img data-src="images/clipboard-3281427333.png" class="quarto-figure quarto-figure-left r-stretch"><p class="caption">От типа стандартизации зависит пространственное распределение показателя</p></section>
-<section id="цветовые-шкалы" class="slide level2">
-<h2>Цветовые шкалы</h2>
-<p><strong>Последовательные</strong> шкалы используются для отображения <em>униполярных</em> показателей (не имеющих нейтральное значение).</p>
+<section id="оптимизация" class="slide level2">
+<h2>Оптимизация</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Одноцветные</strong></p>
-<div id="d1ef191c" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-2-output-1.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-2-output-2.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-2-output-3.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-</div>
+<p><strong>Оптимальный размер</strong></p>
+<ul>
+<li><p>Размер диаграмм должен быть таким, чтобы он не давал избыточного перекрытия или наоборот пустоты на карте.</p></li>
+<li><p>Экспериментальные исследования говорят, что человек недооценивает размеры объектов. Можно использовать компенсацию <em>Флэннери</em>:</p>
+<p><span class="math display">\[
+\widehat S = 1.01902 \cdot S^{1.14325}
+\]</span></p></li>
+</ul>
 </div><div class="column" style="width:50%;">
-<p><strong>Многоцветные</strong></p>
-<div id="33f5b1bf" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-3-output-1.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-3-output-2.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-3-output-3.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>В последовательных шкалах понижается светлота и увеличивается насыщенность.</p>
-</section>
-<section id="цветовые-шкалы-1" class="slide level2">
-<h2>Цветовые шкалы</h2>
-<p><strong>Расходящиеся</strong> шкалы используются для отображения <em>биполярных</em> показателей (имеющих нейтральное значение, обычно <span class="math inline">\(0\)</span>).</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Двухцветные</strong></p>
-<div id="11c9b200" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-4-output-1.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-4-output-2.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-4-output-3.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p><strong>Трехцветные</strong></p>
-<div id="6bd31fdf" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-5-output-1.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-5-output-2.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-5-output-3.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>Расходящиеся шкалы получаются путем объединения двух последовательных шкал</p>
-</section>
-<section id="цветовые-шкалы-2" class="slide level2">
-<h2>Цветовые шкалы</h2>
-<p><strong>Категориальные</strong> шкалы используются для отображения <em>номинальных</em> (качественных) показателей.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Насыщенные</strong></p>
-<div id="04f061b2" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-6-output-1.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-6-output-2.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p><strong>Пастельные</strong></p>
-<div id="cb6a4f00" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-7-output-1.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="03_Choropleths_files/figure-revealjs/cell-7-output-2.png" width="540" height="98"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>Для категориальных шкал важна одинаковая светлота и насыщенность элементов.</p>
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Номинальные данные</strong></p>
-</div>
-<div class="callout-content">
-<p>Номинальные данные нельзя картографировать с помощью последовательных и расходящихся шкал</p>
-</div>
+<p><strong>Оптимальное размещение</strong></p>
+<ul>
+<li><p>Расположение концептуальной точки необходимо определять алгоритмически:</p>
+<ul>
+<li>центроид, точка в полигоне, центр максимальной вписанной окружности.</li>
+</ul></li>
+<li><p>В случае использования значков они могут быть раздвинуты для обеспечения читаемости в ущерб точности расположения</p></li>
+</ul>
 </div>
 </div>
 </section>
-<section id="color-brewer" class="slide level2">
-<h2>Color Brewer</h2>
-<p>Для выбора шкал удобно использовать сайт <strong>Color Brewer</strong>. Его шкалы есть в <code>matplotlib</code> и <code>seaborn</code>.</p>
+<section id="концептуальная-точка" class="slide level2">
+<h2>Концептуальная точка</h2>
+<p><strong>Центроид</strong></p>
 
-<img data-src="images/clipboard-4208284786.png" class="r-stretch"></section>
-<section id="классификация-или-нет" class="slide level2">
-<h2>Классификация или нет?</h2>
-<p>Неклассифицированные картограммы точнее отображают данные, однако могут быть трудны для восприятия в зависимости от распределения показателя.</p>
+<img data-src="images/clipboard-1595657423.png" class="r-stretch"></section>
+<section id="концептуальная-точка-1" class="slide level2">
+<h2>Концептуальная точка</h2>
+<p><strong>Точка на поверхности</strong></p>
 
-<img data-src="images/clipboard-2225744427.png" class="r-stretch"></section>
-<section id="классификация-или-нет-1" class="slide level2">
-<h2>Классификация или нет?</h2>
-<p>Неклассифицированные картограммы точнее отображают данные, однако могут быть трудны для восприятия в зависимости от распределения показателя.</p>
+<img data-src="images/clipboard-3372775963.png" class="r-stretch"></section>
+<section id="концептуальная-точка-2" class="slide level2">
+<h2>Концептуальная точка</h2>
+<p><strong>Центр максимальной вписанной окружности</strong></p>
 
-<img data-src="images/clipboard-3658542196.png" class="r-stretch"></section>
-<section id="легенда" class="slide level2">
-<h2>Легенда</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>В <em>американской</em> картографической школе принято плашки для легенды картограмм показывать <strong>слитно</strong>, т.к. это указывает на соседство учетных единиц</p>
-<p><img data-src="images/clipboard-129992976.png"></p>
-<p>Допускается указание границ вместо интервалов</p>
-</div><div class="column" style="width:50%;">
-<p>В <em>русской</em> школе плашки для легенды картограмм принято показывать <strong>раздельно</strong>, т.к. учетные единицы могут не быть в соседних классах</p>
-<p><img data-src="images/clipboard-3237029520.png"></p>
-</div>
-</div>
-</section>
-<section id="легенда-1" class="slide level2">
-<h2>Легенда</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p>Элементы упорядочиваются последовательно, при этом предпочтительным вариантом является увеличение слева направо (<strong>A</strong>) и снизу вверх (<strong>C</strong>).</p>
-<p>Другие варианты допустимы, но менее ассоциативны (читаем слева направо, выше — больше).</p>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Количество классов</strong></p>
-</div>
-<div class="callout-content">
-<p>Читатель карты нормально различает 5, в некоторых случаях до 7 классов. Больше делать не рекомендуется.</p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:60%;">
-<p><img data-src="images/clipboard-2755071279.png"></p>
-</div>
-</div>
-</section>
-<section id="визуальная-сложность" class="slide level2">
-<h2>Визуальная сложность</h2>
-<p><strong>Сложность</strong>: визуальная загруженность, мозаичность изображения</p>
-<p><span class="math display">\[C = \frac{N_{c}}{N},\]</span></p>
-<p>где <span class="math inline">\(N\)</span> — общее число полигонов/границ/вершин в полном наборе единиц, <span class="math inline">\(N_c\)</span> — число тех же элементов после объединения единиц, попадающих в один класс.</p>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Интерпретация</strong></p>
-</div>
-<div class="callout-content">
-<p>Сложность картограмм показывает на какое количество однородных областей делится изображение при выбранном методе классификации и количестве классов.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Применение</strong></p>
-</div>
-<div class="callout-content">
-<p>Наилучшие картограммы получаются при оптимальном сочетании добротности классификации (GADF) и визуальной сложности (C).</p>
-</div>
-</div>
-</div>
-</section>
-<section id="визуальная-сложность-1" class="slide level2">
-<h2>Визуальная сложность</h2>
-<p>В зависимости от выбранного метода классификации и количества классов будет меняться характер распределения и его визуальная сложность.</p>
+<img data-src="images/clipboard-547672974.png" class="r-stretch"></section>
+<section id="центр-макс.-вписанной-окружности" class="slide level2">
+<h2>Центр макс. вписанной окружности</h2>
+<p>Построить диаграмму Вороного для точек на границе региона</p>
 
-<img data-src="images/clipboard-3894783524.png" class="quarto-figure quarto-figure-left r-stretch"><p class="caption">Фишер-Дженкс (k = 8, C = 0.47)</p></section>
-<section id="визуальная-сложность-2" class="slide level2">
-<h2>Визуальная сложность</h2>
-<p>В зависимости от выбранного метода классификации и количества классов будет меняться характер распределения и его визуальная сложность.</p>
+<img data-src="images/clipboard-1321400217.png" class="r-stretch"></section>
+<section id="центр-макс.-вписанной-окружности-1" class="slide level2">
+<h2>Центр макс. вписанной окружности</h2>
+<p>Отобрать только те ребра диаграммы, которые располагаются внутри регионы (<code>CONTAINS_PROPERLY</code>):</p>
 
-<img data-src="images/clipboard-4107761414.png" class="quarto-figure quarto-figure-left r-stretch"><p class="caption">Квантили (k = 4, C = 0.31)</p></section>
+<img data-src="images/clipboard-1896654347.png" class="r-stretch"></section>
+<section id="центр-макс.-вписанной-окружности-2" class="slide level2">
+<h2>Центр макс. вписанной окружности</h2>
+<p>Для всех вершин ребер вычислить расстояние до границы региона</p>
+
+<img data-src="images/clipboard-574950881.png" class="r-stretch"></section>
+<section id="центр-макс.-вписанной-окружности-3" class="slide level2">
+<h2>Центр макс. вписанной окружности</h2>
+<p>Выбрать среди них вершину с максимальным расстоянием</p>
+
+<img data-src="images/clipboard-185457508.png" class="r-stretch"></section>
 <section id="библиография" class="slide level2">
 <h2>Библиография</h2>
 
